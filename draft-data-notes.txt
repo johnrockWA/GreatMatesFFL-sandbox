@@ -1,0 +1,36 @@
+Great Mates FFL draft preview 02 — data and behaviour
+
+Updated 2 October 2026 for the 2027 draft preview.
+
+Logo: embedded logo from the existing FFL website header.
+Team shortnames: sandbox FFL_WebApp_Data, Users_Teams columns C:D.
+Draft order is illustrative, not the approved 2027 draft order.
+
+Players: 60 distinct players selected using saved 2026 Player Stats workbook
+Round 0 2026 data through Round 24 2026 data, columns A:Q. Finals excluded.
+Scoring is calculated for each game, then averaged over recorded games.
+No minimum games cutoff. Ties: games played descending, then player name.
+The top 10 for each of 6 roles contain 47 distinct players. Starting at rank
+11, visit Forward, Ruck, Marker, Midfielder, Tackler, All Rounder in order,
+adding unseen players until the pool contains 60.
+
+Scoring agrees with the supplied FFL 2027 Competition League Rules and
+sandbox Season workbook Master A19:M28 / Rd01 R4:R10:
+Forward = 6*goals + 2*behinds
+Ruck = hitouts + 3*goals
+Marker = 3*marks + kicks + 3*goals
+Midfielder = disposals + max(0, disposals-29) + 3*goals
+Tackler = 3*tackles + handballs + 3*goals
+All Rounder = disposals + tackles + marks + 3*goals
+
+These are calculated saved-source averages, not invented sample values.
+The saved scraper results have not been independently audited for completeness
+or accuracy against the AFL. Club names reflect this saved source.
+
+Drafted players stay searchable and viewable with team and round.pick.
+They remain crossed out in the queue until explicitly removed. Draft actions
+are disabled for taken players. Six demo rounds / 60 picks are available.
+
+This is a single-browser commissioner demo. Picks and queue persist locally.
+It does not synchronize between coaches, use the Apps Script API, change
+league spreadsheets or send email. Shared draft integration remains pending.
