@@ -1,0 +1,35 @@
+GREAT MATES FFL — WORKFLOW BUILD 01 — 3 October 2026
+
+Status: interactive local simulation; not a shared coach test.
+Published separately from the existing draft-room design so current testers retain their original link.
+
+Implemented and tested in the shared rules engine:
+- Committee schedules with timezone-qualified opening, locking and draft times.
+- Working selections versus explicit submission; last submitted choices survive later edits.
+- 0–2 normal retains plus 0–2 fookies; career games <=50; fookies in normal slots exempt from dynasty clock.
+- Team-specific three-retention cap; missing history fails closed.
+- 2–4 midseason delists; partial working choices allowed.
+- Committee review, corrections with reasons, trades before preparation, pause/resume.
+- Variable pick counts, round-one own-discard restriction for preseason, duplicate and stale-pick checks.
+- Official squad snapshot unchanged until committee finalization; 7/3-day visibility cutoff.
+- Reminder event generation and private queue projection. Emails suppressed.
+
+Preview fixtures:
+200 players from the sandbox Squads snapshot. Club and games data are NOT a verified preseason snapshot or necessarily the final 2026 squads.
+Josh Lindsay and Wayne Milera have missing career games and cannot be retained until verified.
+16 current players have consecutive normal-slot entries in Dynasty_Retains. Those entries need historical career-games verification because fookies can use normal slots. They are blocked for normal retention in this demo rather than assigned an invented dynasty count.
+Team shortnames match the previous preview. Pick order is illustrative; connect actual preseason order and reverse round-nine ladder before shared testing.
+Sample actions intentionally choose only eligible fookies (preseason) or first two delists (midseason); they are not recommendations to coaches.
+
+Prepared, NOT installed or verified against live Apps Script:
+api/DraftWorkflow.gs uses server-derived identity/time, script locking, revision checks, chunked immutable snapshots with checksums, then a committed pointer. No mail API is used. Shared finalization deliberately blocked until weekly squad readers are integrated.
+Verify current validateToken output field mapping before wiring. Configure explicit commissioner/president emails from trusted script properties. No generic admin escalation.
+
+Next integration work:
+1. Build a verified player/history snapshot (including fookie tenure and ambiguous name review), official end-of-season squads, trades and draft order sources.
+2. Add committee date editor, audited individual/whole-window reopen, verified-history review, and trade UI; then wire server routes and private coach views. Preview edits are browser-local only.
+3. Integrate finalization with every weekly squad consumer and retention-history writeback; simulate failures/rollback. Activate scheduler and suppressed notice outbox tests before any email sending.
+4. Owner-only end-to-end API test remains blocked by current browser access to Apps Script exec. Production writes and emails remain off. No background work is running.
+
+Run tests: node tests/draft-engine.test.js
+Build preview: from the project parent run python ffl-workflow/build-preview.py (requires saved source snapshots).
