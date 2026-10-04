@@ -1,4 +1,4 @@
-GREAT MATES FFL — WORKFLOW BUILD 01 — 3 October 2026
+GREAT MATES FFL — WORKFLOW BUILD 02 — 4 October 2026
 
 Status: interactive local simulation; not a shared coach test.
 Published separately from the existing draft-room design so current testers retain their original link.
@@ -19,7 +19,7 @@ Preview fixtures:
 Josh Lindsay and Wayne Milera have missing career games and cannot be retained until verified.
 16 current players have consecutive normal-slot entries in Dynasty_Retains. Those entries need historical career-games verification because fookies can use normal slots. They are blocked for normal retention in this demo rather than assigned an invented dynasty count.
 Team shortnames match the previous preview. Pick order is illustrative; connect actual preseason order and reverse round-nine ladder before shared testing.
-Sample actions intentionally choose only eligible fookies (preseason) or first two delists (midseason); they are not recommendations to coaches.
+Sample actions choose two normal retains PLUS two eligible fookies (preseason), or first two delists (midseason); they are not recommendations to coaches. Separate slot cards, per-team counters and total/pick count make the four-player allowance explicit. Rejected selection controls now restore the last saved value. Existing browser-local choices are preserved across this update.
 
 Prepared, NOT installed or verified against live Apps Script:
 api/DraftWorkflow.gs uses server-derived identity/time, script locking, revision checks, chunked immutable snapshots with checksums, then a committed pointer. No mail API is used. Shared finalization deliberately blocked until weekly squad readers are integrated.
