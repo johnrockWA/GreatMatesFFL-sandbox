@@ -1,4 +1,4 @@
-GREAT MATES FFL — WORKFLOW BUILD 02 — 4 October 2026
+GREAT MATES FFL — WORKFLOW BUILD 03 — 7 October 2026
 
 Status: interactive local simulation; not a shared coach test.
 Published separately from the existing draft-room design so current testers retain their original link.
@@ -33,3 +33,8 @@ Next integration work:
 
 Run tests: node tests/draft-engine.test.js
 Build preview: from the project parent run python ffl-workflow/build-preview.py (requires saved source snapshots).
+
+ADMIN UPDATE — Build 03
+A separate Admin workspace replaces the bottom-of-page committee desk in the workflow preview. Includes plain-language next steps, submission progress, three guided approval steps, confirmation dialogs, team review, competition health cards, corrections and decision history. Technical diagnostics are collapsed.
+Draft arming is now an explicit committee action after setup approval. Corrections clear arming; a paused draft cannot resume until re-armed. Eleven rule tests pass.
+Live health endpoints are not connected: cards explicitly show Not checked, Saved snapshot or Off for testing. Only local validations receive positive status. Shared account access, live health integration, ten-round mock completion, undo and official squad publication remain integration work, not delivered by this UI update. No president account was granted access by changing the preview role selector.
