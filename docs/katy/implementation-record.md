@@ -52,11 +52,10 @@ The initial GitHub Actions run passed. The follow-up adds persona safety checks 
 in-memory UI integration checks for coach privacy and role transitions. These UI
 checks exercise rendered content, not CSS or browser layout.
 
-Browser visual acceptance remains open: navigation initially timed out and direct
-opening of the self-contained preview was blocked by browser URL policy. No bypass
-or alternate browser control was attempted. A permitted HTTP(S) review surface is
-needed before desktop/mobile visual acceptance. Real shared sessions and Google
-integration also remain open.
+Desktop and emulated-mobile browser checks now passed on the separately approved
+owner-private static preview. See [browser-review.md](browser-review.md) for source
+provenance, tested interactions and limits. Shared sessions, physical-device testing
+and Google integration remain open.
 
 The starting demo was rebuilt byte-for-byte before edits (SHA-256
 `7de080ed859f8fd0c467b204ea657b64fd94c5fa86288429245f6c514000099d`).
