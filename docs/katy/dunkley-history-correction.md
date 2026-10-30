@@ -25,3 +25,20 @@ and continued rejection at the three-year cap. Other unverified histories stay b
 
 This corrects the approved private preview and proposes a separate source PR to
 develop. Merge requires John's decision; Google remains untouched.
+
+## Career-games provenance and Jagga Smith correction
+
+The recovered original builder read `workflow-squads-source.json` and used the
+fifth column (index 4, Squads column E) as careerGames. That was a saved capture of
+WebApp_Data / Squads. C1 recovered its frozen values from the published October
+baseline HTML; the current static builder embeds them from the fixture JSON. It
+performs no live AFL, FinalsSiren or Google fetch. The source notes explicitly say
+this is not a verified preseason player/statistics snapshot.
+
+Jagga Smith's inherited value was 0. John corrected it to 25 on 30 October 2026.
+The fixture now records 25 and carries that confirmation source, without claiming
+an independent AFL data refresh. Exact stale zeroes in saved demos upgrade to 25;
+a different value is preserved. He remains fookie eligible at both 0 and 25 under
+the current <=50 rule. The correction changes the displayed count, not eligibility.
+All remaining player counts still require a properly dated source reconciliation
+before a shared or official draft. No Google source cells are changed.

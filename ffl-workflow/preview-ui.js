@@ -15,6 +15,10 @@ function refreshDemoEvidence(s){
   p.history[correction.team]=JSON.parse(JSON.stringify(correction.after));
   p.historyReview=Object.values(p.history).some(h=>!h.verified);
  }
+ for(const correction of FIXTURE.careerGamesCorrections||[]){
+  const p=s.players.find(p=>p.id===correction.player);
+  if(p&&p.careerGames===correction.before)p.careerGames=correction.after;
+ }
  return s;
 }
 function load(){try{const saved=JSON.parse(localStorage.getItem('ffl-workflow-01-'+kind));state=saved?.state||fresh();now=saved?.now||FFLDraft.date(state.config.opensAt);}catch(e){state=fresh();now=FFLDraft.date(state.config.opensAt);}refreshDemoEvidence(state);edit=null;render();}

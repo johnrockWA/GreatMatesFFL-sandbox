@@ -42,3 +42,10 @@ test('Rockstars can retain Dunkley and saved demos receive only the confirmed hi
  assert.throws(()=>p.run("FFLDraft.selection(state,'7',{normal:['p133'],fookies:[],delists:[]})"),/three consecutive/);
  const unknown=p.run("state.players.find(p=>p.careerGames>50&&Object.values(p.history).some(h=>!h.verified))");assert.ok(unknown);
 });
+test('Jagga shows coach-confirmed 25 games and stale saved zero is upgraded without changing fookie eligibility',()=>{
+ const p=preview();assert.equal(p.run("state.players.find(p=>p.id==='p128').careerGames"),25);
+ p.run("state.players.find(p=>p.id==='p128').careerGames=0;refreshDemoEvidence(state)");
+ assert.equal(p.run("state.players.find(p=>p.id==='p128').careerGames"),25);
+ assert.doesNotThrow(()=>p.run("FFLDraft.selection(state,'7',{normal:[],fookies:['p128'],delists:[]})"));
+ p.run("state.players.find(p=>p.id==='p128').careerGames=26;refreshDemoEvidence(state)");assert.equal(p.run("state.players.find(p=>p.id==='p128').careerGames"),26);
+});
