@@ -1,0 +1,17 @@
+# Private Google/OAuth state and any unpublished source/data captures
+.clasprc.json
+.clasprc*.json
+.clasp.json
+.env
+.env.*
+!.env.example
+*credentials*.json
+*token*.json
+private/
+private-candidates/
+apps-audit/
+audit-evidence.json
+node_modules/
+__pycache__/
+*.pyc
+test-results/
