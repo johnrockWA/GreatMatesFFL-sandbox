@@ -27,3 +27,18 @@ test('Katy greeting and factual approval guidance render without enabling genera
  const p=preview();assert.match(p.nodes.get('katybanter').textContent,/Hello, coach/);
  p.run("role='commissioner';workspace='admin';render()");assert.match(p.nodes.get('admincontent').innerHTML,/Conversational AI off/);assert.match(p.nodes.get('admincontent').innerHTML,/setup approval becomes available after the deadline/);
 });
+test('Rockstars can retain Dunkley and saved demos receive only the confirmed history correction',()=>{
+ const p=preview();
+ p.run("selected='7';role='coach';render()");
+ const d=p.run("state.players.find(p=>p.id==='p133')");assert.equal(d.history['7'].verified,true);assert.equal(d.history['7'].retains,1);
+ assert.doesNotThrow(()=>p.run("FFLDraft.selection(state,'7',{normal:['p133'],fookies:[],delists:[]})"));
+ assert.match(p.nodes.get('squad').innerHTML,/Josh Dunkley/);
+ // Reproduce old local storage, retaining existing choices and draft metadata.
+ p.run("state.players.find(p=>p.id==='p133').history['7']={verified:false,retains:0,recordedNormalYears:[2026]};state.players.find(p=>p.id==='p133').historyReview=true");
+ const before=p.run("JSON.stringify({choices:state.choices,picks:state.picks,audit:state.audit,revision:state.revision})");
+ p.run('refreshDemoEvidence(state)');assert.equal(p.run("state.players.find(p=>p.id==='p133').history['7'].retains"),1);
+ assert.equal(p.run("JSON.stringify({choices:state.choices,picks:state.picks,audit:state.audit,revision:state.revision})"),before);
+ p.run("state.players.find(p=>p.id==='p133').history['7'].retains=3;refreshDemoEvidence(state)");
+ assert.throws(()=>p.run("FFLDraft.selection(state,'7',{normal:['p133'],fookies:[],delists:[]})"),/three consecutive/);
+ const unknown=p.run("state.players.find(p=>p.careerGames>50&&Object.values(p.history).some(h=>!h.verified))");assert.ok(unknown);
+});
