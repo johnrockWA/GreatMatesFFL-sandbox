@@ -3,7 +3,7 @@ function confirmAdmin(title,description,label,job){$('approvaltitle').textConten
 function renderAdmin(){
  const ph=FFLDraft.phase(state,now),missing=state.teams.filter(t=>state.choices[t.id].submitted===null),received=state.teams.length-missing.length;
  const dataMissing=state.players.filter(p=>!Number.isInteger(p.careerGames)).length;
- const historyReview=state.players.filter(p=>p.careerGames>50&&!Object.values(p.history||{}).some(h=>h.verified)).length;
+ const historyReview=state.players.filter(p=>p.careerGames>50&&state.teams.some(t=>state.baselineSquads[t.id].includes(p.id)&&!p.history?.[t.id]?.verified)).length;
  const invalid=[];for(const t of state.teams){const v=state.choices[t.id].submitted;if(v)try{FFLDraft.selection(state,t.id,v);}catch(e){invalid.push({team:t.short,reason:e.message});}}
  const canPrepare=ph==='review'&&!missing.length&&!invalid.length,canArm=state.prepared&&!state.armed&&['ready','paused'].includes(ph);
  const next=FFLKaty.nextStep({phase:ph,missingCount:missing.length,invalidCount:invalid.length,armed:state.armed});

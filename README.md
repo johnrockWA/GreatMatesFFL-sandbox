@@ -31,3 +31,12 @@ and [acceptance gates](docs/katy/acceptance-and-release.md) before any Google wo
 
 Keep OAuth state, coach emails, passwords, tokens and private workbook snapshots out
 of this public repository. CI only tests/builds; it cannot deploy or contact coaches.
+
+## Dated player-data preview
+
+The workflow uses `ffl-workflow/fixtures/demo-post-trade-20261030.json`: 670 sourced
+profiles, all 200 squad players, separate season/finals averages, post-trade clubs,
+and explicit dynasty/discard warnings. The original October fixture remains the
+historical seed. See [the refresh record](docs/katy/player-refresh-20261030.md) for
+provenance, archived evidence and coverage limits. Started local demos require an
+explicit reset to move to the updated snapshot.

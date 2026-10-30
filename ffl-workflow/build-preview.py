@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parent
 DEFAULT_OUTPUT = ROOT.parent / 'draft-workflow-preview.html'
 
 def build():
-    fixture = json.loads((ROOT / 'fixtures/demo-20261007.json').read_text(encoding='utf-8'))
+    fixture = json.loads((ROOT / 'fixtures/demo-post-trade-20261030.json').read_text(encoding='utf-8'))
     # The checked-in fixture is the old public demo, not a verified league snapshot.
     fixture_json = json.dumps(fixture, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026').replace('\u2028', '\\u2028').replace('\u2029', '\\u2029')
     replacements = {
