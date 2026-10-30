@@ -1,7 +1,7 @@
 /* Shared pure draft rules. Clock and authenticated actor must be supplied by the server. */
 var FFLDraft = (function () {
 'use strict';
-const RULE_VERSION='provisional-build03', SOFTWARE_VERSION='katy-foundation-c1.1';
+const RULE_VERSION='provisional-build03', SOFTWARE_VERSION='katy-foundation-c1.2';
 const copy=x=>JSON.parse(JSON.stringify(x));
 const fail=m=>{throw new Error(m);};
 const unique=a=>new Set(a).size===a.length;
@@ -13,10 +13,20 @@ function create(c,teams,players,squads){schedule(c);if(!teams.length||!unique(te
 function phase(s,now){if(s.finalizedAt)return now>=date(s.finalizedAt)+(s.config.kind==='preseason'?7:3)*86400000?'hidden':'closed';if(now<date(s.config.opensAt))return 'scheduled';if(now<date(s.config.locksAt))return 'selection';if(!s.prepared)return 'review';if(s.paused)return 'paused';if(s.picks.length===s.plan.length)return 'validation';return !s.armed||now<date(s.config.draftAt)?'ready':'drafting';}
 function player(s,id){return s.players.find(p=>p.id===id)||fail('Unknown player.');}
 function team(s,id){return s.teams.find(t=>t.id===id)||fail('Unknown team.');}
-function selection(s,id,v,incomplete=false){team(s,id);if(!v||!['normal','fookies','delists'].every(k=>Array.isArray(v[k])))fail('Invalid selections.');const all=[...v.normal,...v.fookies,...v.delists];if(!unique(all)||all.some(p=>!s.baselineSquads[id].includes(p)))fail('Select distinct players from this team’s starting squad.');if(s.config.kind==='preseason'){if(v.normal.length>2)fail('Choose up to two normal retains. You also have two separate fookie slots.');if(v.fookies.length>2)fail('Choose up to two fookie-slot retains. Additional eligible fookies can use any free normal slots.');if(v.delists.length)fail('Delists are only used in the midseason draft.');for(const pid of all){const p=player(s,pid);if(!Number.isInteger(p.careerGames)||p.careerGames<0)fail(p.name+': career games require verification.');if(v.fookies.includes(pid)&&p.careerGames>50)fail(p.name+' is not fookie eligible.');if(p.careerGames>50){const h=p.history?.[id];if(!h||h.verified!==true||!Number.isInteger(h.retains)||h.retains<0)fail(p.name+': retention history requires verification.');if(h.retains>=3)fail(p.name+' has reached three consecutive dynasty retentions.');}}}else if(v.normal.length||v.fookies.length||(!incomplete&&v.delists.length<2)||v.delists.length>4)fail('Choose two to four delists.');return copy(v);}
+// One factual eligibility result for rules and coach display.
+function retentionStatus(s,tid,pid){
+ team(s,tid);const p=player(s,pid),h=p.history?.[tid];
+ if(['retired','delisted','relist-pending'].includes(p.listStatus))return {code:'list-unconfirmed',allowed:false,label:'Not on the confirmed active list',detail:'AFL list status: '+p.listStatus+'. Retention is unavailable until active list status is confirmed.'};
+ if(!Number.isInteger(p.careerGames)||p.careerGames<0)return {code:'games-unverified',allowed:false,label:'Career games need verification',detail:'Career games must be verified before retention.'};
+ if(p.careerGames<=50)return {code:'fookie-eligible',allowed:true,label:'Fookie eligible',detail:'Eligible in a fookie slot or a free normal slot; does not advance the dynasty clock.'};
+ if(!h||h.verified!==true||!Number.isInteger(h.retains)||h.retains<0)return {code:'history-unverified',allowed:false,label:'Retention eligibility unverified',detail:'Historical career games must be checked before normal-slot entries can count as dynasty years.'};
+ if(h.retains>=3)return {code:'dynasty-limit',allowed:false,label:'Dynasty Player',detail:'Cannot be retained for '+s.config.season+'. Three qualifying consecutive retentions'+((h.qualifyingYears||h.recordedNormalYears)?.length?' ('+(h.qualifyingYears||h.recordedNormalYears).slice(-3).join(', ')+')':'')+'. Must enter the draft.'};
+ return {code:'normal-eligible',allowed:true,label:'Eligible to retain',detail:h.retains+' of 3 qualifying consecutive retentions used.'};
+}
+function selection(s,id,v,incomplete=false){team(s,id);if(!v||!['normal','fookies','delists'].every(k=>Array.isArray(v[k])))fail('Invalid selections.');const all=[...v.normal,...v.fookies,...v.delists];if(!unique(all)||all.some(p=>!s.baselineSquads[id].includes(p)))fail('Select distinct players from this team’s starting squad.');if(s.config.kind==='preseason'){if(v.normal.length>2)fail('Choose up to two normal retains. You also have two separate fookie slots.');if(v.fookies.length>2)fail('Choose up to two fookie-slot retains. Additional eligible fookies can use any free normal slots.');if(v.delists.length)fail('Delists are only used in the midseason draft.');for(const pid of all){const p=player(s,pid),eligibility=retentionStatus(s,id,pid);if(!eligibility.allowed){if(eligibility.code==='list-unconfirmed')fail(p.name+': AFL list status requires verification ('+p.listStatus+').');if(eligibility.code==='games-unverified')fail(p.name+': career games require verification.');if(eligibility.code==='history-unverified')fail(p.name+': retention history requires verification.');fail(p.name+' is a Dynasty Player and has reached three consecutive dynasty retentions.');}if(v.fookies.includes(pid)&&p.careerGames>50)fail(p.name+' is not fookie eligible.');}}else if(v.normal.length||v.fookies.length||(!incomplete&&v.delists.length<2)||v.delists.length>4)fail('Choose two to four delists.');return copy(v);}
 function status(s,id){const c=s.choices[id];return c.submitted!==null&&c.version===c.submittedVersion?'Submitted':'Not Submitted';}
 function allocation(s,locked){const counts={};for(const t of s.teams){const v=selection(s,t.id,locked[t.id]);counts[t.id]=s.config.kind==='preseason'?20-v.normal.length-v.fookies.length:v.delists.length;}const plan=[];for(let r=1;r<=Math.max(...Object.values(counts));r++)for(const [i,t] of s.teams.entries())if(counts[t.id]>=r)plan.push({team:t.id,round:r,slot:i+1,label:r+'.'+String(i+1).padStart(2,'0')});return plan;}
-function available(s,pid,pickIndex=s.picks.length){const p=player(s,pid);if(s.picks.some(x=>x.player===pid))return {ok:false,reason:'Drafted',pick:s.picks.find(x=>x.player===pid)};if(!s.prepared)return {ok:false,reason:'Draft has not opened'};for(const t of s.teams){const c=s.locked[t.id];const kept=s.config.kind==='preseason'?[...c.normal,...c.fookies]:s.baselineSquads[t.id].filter(id=>!c.delists.includes(id));if(kept.includes(pid))return {ok:false,reason:'Retained',team:t.id};}const turn=s.plan[pickIndex];if(!turn)return {ok:false,reason:'Draft complete'};if(s.config.kind==='preseason'&&turn.round===1&&s.baselineSquads[turn.team].includes(p.id))return {ok:false,reason:'Your discarded player: available after round one'};return {ok:true};}
+function available(s,pid,pickIndex=s.picks.length){const p=player(s,pid);if(['retired','delisted','relist-pending'].includes(p.listStatus))return {ok:false,reason:'Not in the confirmed active AFL list: '+p.listStatus};if(s.picks.some(x=>x.player===pid))return {ok:false,reason:'Drafted',pick:s.picks.find(x=>x.player===pid)};if(!s.prepared)return {ok:false,reason:'Draft has not opened'};for(const t of s.teams){const c=s.locked[t.id];const kept=s.config.kind==='preseason'?[...c.normal,...c.fookies]:s.baselineSquads[t.id].filter(id=>!c.delists.includes(id));if(kept.includes(pid))return {ok:false,reason:'Retained',team:t.id};}const turn=s.plan[pickIndex];if(!turn)return {ok:false,reason:'Draft complete'};if(s.config.kind==='preseason'&&turn.round===1&&s.baselineSquads[turn.team].includes(p.id))return {ok:false,reason:'You delisted this player — you can draft him from Round 2'};return {ok:true};}
 function finalSquads(s){const out={};for(const t of s.teams){const c=s.locked[t.id];const base=s.config.kind==='preseason'?[...c.normal,...c.fookies]:s.baselineSquads[t.id].filter(id=>!c.delists.includes(id));out[t.id]=[...base,...s.picks.filter(p=>p.team===t.id).map(p=>p.player)];if(out[t.id].length!==20||!unique(out[t.id]))fail('Final squad invalid for '+t.name);}if(!unique(Object.values(out).flat()))fail('Player appears in multiple final squads.');return out;}
 // Record only the fields an accepted action can change, rather than copying private state.
 function evidence(s,a,target){
@@ -67,6 +77,7 @@ function apply(input,a,actor,now){
  return s;
 }
 function reminders(input,now){const s=copy(input);if(phase(s,now)!=='selection')return s;for(const t of s.teams){const events=[['open',date(s.config.opensAt)],['48h',Math.max(date(s.config.opensAt),date(s.config.locksAt)-48*3600000)],['6h',Math.max(date(s.config.opensAt),date(s.config.locksAt)-6*3600000)]];const due=events.filter(e=>now>=e[1]&&!s.reminderKeys.includes(t.id+':'+e[0]));if(!due.length)continue;due.forEach(e=>s.reminderKeys.push(t.id+':'+e[0]));const event=due[due.length-1];if(event[0]!=='open'&&status(s,t.id)==='Submitted')continue;s.notices.push({id:t.id+':'+event[0],team:t.id,text:event[0]==='open'?'Selection window is open':'Selections need submission before the deadline',at:new Date(now).toISOString(),emailStatus:'suppressed'});}if(!same(s.notices,input.notices)||!same(s.reminderKeys,input.reminderKeys))s.revision++;return s;}
+function statsProjection(x){return {games:x.games,averages:Object.fromEntries(['kicks','handballs','disposals','marks','hitouts','tackles','goals','behinds','freeFor','freeAgainst'].map(k=>[k,x.averages[k]])),fflAverages:Object.fromEntries(['forward','ruck','marker','midfielder','tackler','allRounder'].map(k=>[k,x.fflAverages[k]]))};}
 function view(s,actor,now){
  if(!actor||!actor.id)fail('Authentication required.');
  if(!['coach','commissioner','president'].includes(actor.role))fail('Verified draft role required.');
@@ -83,8 +94,8 @@ function view(s,actor,now){
    ruleVersion:RULE_VERSION,softwareVersion:SOFTWARE_VERSION,
    config:{kind:s.config.kind,season:s.config.season,opensAt:s.config.opensAt,locksAt:s.config.locksAt,draftAt:s.config.draftAt},
    teams:s.teams.map(t=>({id:t.id,name:t.name,short:t.short||t.name})),
-   players:s.players.map(p=>({id:p.id,name:p.name,club:p.club||'',careerGames:p.careerGames,
-     historyReview:!!p.historyReview,history:Object.fromEntries(Object.entries(p.history||{}).map(([id,h])=>[id,{verified:h.verified===true,retains:h.retains,recordedNormalYears:h.recordedNormalYears||[]}]))})),
+   players:s.players.map(p=>({id:p.id,name:p.name,club:p.club||'',careerGames:p.careerGames,listStatus:p.listStatus||'unverified',stats2026:p.stats2026?{season:p.stats2026.season,asOf:p.stats2026.asOf,source:p.stats2026.source,regularSeason:statsProjection(p.stats2026.regularSeason),includingFinals:statsProjection(p.stats2026.includingFinals)}:null,
+     historyReview:!!p.historyReview,history:Object.fromEntries(Object.entries(p.history||{}).map(([id,h])=>[id,{verified:h.verified===true,retains:h.retains,recordedNormalYears:h.recordedNormalYears||[],qualifyingYears:h.qualifyingYears||[],evidenceSource:h.evidenceSource||null}]))})),
    officialSquads:s.officialSquads,baselineSquads:s.baselineSquads,
    prepared:s.prepared,armed:s.armed,paused:s.paused,finalizedAt:s.finalizedAt,
    phase:ph,visible:!['scheduled','hidden'].includes(ph),
@@ -99,7 +110,7 @@ function view(s,actor,now){
  if(committee(actor))v.audit=s.audit.filter(e=>e.type!=='queue'||e.actor===actor.id);
  return copy(v);
 }
-return {create,apply,phase,status,selection,available,finalSquads,reminders,view,date,
+return {create,apply,phase,status,selection,retentionStatus,available,finalSquads,reminders,view,date,
  ruleVersion:RULE_VERSION,softwareVersion:SOFTWARE_VERSION};
 })();
 if(typeof module!=='undefined')module.exports=FFLDraft;

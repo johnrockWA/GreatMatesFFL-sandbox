@@ -1,0 +1,1209 @@
+{
+  "asOf": "2026-10-30",
+  "cutoff": "2026 trade period completed",
+  "trades": [
+    {
+      "name": "Toby Greene",
+      "club": "Geelong",
+      "entryId": 7721,
+      "position": 1.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Joel Amartey",
+      "club": "Carlton",
+      "entryId": 7728,
+      "position": 2.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Kieren Briggs",
+      "club": "Richmond",
+      "entryId": 7739,
+      "position": 3.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Lachie Neale",
+      "club": "Collingwood",
+      "entryId": 7740,
+      "position": 4.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Jordon Butts",
+      "club": "Western Bulldogs",
+      "entryId": 7747,
+      "position": 5.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Jesse Hogan",
+      "club": "Collingwood",
+      "entryId": 7769,
+      "position": 6.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Scott Pendlebury",
+      "club": "Gold Coast Suns",
+      "entryId": 7788,
+      "position": 7.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Zach Merrett",
+      "club": "Hawthorn",
+      "entryId": 7797,
+      "position": 8.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Nathan O'Driscoll",
+      "club": "Richmond",
+      "entryId": 7847,
+      "position": 9.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Jordan Ridley",
+      "club": "Geelong",
+      "entryId": 7890,
+      "position": 10.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Jack Bowes",
+      "club": "Essendon",
+      "entryId": 7890,
+      "position": 10.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Rowan Marshall",
+      "club": "Geelong",
+      "entryId": 7930,
+      "position": 11.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Finn Maginness",
+      "club": "Western Bulldogs",
+      "entryId": 7983,
+      "position": 13.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Hudson O'Keeffe",
+      "club": "Western Bulldogs",
+      "entryId": 7983,
+      "position": 13.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Ben King",
+      "club": "Hawthorn",
+      "entryId": 7987,
+      "position": 14.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Zak Butters",
+      "club": "Western Bulldogs",
+      "entryId": 7995,
+      "position": 15.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Sam Marshall",
+      "club": "St Kilda",
+      "entryId": 8000,
+      "position": 16.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Aidan Schubert",
+      "club": "Gold Coast Suns",
+      "entryId": 8030,
+      "position": 18.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Sam Butler",
+      "club": "Gold Coast Suns",
+      "entryId": 8030,
+      "position": 18.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Nick Blakey",
+      "club": "North Melbourne",
+      "entryId": 8077,
+      "position": 19.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Zane Duursma",
+      "club": "Melbourne",
+      "entryId": 8082,
+      "position": 20.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Lachie Whitfield",
+      "club": "Carlton",
+      "entryId": 8093,
+      "position": 21.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Flynn Riley",
+      "club": "Collingwood",
+      "entryId": 8096,
+      "position": 22.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Trent Rivers",
+      "club": "West Coast Eagles",
+      "entryId": 8188,
+      "position": 26.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Jack Viney",
+      "club": "West Coast Eagles",
+      "entryId": 8188,
+      "position": 26.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Will McLachlan",
+      "club": "Melbourne",
+      "entryId": 8189,
+      "position": 27.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Josh Goater",
+      "club": "Hawthorn",
+      "entryId": 8190,
+      "position": 28.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Bodie Ryan",
+      "club": "Melbourne",
+      "entryId": 8191,
+      "position": 29.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Keidean Coleman",
+      "club": "Essendon",
+      "entryId": 8193,
+      "position": 30.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    },
+    {
+      "name": "Luke Pedlar",
+      "club": "Port Adelaide",
+      "entryId": 8195,
+      "position": 31.0,
+      "source": "https://www.afl.com.au/trade/trade-tracker/2026",
+      "sourceApi": "https://aflapi.afl.com.au/liveblog/afl/253/EN"
+    }
+  ],
+  "listChanges": [
+    {
+      "name": "Jordon Butts",
+      "status": "free-agent-move",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625817"
+    },
+    {
+      "name": "Chayce Jones",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1613308/former-first-round-pick-father-son-among-trio-cut-from-adelaide-crows"
+    },
+    {
+      "name": "Luke Pedlar",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628711/adelaide-crows-forward-luke-pedlar-traded-to-arch-rival-port-adelaide-power"
+    },
+    {
+      "name": "Lachlan Sholl",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1613308/former-first-round-pick-father-son-among-trio-cut-from-adelaide-crows"
+    },
+    {
+      "name": "Taylor Walker",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1582374/adelaide-crows-veteran-taylor-walker-to-retire-at-end-of-2026-season"
+    },
+    {
+      "name": "Tyler Welsh",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1613308/former-first-round-pick-father-son-among-trio-cut-from-adelaide-crows"
+    },
+    {
+      "name": "Luke Beecken",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634451/brisbane-lions-pair-darragh-joyce-and-luke-beecken-delisted-youngsters-to-be-re-drafted-next-month"
+    },
+    {
+      "name": "Keidean Coleman",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1631430/bombers-boost-essendon-completes-deal-for-classy-brisbane-lion-keidean-coleman"
+    },
+    {
+      "name": "Koby Evans",
+      "status": "delisted",
+      "rerookieIntent": true,
+      "source": "https://www.afl.com.au/news/1634451/brisbane-lions-pair-darragh-joyce-and-luke-beecken-delisted-youngsters-to-be-re-drafted-next-month"
+    },
+    {
+      "name": "Darragh Joyce",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634451/brisbane-lions-pair-darragh-joyce-and-luke-beecken-delisted-youngsters-to-be-re-drafted-next-month"
+    },
+    {
+      "name": "Luke Lloyd",
+      "status": "delisted",
+      "rerookieIntent": true,
+      "source": "https://www.afl.com.au/news/1634451/brisbane-lions-pair-darragh-joyce-and-luke-beecken-delisted-youngsters-to-be-re-drafted-next-month"
+    },
+    {
+      "name": "Sam Marshall",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628961/disgruntled-flag-brisbane-lion-sam-marshall-secures-move-to-st-kilda-saints-in-victoria"
+    },
+    {
+      "name": "Will McLachlan",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629752/melbourne-demons-boost-firepower-with-deal-done-for-brisbane-lions-forward-will-mclachlan"
+    },
+    {
+      "name": "Lachie Neale",
+      "status": "free-agent-move",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625750/brisbane-lions-champion-lachie-neale-joins-third-club-with-collingwood-magpies-move"
+    },
+    {
+      "name": "Jordan Boyd",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1607012/carlton-blues-delist-seven-players-including-two-club-veteran-zac-williams-and-elijah-hollands"
+    },
+    {
+      "name": "Ben Camporeale",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1607279/father-son-products-lucas-and-ben-camporeale-delisted-by-carlton-blues-as-changes-continue"
+    },
+    {
+      "name": "Lucas Camporeale",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1607279/father-son-products-lucas-and-ben-camporeale-delisted-by-carlton-blues-as-changes-continue"
+    },
+    {
+      "name": "Harry Charleson",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1607012/carlton-blues-delist-seven-players-including-two-club-veteran-zac-williams-and-elijah-hollands"
+    },
+    {
+      "name": "Matt Duffy",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1583613/carlton-blues-rookie-matt-duffy-returning-to-ireland-after-three-years"
+    },
+    {
+      "name": "Lachie Fogarty",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1607012/carlton-blues-delist-seven-players-including-two-club-veteran-zac-williams-and-elijah-hollands"
+    },
+    {
+      "name": "Elijah Hollands",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1607012/carlton-blues-delist-seven-players-including-two-club-veteran-zac-williams-and-elijah-hollands"
+    },
+    {
+      "name": "Hudson O'Keeffe",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629042/five-club-mega-deal-lands-as-dogs-land-duo-power-load-up"
+    },
+    {
+      "name": "Flynn Riley",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1631431/big-carlton-blue-flynn-riley-gets-his-move-to-arch-rivals-collingwood-magpies"
+    },
+    {
+      "name": "Adam Saad",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634427/former-all-australian-adam-saad-delisted-after-six-seasons-at-carlton-blues"
+    },
+    {
+      "name": "Zac Williams",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1607012/carlton-blues-delist-seven-players-including-two-club-veteran-zac-williams-and-elijah-hollands"
+    },
+    {
+      "name": "Lewis Young",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1607012/carlton-blues-delist-seven-players-including-two-club-veteran-zac-williams-and-elijah-hollands"
+    },
+    {
+      "name": "Flynn Young",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1607012/carlton-blues-delist-seven-players-including-two-club-veteran-zac-williams-and-elijah-hollands"
+    },
+    {
+      "name": "Joel Cochran",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600213/ex-cricketer-and-mid-season-rookie-among-six-collingwood-magpies-delisted"
+    },
+    {
+      "name": "Harrison Coe",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634392/collingwood-magpies-confirm-further-list-changes-as-mid-season-recruits-noah-howes-harrison-coe-axed"
+    },
+    {
+      "name": "Harry DeMattia",
+      "status": "delisted",
+      "rerookieIntent": true,
+      "source": "https://www.afl.com.au/news/1634392/collingwood-magpies-confirm-further-list-changes-as-mid-season-recruits-noah-howes-harrison-coe-axed"
+    },
+    {
+      "name": "Bobby Hill",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1571952/bobby-hill-to-depart-collingwood-magpies-after-club-and-player-agreed-to-terms-of-exit"
+    },
+    {
+      "name": "Noah Howes",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634392/collingwood-magpies-confirm-further-list-changes-as-mid-season-recruits-noah-howes-harrison-coe-axed"
+    },
+    {
+      "name": "Wil Parker",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600213/ex-cricketer-and-mid-season-rookie-among-six-collingwood-magpies-delisted"
+    },
+    {
+      "name": "Scott Pendlebury",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1626426/trade-agreed-for-games-record-holder-scott-pendlebury-gold-coast-suns-compo-pick-still-intact"
+    },
+    {
+      "name": "Mitch Podhajski",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600213/ex-cricketer-and-mid-season-rookie-among-six-collingwood-magpies-delisted"
+    },
+    {
+      "name": "Jakob Ryan",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600213/ex-cricketer-and-mid-season-rookie-among-six-collingwood-magpies-delisted"
+    },
+    {
+      "name": "Steele Sidebottom",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1583542/collingwood-magpies-legend-steele-sidebottom-to-retire-at-the-end-of-the-season"
+    },
+    {
+      "name": "Iliro Smit",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600213/ex-cricketer-and-mid-season-rookie-among-six-collingwood-magpies-delisted"
+    },
+    {
+      "name": "Lachie Sullivan",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600213/ex-cricketer-and-mid-season-rookie-among-six-collingwood-magpies-delisted"
+    },
+    {
+      "name": "Nik Cox",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632599/former-top-10-pick-nik-cox-among-three-essendon-bombers-delisted"
+    },
+    {
+      "name": "Tom Edwards",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632599/former-top-10-pick-nik-cox-among-three-essendon-bombers-delisted"
+    },
+    {
+      "name": "Saad El-Hawli",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1612850/former-top-10-pick-elijah-tsatas-free-agent-jade-gresham-among-five-essendon-bombers-delisted"
+    },
+    {
+      "name": "Kayle Gerreyn",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632599/former-top-10-pick-nik-cox-among-three-essendon-bombers-delisted"
+    },
+    {
+      "name": "Jade Gresham",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1612850/former-top-10-pick-elijah-tsatas-free-agent-jade-gresham-among-five-essendon-bombers-delisted"
+    },
+    {
+      "name": "Matt Guelfi",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1612850/former-top-10-pick-elijah-tsatas-free-agent-jade-gresham-among-five-essendon-bombers-delisted"
+    },
+    {
+      "name": "Liam McMahon",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1612850/former-top-10-pick-elijah-tsatas-free-agent-jade-gresham-among-five-essendon-bombers-delisted"
+    },
+    {
+      "name": "Zach Merrett",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628685/zach-merrett-gets-long-held-wish-after-hawthorn-hawks-up-offer-to-essendon-bombers"
+    },
+    {
+      "name": "Jordan Ridley",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628710/geelong-cats-secure-defender-jordan-ridley-essendon-bombers-land-utility-jack-bowes-in-trade"
+    },
+    {
+      "name": "Elijah Tsatas",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1612850/former-top-10-pick-elijah-tsatas-free-agent-jade-gresham-among-five-essendon-bombers-delisted"
+    },
+    {
+      "name": "Bailey Banfield",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625734/utility-bailey-banfield-among-four-fremantle-dockers-delisted-after-grand-final-loss"
+    },
+    {
+      "name": "Jaren Carr",
+      "status": "delisted",
+      "rerookieIntent": true,
+      "source": "https://www.afl.com.au/news/1636402/fremantle-dockers-delist-father-son-jaren-carr-commit-to-rookie-lifeline"
+    },
+    {
+      "name": "Ryda Luke",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625734/utility-bailey-banfield-among-four-fremantle-dockers-delisted-after-grand-final-loss"
+    },
+    {
+      "name": "Ollie Murphy",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625734/utility-bailey-banfield-among-four-fremantle-dockers-delisted-after-grand-final-loss"
+    },
+    {
+      "name": "Nathan O'Driscoll",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628864/fremantle-dockers-winger-nathan-odriscoll-traded-to-richmond-tigers"
+    },
+    {
+      "name": "Sam Sturt",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625734/utility-bailey-banfield-among-four-fremantle-dockers-delisted-after-grand-final-loss"
+    },
+    {
+      "name": "Sam Switkowski",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595650"
+    },
+    {
+      "name": "Jed Bews",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1619550"
+    },
+    {
+      "name": "Jack Bowes",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628710/geelong-cats-secure-defender-jordan-ridley-essendon-bombers-land-utility-jack-bowes-in-trade"
+    },
+    {
+      "name": "Mitch Knevitt",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634188/geelong-cats-midfielder-mitch-knevitt-delisted-door-ajar-to-return-next-month-at-drafts"
+    },
+    {
+      "name": "Jake Kolodjashnij",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625730"
+    },
+    {
+      "name": "Keighton Matofai-Forbes",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1619550"
+    },
+    {
+      "name": "Rhys Stanley",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1617909/geelong-cats-ruck-rhys-stanley-calls-time-after-17-seasons"
+    },
+    {
+      "name": "Tyson Stengle",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1572500/premiership-forward-tyson-stengle-parts-ways-with-cats-after-mutual-agreement"
+    },
+    {
+      "name": "George Stevens",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1619550"
+    },
+    {
+      "name": "Cooper Bell",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595656/gold-coast-academy-graduate-among-three-suns-delisted"
+    },
+    {
+      "name": "Asher Eastham",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595656/gold-coast-academy-graduate-among-three-suns-delisted"
+    },
+    {
+      "name": "Caleb Graham",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595656/gold-coast-academy-graduate-among-three-suns-delisted"
+    },
+    {
+      "name": "Elliott Himmelberg",
+      "status": "delisted",
+      "rerookieIntent": true,
+      "source": "https://www.afl.com.au/news/1636548/gold-coast-suns-to-delist-former-no1-pick-jamarra-ugle-hagan-but-commit-to-re-draft"
+    },
+    {
+      "name": "Nick Holman",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1589362"
+    },
+    {
+      "name": "Ben King",
+      "status": "free-agent-move",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1626399"
+    },
+    {
+      "name": "Jamarra Ugle-Hagan",
+      "status": "delisted",
+      "rerookieIntent": true,
+      "source": "https://www.afl.com.au/news/1636548/gold-coast-suns-to-delist-former-no1-pick-jamarra-ugle-hagan-but-commit-to-re-draft"
+    },
+    {
+      "name": "Kieren Briggs",
+      "status": "free-agent-move",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625735/richmond-tigers-land-greater-western-sydney-giant-kieren-briggs-to-bolster-ruck-stocks"
+    },
+    {
+      "name": "Toby Greene",
+      "status": "free-agent-move",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625751/greater-western-sydney-giants-star-toby-greene-completes-move-to-geelong-cats-as-free-agent"
+    },
+    {
+      "name": "Jesse Hogan",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1627079"
+    },
+    {
+      "name": "Conor Stone",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634330/greater-western-sydney-giants-delist-former-first-round-pick-conor-stone-after-six-seasons"
+    },
+    {
+      "name": "Jake Stringer",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1594990/time-was-right-forward-jake-stringers-departure-from-greater-western-sydney-giants-confirmed"
+    },
+    {
+      "name": "Lachie Whitfield",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628958/greater-western-giant-lachie-whitfield-secures-move-to-carlton-blues-five-picks-change-hands-in-trade"
+    },
+    {
+      "name": "Cody Anderson",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1620090"
+    },
+    {
+      "name": "Sam Butler",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629329/gold-coast-suns-seal-deal-for-hawthorn-hawks-duo-aidan-schubert-sam-butler-in-attacking-boost"
+    },
+    {
+      "name": "James Blanck",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1620090"
+    },
+    {
+      "name": "Henry Hustwaite",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1620090"
+    },
+    {
+      "name": "Finn Maginness",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629042/five-club-mega-deal-lands-as-dogs-land-duo-power-load-up"
+    },
+    {
+      "name": "Flynn Perez",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632328"
+    },
+    {
+      "name": "Max Ramsden",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632328"
+    },
+    {
+      "name": "Bodie Ryan",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632195/melbourne-demons-swoop-on-hawthorn-hawks-defender-bodie-ryan-in-dying-minute-of-trade-period"
+    },
+    {
+      "name": "Aidan Schubert",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629329/gold-coast-suns-seal-deal-for-hawthorn-hawks-duo-aidan-schubert-sam-butler-in-attacking-boost"
+    },
+    {
+      "name": "Jaime Uhr-Henry",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1620090"
+    },
+    {
+      "name": "Tom Campbell",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1519169"
+    },
+    {
+      "name": "Jack Henderson",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600513/untried-father-son-tall-kalani-white-among-five-melbourne-demons-cut-after-season-ends"
+    },
+    {
+      "name": "Aidan Johnson",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600513/untried-father-son-tall-kalani-white-among-five-melbourne-demons-cut-after-season-ends"
+    },
+    {
+      "name": "Steven May",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1471030/premiership-melbourne-demon-steven-may-calls-time-despite-one-year-remaining-on-deal"
+    },
+    {
+      "name": "Shane McAdam",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1528155/melbourne-demons-forward-shane-mcadam-retires-after-tough-run-with-injuries"
+    },
+    {
+      "name": "Tom McDonald",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1577038/much-loved-premiership-melbourne-demon-tom-mcdonald-to-retire-at-seasons-end"
+    },
+    {
+      "name": "Jake Melksham",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1594984/melbourne-demons-veteran-jake-melksham-to-retire-at-seasons-end"
+    },
+    {
+      "name": "Andy Moniz-Wakefield",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600513/untried-father-son-tall-kalani-white-among-five-melbourne-demons-cut-after-season-ends"
+    },
+    {
+      "name": "Riley Onley",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600513/untried-father-son-tall-kalani-white-among-five-melbourne-demons-cut-after-season-ends"
+    },
+    {
+      "name": "Trent Rivers",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1631429/wet-coast-eagles-agree-deal-for-melbourne-demons-duo-trent-rivers-jack-viney-in-big-boost"
+    },
+    {
+      "name": "Jack Viney",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1631429/wet-coast-eagles-agree-deal-for-melbourne-demons-duo-trent-rivers-jack-viney-in-big-boost"
+    },
+    {
+      "name": "Kalani White",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1600513/untried-father-son-tall-kalani-white-among-five-melbourne-demons-cut-after-season-ends"
+    },
+    {
+      "name": "Callum Coleman-Jones",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1596209/father-son-recruit-bailey-scott-among-four-north-melbourne-kangaroos-axed"
+    },
+    {
+      "name": "Zane Duursma",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628959/zane-duursma-gets-trade-wish-three-picks-change-hands-between-melbourne-demons-and-north-melbourne-kangaroos"
+    },
+    {
+      "name": "Zac Fisher",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634296/father-son-cooper-harvey-former-blue-zac-fisher-and-luke-urquhart-delisted-by-north-melbourne-kangaroos"
+    },
+    {
+      "name": "Brayden George",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1596209/father-son-recruit-bailey-scott-among-four-north-melbourne-kangaroos-axed"
+    },
+    {
+      "name": "Josh Goater",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629743/hawthorn-hawks-busy-off-season-continues-as-north-melbourne-kangaroos-defender-josh-goater-joins"
+    },
+    {
+      "name": "Robert Hansen jnr",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1596209/father-son-recruit-bailey-scott-among-four-north-melbourne-kangaroos-axed"
+    },
+    {
+      "name": "Cooper Harvey",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634296/father-son-cooper-harvey-former-blue-zac-fisher-and-luke-urquhart-delisted-by-north-melbourne-kangaroos"
+    },
+    {
+      "name": "Bailey Scott",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1596209/father-son-recruit-bailey-scott-among-four-north-melbourne-kangaroos-axed"
+    },
+    {
+      "name": "Luke Urquhart",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634296/father-son-cooper-harvey-former-blue-zac-fisher-and-luke-urquhart-delisted-by-north-melbourne-kangaroos"
+    },
+    {
+      "name": "Tom Anastasopoulos",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632353"
+    },
+    {
+      "name": "Benny Barrett",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595158/port-adelaide-power-axe-six-players-as-off-season-of-change-looms"
+    },
+    {
+      "name": "Will Brodie",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632353"
+    },
+    {
+      "name": "Zak Butters",
+      "status": "free-agent-move",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628929/western-bulldogs-lodge-zak-butters-paperwork-as-blockbuster-move-nears"
+    },
+    {
+      "name": "Mani Liddy",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595158/port-adelaide-power-axe-six-players-as-off-season-of-change-looms"
+    },
+    {
+      "name": "Ollie Lord",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632353"
+    },
+    {
+      "name": "Will Lorenz",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595158/port-adelaide-power-axe-six-players-as-off-season-of-change-looms"
+    },
+    {
+      "name": "Jackson Mead",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595158/port-adelaide-power-axe-six-players-as-off-season-of-change-looms"
+    },
+    {
+      "name": "Jacob Moss",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595158/port-adelaide-power-axe-six-players-as-off-season-of-change-looms"
+    },
+    {
+      "name": "Ivan Soldo",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1507909/flag-ruck-ivan-soldo-retires-after-10-year-career-across-two-clubs"
+    },
+    {
+      "name": "Xavier Walsh",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595158/port-adelaide-power-axe-six-players-as-off-season-of-change-looms"
+    },
+    {
+      "name": "Nathan Broad",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1576945/triple-flag-richmond-tiger-nathan-broad-calls-it-a-day"
+    },
+    {
+      "name": "Liam Fawcett",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595675"
+    },
+    {
+      "name": "Steely Green",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632356"
+    },
+    {
+      "name": "Oliver Hayes-Brown",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632356"
+    },
+    {
+      "name": "Dion Prestia",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1583472/another-premiership-richmond-tigers-player-dion-prestia-to-say-farewell-at-end-of-the-season"
+    },
+    {
+      "name": "Samson Ryan",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629061/richmond-tigers-delist-three-tyler-sonsie-samson-ryan-james-trezise-as-list-overhaul-continues"
+    },
+    {
+      "name": "Kaleb Smith",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595675"
+    },
+    {
+      "name": "Tyler Sonsie",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629061/richmond-tigers-delist-three-tyler-sonsie-samson-ryan-james-trezise-as-list-overhaul-continues"
+    },
+    {
+      "name": "James Trezise",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629061/richmond-tigers-delist-three-tyler-sonsie-samson-ryan-james-trezise-as-list-overhaul-continues"
+    },
+    {
+      "name": "Dan Butler",
+      "status": "delisted",
+      "rerookieIntent": true,
+      "source": "https://www.afl.com.au/news/1636586/st-kilda-saints-duo-dan-butler-ryan-byrnes-delisted-set-for-rookie-lifelines"
+    },
+    {
+      "name": "Ryan Byrnes",
+      "status": "delisted",
+      "rerookieIntent": true,
+      "source": "https://www.afl.com.au/news/1636586/st-kilda-saints-duo-dan-butler-ryan-byrnes-delisted-set-for-rookie-lifelines"
+    },
+    {
+      "name": "Jack Carroll",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634437"
+    },
+    {
+      "name": "Paddy Dow",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595742"
+    },
+    {
+      "name": "Dougal Howard",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1589767/st-kilda-saints-defender-dougal-howard-to-hang-up-the-boots-after-two-club-12-season-career"
+    },
+    {
+      "name": "Isaac Keeler",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595742"
+    },
+    {
+      "name": "Rowan Marshall",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1628930/rowan-marshall-gets-trade-wish-as-st-kilda-saints-land-top-draft-pick-from-geelong-cats"
+    },
+    {
+      "name": "Patrick Said",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595742"
+    },
+    {
+      "name": "Taylor Adams",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1546461/sydney-swan-taylor-adams-announces-retirement"
+    },
+    {
+      "name": "Joel Amartey",
+      "status": "free-agent-move",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1625737/new-blue-tall-forward-joel-amartey-joins-carlton-from-sydney-swans"
+    },
+    {
+      "name": "Nick Blakey",
+      "status": "traded",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629721/north-melbourne-kangaroos-land-sydney-swans-star-nick-blakey-in-blockbuster-move"
+    },
+    {
+      "name": "Harry Cunningham",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1629056"
+    },
+    {
+      "name": "Dane Rampe",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1636570/off-dane-rampe-former-sydney-swans-co-captain-calls-it-a-day"
+    },
+    {
+      "name": "Harry Barnett",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595420/west-coast-eagles-pair-harry-barnett-and-defender-harvey-johnston-delisted-at-the-end-of-2026-season"
+    },
+    {
+      "name": "Tyler Brockman",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1596003/forward-tyler-brockman-delisted-after-three-seasons-with-west-coast-eagles"
+    },
+    {
+      "name": "Jamie Cripps",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1550904"
+    },
+    {
+      "name": "Clay Hall",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632361/west-coast-eagles-continue-off-season-changes-with-clay-hall-harry-schoenberg-and-jack-williams-delisted"
+    },
+    {
+      "name": "Harvey Johnston",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1595420/west-coast-eagles-pair-harry-barnett-and-defender-harvey-johnston-delisted-at-the-end-of-2026-season"
+    },
+    {
+      "name": "Matt Owies",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1634406"
+    },
+    {
+      "name": "Harry Schoenberg",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632361/west-coast-eagles-continue-off-season-changes-with-clay-hall-harry-schoenberg-and-jack-williams-delisted"
+    },
+    {
+      "name": "Jack Williams",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632361/west-coast-eagles-continue-off-season-changes-with-clay-hall-harry-schoenberg-and-jack-williams-delisted"
+    },
+    {
+      "name": "Oskar Baker",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1606748"
+    },
+    {
+      "name": "Nick Coffield",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632352/western-bulldogs-delist-trio-as-off-season-overhaul-rolls-on"
+    },
+    {
+      "name": "Harvey Gallagher",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1606748"
+    },
+    {
+      "name": "Riley Garcia",
+      "status": "delisted",
+      "rerookieIntent": true,
+      "source": "https://www.afl.com.au/news/1636335/luckless-western-bulldog-riley-garcia-delisted-set-to-get-rookie-lifeline"
+    },
+    {
+      "name": "Ryan Gardner",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632352/western-bulldogs-delist-trio-as-off-season-overhaul-rolls-on"
+    },
+    {
+      "name": "James Harmes",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1464341/western-bulldogs-midfielder-and-former-melbourne-demon-james-harmes-retires"
+    },
+    {
+      "name": "Tom Liberatore",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1606893/veteran-western-bulldogs-midfielder-tom-liberatore-announces-retirement-after-stellar-career"
+    },
+    {
+      "name": "Lachlan McNeil",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1632352/western-bulldogs-delist-trio-as-off-season-overhaul-rolls-on"
+    },
+    {
+      "name": "Lachlan Smith",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1606748"
+    },
+    {
+      "name": "Adam Treloar",
+      "status": "retired",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1606939/three-club-western-bulldog-adam-treloar-calls-time-on-after-16-season-career"
+    },
+    {
+      "name": "Zac Walker",
+      "status": "delisted",
+      "rerookieIntent": false,
+      "source": "https://www.afl.com.au/news/1606748"
+    }
+  ],
+  "source": "https://www.afl.com.au/news/features/retirements-and-delistings"
+}
