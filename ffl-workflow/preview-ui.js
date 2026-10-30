@@ -6,7 +6,22 @@ let workspace='draft',pendingApproval=null;
 let kind='preseason',selected=FIXTURE.teams[0].id,role='coach',now,state,edit;
 const phaseNames={scheduled:'Before the window',selection:'Selections open',review:'Committee review',ready:'Ready for draft night',drafting:'Draft is live',paused:'Draft paused',validation:'Awaiting validation',closed:'Squads finalised',hidden:'Draft tab hidden'};
 function fresh(){const month=kind==='preseason'?'02':'06';return FFLDraft.create({kind,season:2027,opensAt:`2027-${month}-01T18:00:00+08:00`,locksAt:`2027-${month}-08T18:00:00+08:00`,draftAt:`2027-${month}-09T19:00:00+08:00`},FIXTURE.teams,FIXTURE.players,FIXTURE.squads);}
-function load(){try{const saved=JSON.parse(localStorage.getItem('ffl-workflow-01-'+kind));state=saved?.state||fresh();now=saved?.now||FFLDraft.date(state.config.opensAt);}catch(e){state=fresh();now=FFLDraft.date(state.config.opensAt);}edit=null;render();}
+// Upgrade only the exact stale public-demo evidence. Keep selections, picks and
+// committee state intact; never overwrite a different manual/history correction.
+function refreshDemoEvidence(s){
+ for(const correction of FIXTURE.historyCorrections||[]){
+  const p=s.players.find(p=>p.id===correction.player),h=p?.history?.[correction.team];
+  if(!h||h.verified!==correction.before.verified||h.retains!==correction.before.retains||JSON.stringify(h.recordedNormalYears)!==JSON.stringify(correction.before.recordedNormalYears))continue;
+  p.history[correction.team]=JSON.parse(JSON.stringify(correction.after));
+  p.historyReview=Object.values(p.history).some(h=>!h.verified);
+ }
+ for(const correction of FIXTURE.careerGamesCorrections||[]){
+  const p=s.players.find(p=>p.id===correction.player);
+  if(p&&p.careerGames===correction.before)p.careerGames=correction.after;
+ }
+ return s;
+}
+function load(){try{const saved=JSON.parse(localStorage.getItem('ffl-workflow-01-'+kind));state=saved?.state||fresh();now=saved?.now||FFLDraft.date(state.config.opensAt);}catch(e){state=fresh();now=FFLDraft.date(state.config.opensAt);}refreshDemoEvidence(state);edit=null;render();}
 function persist(){try{localStorage.setItem('ffl-workflow-01-'+kind,JSON.stringify({state,now}));}catch(e){msg('Browser storage is unavailable; changes last only until this page closes.');}}
 function actor(team=selected){return {id:'demo-'+role+'-'+team,role,team};}
 function run(type,data={},who=actor()){state=FFLDraft.apply(state,{type,revision:state.revision,...data},who,now);persist();}
