@@ -1,0 +1,16 @@
+{
+  "version": "provisional-build03",
+  "status": "Preserves the recovered demo. Authoritative league-rule and historical-eligibility reconciliation is pending.",
+  "sourceCommit": "04ae1b156dc9b63929dc42308c8a7c3e0f724fab",
+  "rules": [
+    {"id":"retain-slots","value":{"normalMax":2,"fookieMax":2},"scope":"preseason"},
+    {"id":"fookie-eligibility","value":{"careerGamesMaxInclusive":50,"normalSlotExemptFromDynastyIfEligible":true},"verification":"Verify career games at the relevant eligibility date; never infer unknown counts."},
+    {"id":"dynasty-cap","value":{"teamSpecific":true,"maxConsecutiveRetentions":3,"missingHistory":"deny"},"scope":"preseason"},
+    {"id":"midseason-delists","value":{"minimumOnSubmission":2,"maximum":4,"partialWorkingChoices":true}},
+    {"id":"own-discard","value":{"blockedRound":1,"allowedLater":true},"scope":"preseason"},
+    {"id":"squad-finalisation","value":{"size":20,"uniqueAcrossTeams":true,"officialChangesOnlyAfterFinalisation":true,"sharedFinalisation":"disabled"}},
+    {"id":"draft-visibility","value":{"preseasonDaysAfterFinalisation":7,"midseasonDaysAfterFinalisation":3}},
+    {"id":"choice-publication","value":{"workingChoices":"authorised-team-and-committee-only","submittedChoicesBeforePreparation":"authorised-team-and-committee-only","lockedChoicesAfterCommitteePreparation":"public-to-authenticated-league-members","queues":"authorised-team-only"},"scope":"prepared-adapter-response"}
+  ],
+  "unverifiedInputs": ["Official end-of-season squads", "Full AFL player pool", "Historical fookie eligibility", "Player name aliases", "Final preseason and round-nine draft orders", "Real mock dates", "Server capability and multi-team mappings"]
+}

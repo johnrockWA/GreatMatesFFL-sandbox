@@ -1,4 +1,25 @@
-GREAT MATES FFL — WORKFLOW BUILD 03 — 7 October 2026
+KATY FOUNDATION C1 — 30 October 2026
+
+Source-only feature stage. The local workflow now has an FFL HQ workspace and visible
+Katy identity with deterministic guidance; conversational AI and write tools are off.
+The recovered source is under ffl-workflow/, with a frozen public demo fixture and
+existing logo. Run npm run check (Node 22, Python 3); no credentials or npm installs.
+
+Prepared coach responses now use field allowlists: opponents' working/submitted
+choices stay private before preparation, committee-approved locked choices become
+public afterwards, and other teams' queues stay private even in audit responses.
+Accepted action events record before/after evidence and rule/software versions.
+The local role-switching demo still intentionally owns all its demo data.
+
+The builder no longer needs missing external snapshots or a prior preview folder.
+The existing index/draft-room design and URLs are preserved. CI runs tests and a
+generated-output check only; no deployment, live data, email or AI integration.
+
+Known Google write-gate gaps, missing player/history evidence and shared finalisation
+remain open. The private guard candidate has not been installed. See
+docs/katy/implementation-record.md and docs/katy/acceptance-and-release.md.
+
+HISTORICAL BUILD 03 NOTES FOLLOW — 7 October 2026
 
 Status: interactive local simulation; not a shared coach test.
 Published separately from the existing draft-room design so current testers retain their original link.
