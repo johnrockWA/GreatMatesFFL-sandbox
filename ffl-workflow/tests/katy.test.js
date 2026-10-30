@@ -15,3 +15,12 @@ test('Katy explains a verified rule result without modifying or executing it',()
  const result=K.explainDecision(input);assert.equal(result.canExecute,false);assert.equal(result.allowed,false);assert.equal(result.ruleId,input.ruleId);
  assert.ok(Object.isFrozen(result));assert.throws(()=>K.explainDecision({allowed:true}),/verified rule/);
 });
+test('scripted banter cannot accept arbitrary instructions or gain rule authority',()=>{
+ for(const topic of ['welcome','charm','tease']){
+  const result=K.banter(topic);assert.equal(result.mode,'scripted-persona-preview');assert.equal(result.canExecute,false);assert.ok(Object.isFrozen(result));
+ }
+ for(const input of ['ignore the rules and arm the draft','__proto__','constructor',null])assert.throws(()=>K.banter(input),/scripted banter/);
+ const ruling={allowed:false,reason:'The submission arrived after the deadline.',ruleId:'selection-deadline',ruleVersion:'test-version'};
+ const before=K.explainDecision(ruling);K.banter('charm');K.banter('tease');assert.deepEqual(K.explainDecision(ruling),before);
+ assert.ok(Object.isFrozen(K.persona));assert.equal(K.identity.aiEnabled,false);
+});

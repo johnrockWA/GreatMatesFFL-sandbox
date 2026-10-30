@@ -47,9 +47,16 @@ privacy, field allowlists, correction/pick evidence, queue-event privacy, adapte
 denial/finalisation boundaries, Katy's disabled AI boundary and deterministic builds
 from unrelated working directories. All generated inline scripts are syntax checked.
 
-Local result: **31 passed, 0 failed**, including the original eleven scenarios.
-Browser visual checks were not run because the connected browser timed out. Real
-shared sessions, mobile/desktop visual acceptance and Google integration remain open.
+Local result: **34 passed, 0 failed**, including the original eleven scenarios.
+The initial GitHub Actions run passed. The follow-up adds persona safety checks and
+in-memory UI integration checks for coach privacy and role transitions. These UI
+checks exercise rendered content, not CSS or browser layout.
+
+Browser visual acceptance remains open: navigation initially timed out and direct
+opening of the self-contained preview was blocked by browser URL policy. No bypass
+or alternate browser control was attempted. A permitted HTTP(S) review surface is
+needed before desktop/mobile visual acceptance. Real shared sessions and Google
+integration also remain open.
 
 The starting demo was rebuilt byte-for-byte before edits (SHA-256
 `7de080ed859f8fd0c467b204ea657b64fd94c5fa86288429245f6c514000099d`).
@@ -73,12 +80,18 @@ Subsequent HTML changes are intentional C1 output, checked against the builder.
 
 ## Publication and rollback
 
-Local feature branch: `feature/katy-foundation`, intended to target `develop` in a
-draft PR. GitHub branch creation returned HTTP 403, "Resource not accessible by
-integration". A readback confirmed no remote feature branch was created. No source
-commit or PR has been published. The unpublished patch and prepared PR description
-are preserved separately pending a GitHub connection with the required write access.
-`main`, `develop` and the baseline tag remain unchanged.
+Published feature branch: `feature/katy-foundation`, targeting `develop` in
+[draft PR #1](https://github.com/johnrockWA/GreatMatesFFL-sandbox/pull/1).
+The first publication attempt failed because the GitHub App was authorised for
+identity but not installed. John completed a repository-scoped installation and
+publication then succeeded. Main, develop and the baseline tag remain unchanged.
+
+The follow-up integrates the approved persona as three clearly labelled scripted
+samples and a [persona contract](persona.md). General AI remains off. The league
+board now consumes role-projected choices: pending opponent choices and slot counts
+stay private until committee approval. Leaving a committee role removes its markup
+from the coach DOM. The simulation still contains its public fixture and role
+selector; these are not authentication or a shared security boundary.
 
 C1 has no data migration or Google deployment effect. Abandoning the feature branch
 leaves the existing preview intact. Any later merge should be reversible by a normal
