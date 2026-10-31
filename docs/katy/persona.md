@@ -25,7 +25,7 @@ Approved examples:
 
 These lines are labelled scripted persona samples in the preview. The bench line
 is a joke, not an assertion that Katy has reviewed a particular coach's records.
-General free-text conversation and paid AI remain disabled in this foundation.
+A bounded free-text panel now recognises supported topics; paid AI remains disabled.
 
 ## Rules and disputes
 
@@ -60,3 +60,22 @@ selection. And its consequences.”
 Her avatar may change hair, clothing and expression to suit the interaction, while
 keeping one recognisable adult identity. A friendly or flirtatious look never
 changes her authority, impartiality or the no-selection-advice boundary.
+
+## Guided conversation preview — 31 October 2026
+
+The Ask Katy panel accepts typed messages and quick topic buttons. `converse()`
+returns curated replies for retention rules, own-delisted first-round restrictions,
+statistics provenance, notification policy, deadlines, public draft status and banter.
+Unsupported questions are acknowledged without invented answers. Open-ended AI,
+WhatsApp, conversation persistence and messaging between coaches are not connected.
+
+The UI supplies only public turn information, public submission counts and example
+schedule text. No private choices, queues or audit records enter conversation context.
+Messages render as escaped text. The session retains at most 20 exchanges in memory,
+clearing when team, role or draft changes, on reset or on explicit clear. No network
+requests, messages to people, write tools, model credentials or action authority exist
+in this conversation layer. User instructions cannot change its supported replies.
+
+Rule answers identify the sandbox engine source; deadlines/status show the demo
+clock at the time of the answer. The current source fixture remains a dated snapshot.
+This is a conversation interface foundation, not production AI chat.
