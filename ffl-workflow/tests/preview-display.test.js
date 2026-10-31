@@ -80,3 +80,16 @@ test('chat reflects current public status, escapes text, and clears on identity 
  p.run("sendChat('whose turn');role='commissioner';render()");assert.equal(p.nodes.get('katychatlog').innerHTML,'');
  p.run("sendChat('banter')");p.nodes.get('clearchat').onclick();assert.equal(p.nodes.get('katychatlog').innerHTML,'');
 });
+
+test('Rockstars exact retains submit through the button and retain a clear receipt after edits',()=>{
+ const p=preview();p.run("selected='7';const ids=['Jai Newcombe','Josh Dunkley','Jagga Smith'].map(n=>state.players.find(p=>p.name===n).id);run('save',{value:{normal:ids.slice(0,2),fookies:[ids[2]],delists:[]}});render()");
+ p.nodes.get('submit').onclick();assert.equal(p.nodes.get('status').textContent,'Submitted');assert.equal(p.nodes.get('submit').disabled,true);
+ assert.match(p.nodes.get('submissionfeedback').textContent,/Submitted successfully/);assert.match(p.nodes.get('lastsubmit').textContent,/Jai Newcombe, Josh Dunkley, Jagga Smith/);
+ p.run("run('save',{value:{normal:['p133'],fookies:['p128'],delists:[]}});render()");
+ assert.match(p.nodes.get('status').textContent,/changes not submitted/);assert.match(p.nodes.get('submissionfeedback').textContent,/earlier submission is saved/);assert.equal(p.nodes.get('submit').disabled,false);
+ const board=p.nodes.get('board').innerHTML;assert.match(board,/Submitted · changes not submitted/);assert.match(board,/Jai Newcombe/);
+ p.nodes.get('submit').onclick();assert.equal(p.nodes.get('status').textContent,'Submitted');assert.doesNotMatch(p.nodes.get('lastsubmit').textContent,/Jai Newcombe/);
+});
+test('failed submission displays its reason beside the submit button',()=>{
+ const p=preview();p.run("now=FFLDraft.date(state.config.locksAt)");p.nodes.get('submit').onclick();assert.match(p.nodes.get('submissionfeedback').textContent,/could not be confirmed.*closed/);
+});
