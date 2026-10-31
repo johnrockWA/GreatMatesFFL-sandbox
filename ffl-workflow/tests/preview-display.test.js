@@ -72,3 +72,11 @@ test('in-app draft notification follows the validated turn and flags the delayed
  p.run("const availablePlayer=state.players.find(p=>FFLDraft.available(state,p.id).ok);run('pick',{player:availablePlayer.id,expectedPick:0});render()");assert.equal(p.nodes.get('turnalert').hidden,true);
  p.run("selected=state.plan[state.picks.length].team;now+=3600001;role='commissioner';workspace='admin';render()");assert.equal(p.nodes.get('turnalert').hidden,false);assert.match(p.nodes.get('notificationstatus').textContent,/Email|email/);assert.match(p.nodes.get('notificationstatus').textContent,/no email sent/);
 });
+
+test('chat reflects current public status, escapes text, and clears on identity changes',()=>{
+ const p=preview();p.run("sendChat('deadlines')");assert.match(p.nodes.get('katychatlog').innerHTML,/AWST/);
+ p.run("sendChat('<img src=x onerror=alert(1)>')");assert.doesNotMatch(p.nodes.get('katychatlog').innerHTML,/<img/);assert.match(p.nodes.get('katychatlog').innerHTML,/&lt;img/);
+ p.run("selected='7';render()");assert.equal(p.nodes.get('katychatlog').innerHTML,'');
+ p.run("sendChat('whose turn');role='commissioner';render()");assert.equal(p.nodes.get('katychatlog').innerHTML,'');
+ p.run("sendChat('banter')");p.nodes.get('clearchat').onclick();assert.equal(p.nodes.get('katychatlog').innerHTML,'');
+});
