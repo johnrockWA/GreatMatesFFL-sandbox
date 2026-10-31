@@ -3,6 +3,7 @@ const {fixture,start}=require('./helpers.cjs');
 function adapter(props={}){
  const c={PropertiesService:{getScriptProperties:()=>({getProperty:k=>props[k]??null})}};vm.createContext(c);
  vm.runInContext(fs.readFileSync(path.join(__dirname,'../draft-engine.js'),'utf8'),c);
+ vm.runInContext(fs.readFileSync(path.join(__dirname,'../notifications.js'),'utf8'),c);
  vm.runInContext(fs.readFileSync(path.join(__dirname,'../api/DraftWorkflow.gs'),'utf8'),c);return c;
 }
 test('missing explicit identity mappings fail closed',()=>{

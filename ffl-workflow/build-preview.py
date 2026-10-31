@@ -15,6 +15,7 @@ def build():
         '__LOGO__': 'data:image/jpeg;base64,' + base64.b64encode((ROOT / 'assets/ffl-logo.jpg').read_bytes()).decode('ascii'),
         '__ENGINE__': (ROOT / 'draft-engine.js').read_text(encoding='utf-8'),
         '__FIXTURE__': fixture_json,
+        '__NOTIFICATIONS__': (ROOT / 'notifications.js').read_text(encoding='utf-8'),
         '__KATY__': (ROOT / 'katy.js').read_text(encoding='utf-8'),
         '__ADMIN__': (ROOT / 'admin-ui.js').read_text(encoding='utf-8'),
         '__UI__': (ROOT / 'preview-ui.js').read_text(encoding='utf-8'),

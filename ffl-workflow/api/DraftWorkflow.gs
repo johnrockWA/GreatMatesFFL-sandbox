@@ -41,9 +41,14 @@ function draftWorkflowWrite_(state) {
   // Publish only a fully written snapshot. A failed write leaves the old pointer intact.
   sheet.getRange('A1').setValue(row);SpreadsheetApp.flush();
 }
+function draftWorkflowResponse_(state,actor,now){
+  const view=FFLDraft.view(state,actor,now);
+  view.notifications=FFLNotifications.draftAlerts(state,now).filter(n=>n.channel==='in-app'&&n.team===actor.team);
+  return view;
+}
 function getDraftWorkflow_(auth) {
   const actor=draftWorkflowActor_(auth),lock=LockService.getScriptLock();lock.waitLock(10000);
-  try{return FFLDraft.view(draftWorkflowRead_(),actor,Date.now());}finally{lock.releaseLock();}
+  try{return draftWorkflowResponse_(draftWorkflowRead_(),actor,Date.now());}finally{lock.releaseLock();}
 }
 function postDraftWorkflow_(auth,action) {
   const actor=draftWorkflowActor_(auth),lock=LockService.getScriptLock();lock.waitLock(10000);
@@ -52,6 +57,6 @@ function postDraftWorkflow_(auth,action) {
     // This guard stays until that integration is implemented and rollback-tested.
     if(action.type==='finalize')throw new Error('Shared squad publication is not connected yet. Finalization is disabled.');
     const state=FFLDraft.apply(draftWorkflowRead_(),action,actor,Date.now());
-    draftWorkflowWrite_(state);return FFLDraft.view(state,actor,Date.now());
+    draftWorkflowWrite_(state);return draftWorkflowResponse_(state,actor,Date.now());
   }finally{lock.releaseLock();}
 }
