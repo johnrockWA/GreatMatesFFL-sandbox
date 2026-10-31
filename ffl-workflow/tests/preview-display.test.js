@@ -7,7 +7,7 @@ function preview(){
  const ctx=vm.createContext({document,localStorage:{getItem(){return null;},setItem(){}},console});
  const root=path.join(__dirname,'..');
  vm.runInContext('const FIXTURE='+fs.readFileSync(path.join(root,'fixtures/demo-post-trade-20261030.json'),'utf8'),ctx);
- for(const file of ['draft-engine.js','katy.js','admin-ui.js','preview-ui.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),ctx,{filename:file});
+ for(const file of ['draft-engine.js','notifications.js','katy.js','admin-ui.js','preview-ui.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),ctx,{filename:file});
  return {nodes,run:code=>vm.runInContext(code,ctx)};
 }
 test('coach display hides opponent choices and removes committee markup on role change',()=>{
@@ -65,4 +65,10 @@ test('first-round own discard warning is visible in pool and queue, then clears 
 test('snapshot upgrade preserves choices but does not change an already-started draft',()=>{
  const p=preview();p.run("state.dataRevision='old';state.prepared=true;state.armed=true;const oldPlayerCount=state.players.length;refreshDemoEvidence(state)");
  assert.equal(p.run('state.dataRefreshPending'),true);assert.equal(p.run('state.armed'),true);assert.throws(()=>p.run("run('submit')"),/earlier player snapshot/);
+});
+test('in-app draft notification follows the validated turn and flags the delayed email in preview',()=>{
+ const p=preview();p.run("role='commissioner';for(const t of state.teams)run('submit',{},actor(t.id));now=FFLDraft.date(state.config.locksAt);run('prepare');run('arm');now=FFLDraft.date(state.config.draftAt);role='coach';render()");
+ assert.equal(p.nodes.get('turnalert').hidden,false);assert.match(p.nodes.get('turnalert').innerHTML,/your pick 1.01/);
+ p.run("const availablePlayer=state.players.find(p=>FFLDraft.available(state,p.id).ok);run('pick',{player:availablePlayer.id,expectedPick:0});render()");assert.equal(p.nodes.get('turnalert').hidden,true);
+ p.run("selected=state.plan[state.picks.length].team;now+=3600001;role='commissioner';workspace='admin';render()");assert.equal(p.nodes.get('turnalert').hidden,false);assert.match(p.nodes.get('notificationstatus').textContent,/Email|email/);assert.match(p.nodes.get('notificationstatus').textContent,/no email sent/);
 });
