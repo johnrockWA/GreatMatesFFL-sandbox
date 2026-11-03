@@ -63,3 +63,20 @@ provider revisions before certifying a live feed or updating the ingestion mappi
 Still open: shared login/ownership, real submission writes and reload/lockout tests,
 new draft squad publication, scheduled scraper/parser inspection and failure recovery,
 finals ties/countback, reminders/mail transport, backup/restore and deployment.
+
+## Scraper review follow-up
+
+Read-only browser capture of the bound sandbox scraper (Auto Scraper v5.5) on
+3 November found two confirmed behaviours using offline fake services:
+
+- `appendDedup_` skips a changed statistic when player/club/date already exists.
+- `scrapeAndWrite_` can return inserted rows without reporting another match's fetch
+  failure; the caller can then write an `ok` canary for that partial batch.
+
+`ingestion.js` prepares a side-effect-free refresh plan which rejects incomplete
+expected-match batches, validates scoring inputs and stages corrections with exact
+before/after rows. It deliberately cannot publish. The Google host still needs a
+reviewed transaction, correction audit, rollback and integration before deployment.
+The editor was not modified and no Apps Script function was executed. The current
+browser account's sandbox Triggers page showed zero triggers; other accounts'
+production triggers were not inspected and are not inferred from this view.

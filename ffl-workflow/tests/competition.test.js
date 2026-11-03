@@ -21,3 +21,15 @@ test('ladder retains zero scores and uses points for before percentage',()=>{
  const l=E.ladder(f,s);assert.equal(l[0].team,'C');assert.equal(l.find(t=>t.team==='A').d,1);assert.equal(l.find(t=>t.team==='A').points,2);
  assert.throws(()=>E.ladder([...f,f[0]],s),/Duplicate/);assert.throws(()=>E.ladder(f,new Map()),/Completed/);
 });
+const I=require('../../competition/ingestion');
+test('stat correction is staged with before/after evidence instead of silently skipped',()=>{
+ const old=['Player','Club',10,10,20,1,0,2,0,0,1,0,0,0,'Opponent','Ground','2026-03-12'],fresh=[...old];fresh[2]=12;fresh[4]=22;
+ const existing=[old],batches=[{url:'match1',rows:[fresh]}],before=JSON.stringify({existing,batches});const plan=I.planRefresh(existing,['match1'],batches);
+ assert.equal(plan.updated.length,1);assert.equal(plan.inserted.length,0);assert.equal(plan.updated[0].before[4],20);assert.equal(plan.updated[0].after[4],22);assert.equal(plan.canPublish,false);assert.equal(JSON.stringify({existing,batches}),before);
+});
+test('partial scraper failure and ambiguous data cannot produce a publishable plan',()=>{
+ const r=['Player','Club',10,10,20,1,0,2,0,0,1,0,0,0,'Opponent','Ground','2026-03-12'];
+ assert.throws(()=>I.planRefresh([],['match1','match2'],[{url:'match1',rows:[r]},{url:'match2',error:'Parser failed'}]),/Incomplete/);
+ assert.throws(()=>I.planRefresh([r,r],['match1'],[{url:'match1',rows:[r]}]),/Duplicate existing/);
+ const bad=[...r];bad[4]=25;assert.throws(()=>I.planRefresh([],['match1'],[{url:'match1',rows:[bad]}]),/Disposals/);
+});
