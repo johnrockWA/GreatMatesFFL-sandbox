@@ -64,6 +64,20 @@ Still open: shared login/ownership, real submission writes and reload/lockout te
 new draft squad publication, scheduled scraper/parser inspection and failure recovery,
 finals ties/countback, reminders/mail transport, backup/restore and deployment.
 
+## Finals evaluator
+
+`finals.js` now evaluates an explicitly supplied finals graph, including byes,
+winner/loser advancement and completed scores. It deliberately does not hard-code a
+league bracket or choose a tied final. A tie fails closed unless the caller supplies a
+verified `higher-seed` rule or match-specific `countback` values; a tied countback also
+fails closed. Synthetic tests cover a six-match graph, byes, advancement, missing
+scores and both tie-policy paths.
+
+This is source-level development evidence only. The actual Great Mates finals bracket,
+the meaning of any countback field and the rule after an equal countback still need to
+be recovered from authoritative competition evidence before P27 can be completed or
+connected. No workbook, app, scraper or production behaviour uses this module.
+
 ## Scraper review follow-up
 
 Read-only browser capture of the bound sandbox scraper (Auto Scraper v5.5) on
