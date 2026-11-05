@@ -1,5 +1,5 @@
 /* Pure finals bracket evaluator.
-   The league-specific bracket and tie policy must be supplied from verified rules.
+   The Final Five graph and tie policy were recovered from the sandbox incumbent.
    No network, writes, recommendations or production integration. */
 'use strict';
 
@@ -7,6 +7,17 @@ const fail=message=>{throw Error(message);};
 const ref=(match,outcome='winner')=>({match,outcome});
 const seed=n=>({seed:n});
 const bye=()=>({bye:true});
+
+function finalFive(){
+ return [
+  {id:'EF',a:seed(4),b:seed(5)},
+  {id:'QF',a:seed(2),b:seed(3)},
+  {id:'SF1',a:ref('QF','loser'),b:ref('EF')},
+  {id:'SF2',a:seed(1),b:ref('QF')},
+  {id:'PF',a:ref('SF1'),b:ref('SF2','loser')},
+  {id:'GF',a:ref('SF2'),b:ref('PF')}
+ ];
+}
 
 function validateSeeds(seeds){
  if(!Array.isArray(seeds)||seeds.length<2)fail('At least two seeded teams required');
@@ -38,6 +49,12 @@ function finiteScore(value,label){
 function tieWinner(a,b,policy,match){
  if(!policy)fail('Tied final requires a verified tie policy: '+match.id);
  if(policy.rule==='higher-seed')return a.seed<b.seed?a:b;
+ if(policy.rule==='acpf-then-seed'){
+  const values=policy.values?.[match.id];
+  if(!values||!Number.isFinite(values[a.team])||!Number.isFinite(values[b.team]))fail('Verified match-specific ACPF values required: '+match.id);
+  if(values[a.team]===values[b.team])return a.seed<b.seed?a:b;
+  return values[a.team]>values[b.team]?a:b;
+ }
  if(policy.rule==='countback'){
   const values=policy.values?.[match.id];
   if(!values||!Number.isFinite(values[a.team])||!Number.isFinite(values[b.team]))fail('Verified countback values required: '+match.id);
@@ -74,4 +91,4 @@ function evaluate({seeds:teamSeeds,matches,scores,tiePolicy=null}){
  return {champion:last.winner.team,matches:[...results.values()].map(({index,...r})=>r),audit};
 }
 
-module.exports={evaluate,seed,ref,bye};
+module.exports={evaluate,finalFive,seed,ref,bye};
