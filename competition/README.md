@@ -66,17 +66,24 @@ finals ties/countback, reminders/mail transport, backup/restore and deployment.
 
 ## Finals evaluator
 
-`finals.js` now evaluates an explicitly supplied finals graph, including byes,
-winner/loser advancement and completed scores. It deliberately does not hard-code a
-league bracket or choose a tied final. A tie fails closed unless the caller supplies a
-verified `higher-seed` rule or match-specific `countback` values; a tied countback also
-fails closed. Synthetic tests cover a six-match graph, byes, advancement, missing
-scores and both tie-policy paths.
+`finals.js` evaluates the Final Five graph recovered from the current sandbox incumbent:
+4 v 5 elimination and 2 v 3 qualifying finals; the qualifying loser plays the
+elimination winner; seed 1 plays the qualifying winner; those semi-final paths feed a
+preliminary final and then the grand final. It also retains a generic explicit-graph
+evaluator for audit use, including byes and winner/loser advancement.
 
-This is source-level development evidence only. The actual Great Mates finals bracket,
-the meaning of any countback field and the rule after an equal countback still need to
-be recovered from authoritative competition evidence before P27 can be completed or
-connected. No workbook, app, scraper or production behaviour uses this module.
+The observed tied-score rule compares each team's match-specific average cumulative
+points for (ACPF), then awards an equal-ACPF tie to the higher original finals seed.
+The evaluator requires supplied, finite ACPF evidence for the tied match and otherwise
+fails closed. The six incumbent finals results were non-tied and their participants and
+advancement aligned with this graph. Anonymized tests cover all six paths, the two tie
+stages, byes, missing scores and invalid references without publishing private teams,
+workbook identifiers or evidence links.
+
+This is source-level development evidence only. The module has not been connected to
+the workbook, app, scraper or production, and it does not certify a connected finals
+run. Any future integration must provide the verified match scores and ACPF values; it
+must not infer them or silently choose a winner.
 
 ## Scraper review follow-up
 
