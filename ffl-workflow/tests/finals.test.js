@@ -1,20 +1,12 @@
 const test=require('node:test'),assert=require('node:assert/strict');
 const F=require('../../competition/finals');
 
-const sixMatchBracket=[
- {id:'F1',a:F.seed(1),b:F.bye()},
- {id:'F2',a:F.seed(4),b:F.seed(5)},
- {id:'F3',a:F.seed(2),b:F.seed(3)},
- {id:'F4',a:F.ref('F1'),b:F.ref('F2')},
- {id:'F5',a:F.ref('F3'),b:F.ref('F4')},
- {id:'F6',a:F.ref('F5'),b:F.seed(1)}
-];
-
-test('evaluates a six-match supplied bracket without inventing its structure',()=>{
- const scores={F2:{D:70,E:60},F3:{B:80,C:75},F4:{A:90,D:85},F5:{B:95,A:92},F6:{B:100,A:98}};
- const out=F.evaluate({seeds:['A','B','C','D','E'],matches:sixMatchBracket,scores});
- assert.equal(out.champion,'B');assert.equal(out.matches.length,6);assert.equal(out.matches[0].bye,true);
- assert.deepEqual(out.audit.map(x=>x.winner),['A','D','B','A','B','B']);
+test('evaluates the verified Final Five graph and every advancement path',()=>{
+ const scores={EF:{D:70,E:60},QF:{B:80,C:75},SF1:{C:85,D:82},SF2:{A:90,B:88},PF:{C:92,B:89},GF:{A:100,C:98}};
+ const out=F.evaluate({seeds:['A','B','C','D','E'],matches:F.finalFive(),scores});
+ assert.equal(out.champion,'A');assert.equal(out.matches.length,6);
+ assert.deepEqual(out.audit.map(x=>[x.match,x.winner]),[['EF','D'],['QF','B'],['SF1','C'],['SF2','A'],['PF','C'],['GF','A']]);
+ assert.deepEqual(out.matches.map(x=>x.score&&Object.keys(x.score)),[['D','E'],['B','C'],['C','D'],['A','B'],['C','B'],['A','C']]);
 });
 
 test('a tied final fails closed until a verified policy is supplied',()=>{
@@ -28,6 +20,19 @@ test('countback requires match-specific verified values and refuses a second tie
  assert.throws(()=>F.evaluate({seeds:['A','B'],matches,scores,tiePolicy:{rule:'countback'}}),/countback values/);
  assert.equal(F.evaluate({seeds:['A','B'],matches,scores,tiePolicy:{rule:'countback',values:{GF:{A:9,B:12}}}}).champion,'B');
  assert.throws(()=>F.evaluate({seeds:['A','B'],matches,scores,tiePolicy:{rule:'countback',values:{GF:{A:9,B:9}}}}),/remains tied/);
+});
+
+test('incumbent tied-final rule uses match-specific ACPF then higher seed',()=>{
+ const matches=[{id:'GF',a:F.seed(1),b:F.seed(2)}],scores={GF:{A:80,B:80}};
+ assert.throws(()=>F.evaluate({seeds:['A','B'],matches,scores,tiePolicy:{rule:'acpf-then-seed'}}),/ACPF values/);
+ assert.equal(F.evaluate({seeds:['A','B'],matches,scores,tiePolicy:{rule:'acpf-then-seed',values:{GF:{A:91.2,B:94.6}}}}).champion,'B');
+ assert.equal(F.evaluate({seeds:['A','B'],matches,scores,tiePolicy:{rule:'acpf-then-seed',values:{GF:{A:93,B:93}}}}).champion,'A');
+});
+
+test('generic evaluator still supports an explicit bye',()=>{
+ const matches=[{id:'B1',a:F.seed(1),b:F.bye()},{id:'GF',a:F.ref('B1'),b:F.seed(2)}];
+ const out=F.evaluate({seeds:['A','B'],matches,scores:{GF:{A:90,B:80}}});
+ assert.equal(out.champion,'A');assert.equal(out.matches[0].bye,true);
 });
 
 test('rejects incomplete scores, invalid references and duplicate seeded teams',()=>{
