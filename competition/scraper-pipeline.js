@@ -15,7 +15,11 @@ function validateMatch(match,expected){
   if(!Array.isArray(r)||r.length!==17||typeof r[0]!=='string'||!r[0].trim()||!counts.has(r[1])||typeof r[16]!=='string'||!r[16].trim())throw Error('Malformed player identity/club/date');
   if(r[14]!== (r[1]===expected.home?expected.away:expected.home)||r[15]!==expected.venue||r[16]!==expected.rowDate)throw Error('Player row opponent, venue or date mismatch');
   const k=identity(r);if(seen.has(k))throw Error('Duplicate player');seen.add(k);counts.set(r[1],counts.get(r[1])+1);
-  for(let i=2;i<=13;i++)if(!Number.isFinite(r[i])||r[i]<0)throw Error('Invalid or missing statistics');
+  for(let i=2;i<=13;i++){
+   // Provider ratings are not used for FFL scoring. Their absence must be explicit.
+   if(i===13&&r[i]===null&&match.unavailableStatistics?.length===1&&match.unavailableStatistics[0]==='rating')continue;
+   if(!Number.isFinite(r[i])||r[i]<0)throw Error('Invalid or missing statistics');
+  }
   if(r[2]+r[3]!==r[4])throw Error('Disposal consistency failure');
  }
  for(const club of counts.keys())if(!Number.isInteger(expected.playerCounts?.[club])||expected.playerCounts[club]<=0||counts.get(club)!==expected.playerCounts[club])throw Error('Incomplete team/player coverage');
