@@ -64,6 +64,27 @@ Still open: shared login/ownership, real submission writes and reload/lockout te
 new draft squad publication, scheduled scraper/parser inspection and failure recovery,
 finals ties/countback, reminders/mail transport, backup/restore and deployment.
 
+## Finals evaluator
+
+`finals.js` evaluates the Final Five graph recovered from the current sandbox incumbent:
+4 v 5 elimination and 2 v 3 qualifying finals; the qualifying loser plays the
+elimination winner; seed 1 plays the qualifying winner; those semi-final paths feed a
+preliminary final and then the grand final. It also retains a generic explicit-graph
+evaluator for audit use, including byes and winner/loser advancement.
+
+The observed tied-score rule compares each team's match-specific average cumulative
+points for (ACPF), then awards an equal-ACPF tie to the higher original finals seed.
+The evaluator requires supplied, finite ACPF evidence for the tied match and otherwise
+fails closed. The six incumbent finals results were non-tied and their participants and
+advancement aligned with this graph. Anonymized tests cover all six paths, the two tie
+stages, byes, missing scores and invalid references without publishing private teams,
+workbook identifiers or evidence links.
+
+This is source-level development evidence only. The module has not been connected to
+the workbook, app, scraper or production, and it does not certify a connected finals
+run. Any future integration must provide the verified match scores and ACPF values; it
+must not infer them or silently choose a winner.
+
 ## Scraper review follow-up
 
 Read-only browser capture of the bound sandbox scraper (Auto Scraper v5.5) on
