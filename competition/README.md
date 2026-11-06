@@ -64,6 +64,20 @@ Still open: shared login/ownership, real submission writes and reload/lockout te
 new draft squad publication, scheduled scraper/parser inspection and failure recovery,
 finals ties/countback, reminders/mail transport, backup/restore and deployment.
 
+## Score display states
+
+`score-state.js` defines the successor's fail-closed display contract. Scores can be
+provisional, awaiting verification, disputed, awaiting an approved correction,
+verified final, collection-paused or an older recorded result whose independent
+verification was not captured. Missing values remain missing while numeric zero is
+retained. Only `verified-final` can declare a winner, and a tied final also requires
+an explicit verified winner.
+
+The prepared `ffl-workflow/api/ScoreRead.gs` adapter reads one checksummed snapshot,
+rejects an unauthorized identity, corrupt payload or changing head, and returns only
+allowlisted public score fields. It is source only: there is no deployed route, write,
+trigger, mail operation or production connection.
+
 ## Scraper review follow-up
 
 Read-only browser capture of the bound sandbox scraper (Auto Scraper v5.5) on
