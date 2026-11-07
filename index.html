@@ -1823,6 +1823,15 @@ function scoreStateInfo(raw) {
 function scoreValue(scores, team) {
   return Object.prototype.hasOwnProperty.call(scores || {}, team) && scores[team] != null ? scores[team] : null;
 }
+function scoreFreshnessInfo(data, now) {
+  const maxAgeMs=Number(data && data.freshnessMaxAgeMs);
+  const lastSuccess=Date.parse(data && data.lastSuccessAt);
+  const checkedAt=Number.isFinite(now) ? now : Date.now();
+  if(!Number.isFinite(maxAgeMs) || maxAgeMs<=0)return null;
+  if(!Number.isFinite(lastSuccess))return {stale:true,label:'No verified score collection recorded'};
+  if(checkedAt<lastSuccess)return {stale:true,label:'Score freshness check failed'};
+  return checkedAt-lastSuccess>maxAgeMs ? {stale:true,label:'Scores are stale'} : {stale:false,label:''};
+}
 function scoreStateBanner(data) {
   const info=scoreStateInfo(data && (data.scoreState || data.status));
   const updated=data && (data.updatedAt || data.asOf);
@@ -1830,7 +1839,12 @@ function scoreStateBanner(data) {
   const notices=[info.label];
   if(data && data.correctionPending && info.state !== 'correction-pending')notices.push('Correction awaiting approval');
   if(paused && info.state !== 'collection-paused')notices.push('Collection paused');
-  return `<div class="score-state-banner ${info.tone}">${notices.join(' · ')}${updated ? ` · Updated ${formatPerthTimestamp(updated)}` : ''}</div>`;
+  const freshness=scoreFreshnessInfo(data);
+  if(freshness && freshness.stale)notices.push(freshness.label);
+  if(data && data.lastAttemptAt)notices.push(`Last attempt ${formatPerthTimestamp(data.lastAttemptAt)}`);
+  if(data && data.lastSuccessAt)notices.push(`Last success ${formatPerthTimestamp(data.lastSuccessAt)}`);
+  if(data && data.publishedAt)notices.push(`Published ${formatPerthTimestamp(data.publishedAt)}`);
+  return `<div class="score-state-banner ${freshness&&freshness.stale?'danger':info.tone}">${notices.join(' · ')}${updated ? ` · Updated ${formatPerthTimestamp(updated)}` : ''}</div>`;
 }
 function formatPerthTimestamp(value) {
   const d=new Date(value);if(isNaN(d.getTime()))return 'time unavailable';
@@ -2061,13 +2075,14 @@ function renderFinalMatch(name, m, lock, idx, wi) {
   const played   = m.team1Score != null || m.team2Score != null;
   const t1 = m.team1 || 'To be decided';
   const t2 = m.team2 || 'To be decided';
-  const s1 = played ? (m.team1Score != null ? m.team1Score : 0) : '–';
-  const s2 = played ? (m.team2Score != null ? m.team2Score : 0) : '–';
-  const isDraw = complete && played && Number(s1) === Number(s2);
+  const s1 = m.team1Score != null ? m.team1Score : '–';
+  const s2 = m.team2Score != null ? m.team2Score : '–';
+  const isDraw = complete && m.team1Score != null && m.team2Score != null && Number(s1) === Number(s2);
   const win1 = decided && verifiedWinner === m.team1;
   const win2 = decided && verifiedWinner === m.team2;
   const gold = 'color:var(--gold);font-weight:700';
-  const pend = played ? '' : ' pending';
+  const pend1 = m.team1Score == null ? ' pending' : '';
+  const pend2 = m.team2Score == null ? ' pending' : '';
 
   const lockLabel = (!played && lock) ? formatLockAWST(lock) : '';
   const note = isDraw
@@ -2096,12 +2111,12 @@ function renderFinalMatch(name, m, lock, idx, wi) {
       <div class="fixture-round-badge" style="display:inline-block;margin-bottom:8px">${name}</div>
       <div class="fixture-team-line">
         <span class="fixture-team" style="${win1 ? gold : ''}">${win1 ? '✓ ' : ''}${t1}</span>
-        <span class="fixture-team-score${pend}" style="${win1 ? gold : ''}">${s1}</span>
+        <span class="fixture-team-score${pend1}" style="${win1 ? gold : ''}">${s1}</span>
       </div>
       <div class="fixture-vs">v</div>
       <div class="fixture-team-line">
         <span class="fixture-team" style="${win2 ? gold : ''}">${win2 ? '✓ ' : ''}${t2}</span>
-        <span class="fixture-team-score${pend}" style="${win2 ? gold : ''}">${s2}</span>
+        <span class="fixture-team-score${pend2}" style="${win2 ? gold : ''}">${s2}</span>
       </div>
       ${note}
       ${expand}
@@ -4072,7 +4087,7 @@ async function renderGrandFinalView(data, gf, seedsCard, bracketCard) {
   try { details = await apiGet('getFinalsMatchDetails', { finalName: 'Grand Final', home: t1, away: t2 }); }
   catch (e) { details = null; }
   const bracketSnapshot = data && (data.snapshotId || data.scoreSnapshotId);
-  if (details && bracketSnapshot && details.snapshotId !== bracketSnapshot) details = null;
+  if (details && (!bracketSnapshot || !details.snapshotId || details.snapshotId !== bracketSnapshot)) details = null;
   const homeMap = {}, awayMap = {};
   if (details && details.hasData) {
     (details.homeScores || []).forEach(x => homeMap[x.position] = x);
