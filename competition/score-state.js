@@ -49,4 +49,18 @@ function sameSnapshot(summary,detail){
  return summary.snapshotId===detail.snapshotId;
 }
 
-module.exports={STATES,describe,teamScore,matchView,sameSnapshot};
+function freshnessView(meta,now){
+ if(!Number.isFinite(now))fail('Verified clock required');
+ const maxAgeMs=Number(meta&&meta.freshnessMaxAgeMs);
+ if(!Number.isFinite(maxAgeMs)||maxAgeMs<=0)fail('Positive freshness limit required');
+ const lastSuccessAt=meta&&meta.lastSuccessAt;
+ const success=Date.parse(lastSuccessAt);
+ const base={lastAttemptAt:meta&&meta.lastAttemptAt||null,lastSuccessAt:lastSuccessAt||null,
+  publishedAt:meta&&meta.publishedAt||null,freshnessMaxAgeMs:maxAgeMs};
+ if(!Number.isFinite(success))return {...base,status:'missing',stale:true};
+ if(now<success)return {...base,status:'error',stale:true,reason:'Future success timestamp'};
+ const ageMs=now-success;
+ return {...base,status:ageMs>maxAgeMs?'stale':'fresh',stale:ageMs>maxAgeMs,ageMs};
+}
+
+module.exports={STATES,describe,teamScore,matchView,sameSnapshot,freshnessView};
