@@ -25,7 +25,9 @@ var FFLScoreRead=(function(){
   if(!Array.isArray(snapshot.matches))fail('Score matches missing');
   return {schema:1,snapshotId:snapshot.snapshotId,status:snapshot.status,
    updatedAt:snapshot.updatedAt||null,lastAttemptAt:snapshot.lastAttemptAt||null,
-   lastSuccessAt:snapshot.lastSuccessAt||null,correctionPending:snapshot.correctionPending===true,
+   lastSuccessAt:snapshot.lastSuccessAt||null,publishedAt:snapshot.publishedAt||null,
+   freshnessMaxAgeMs:Number.isFinite(snapshot.freshnessMaxAgeMs)&&snapshot.freshnessMaxAgeMs>0?snapshot.freshnessMaxAgeMs:null,
+   correctionPending:snapshot.correctionPending===true,
    collectionPaused:snapshot.collectionPaused===true,warnings:copy(snapshot.warnings||[]),
    matches:snapshot.matches.map(publicMatch)};
  }
