@@ -4,6 +4,7 @@ const R=require('../api/ScoreRead.gs');
 function fixture(){
  const snapshot={snapshotId:'snap-1',status:'awaiting-verification',updatedAt:'2026-11-06T00:00:00Z',correctionPending:true,collectionPaused:true,
   lastAttemptAt:'2026-11-06T00:01:00Z',lastSuccessAt:'2026-11-06T00:00:00Z',warnings:['Verification pending'],
+  publishedAt:'2026-11-06T00:00:30Z',freshnessMaxAgeMs:3600000,
   matches:[{id:'m1',round:'R1',home:'A',away:'B',scores:{A:0,B:80},scoreState:'awaiting-verification',privateAudit:{actor:'hidden'}}],
   privateCorrections:[{team:'private'}]};
  const head={version:4,snapshotId:'snap-1',hash:'verified-hash'};
@@ -14,6 +15,8 @@ test('returns one checksummed public projection and preserves zero',()=>{
  const x=fixture(),out=R.read({email:'coach@example.invalid',role:'coach',team:'A'},x.services);
  assert.equal(out.snapshotId,'snap-1');assert.equal(out.matches[0].scores.A,0);
  assert.equal(out.correctionPending,true);assert.equal(out.collectionPaused,true);
+ assert.equal(out.lastAttemptAt,x.snapshot.lastAttemptAt);assert.equal(out.lastSuccessAt,x.snapshot.lastSuccessAt);
+ assert.equal(out.publishedAt,x.snapshot.publishedAt);assert.equal(out.freshnessMaxAgeMs,3600000);
  assert.equal(out.matches[0].privateAudit,undefined);assert.equal(out.privateCorrections,undefined);
 });
 
