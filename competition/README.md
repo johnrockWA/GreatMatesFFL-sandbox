@@ -71,7 +71,10 @@ provisional, awaiting verification, disputed, awaiting an approved correction,
 verified final, collection-paused or an older recorded result whose independent
 verification was not captured. Missing values remain missing while numeric zero is
 retained. Only `verified-final` can declare a winner, and a tied final also requires
-an explicit verified winner.
+an explicit verified winner. Finals detail is withheld unless both the summary and
+detail identify the same snapshot. Freshness uses a supplied positive age limit and
+the last successful collection time; attempt, success and publication times remain
+separate so a recent failed attempt cannot make old published scores look current.
 
 The prepared `ffl-workflow/api/ScoreRead.gs` adapter reads one checksummed snapshot,
 rejects an unauthorized identity, corrupt payload or changing head, and returns only
