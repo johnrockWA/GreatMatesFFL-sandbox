@@ -11,7 +11,11 @@ test('app labels score states, preserves missing values and gates winners',()=>{
  assert.match(html,/Correction awaiting approval/);
  assert.match(html,/Object\.prototype\.hasOwnProperty\.call\(scores/);
  assert.match(html,/state === 'verified-final'/);
- assert.match(html,/details\.snapshotId !== bracketSnapshot/);
+ assert.match(html,/!bracketSnapshot \|\| !details\.snapshotId \|\| details\.snapshotId !== bracketSnapshot/);
+ assert.match(html,/const s1 = m\.team1Score != null \? m\.team1Score : '–'/);
+ assert.doesNotMatch(html,/m\.team1Score != null \? m\.team1Score : 0/);
+ assert.match(html,/Last attempt/);assert.match(html,/Last success/);assert.match(html,/Published/);
+ assert.match(html,/checkedAt-lastSuccess>maxAgeMs/);
  assert.doesNotMatch(html,/p\.get\('gfstate'\)/);
  assert.doesNotMatch(html,/gfDeclaredPremier\(\)/);
 });
