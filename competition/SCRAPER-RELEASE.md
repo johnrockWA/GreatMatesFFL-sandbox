@@ -41,7 +41,12 @@ club/name/date vocabulary and return raw match stats in the documented 17-column
 shape. Merely changing provider IDs does not make sources independent. Aliases must
 be explicit and ambiguous identities must fail. No provider is connected yet.
 
-The default requires two independently validated providers agreeing on scoring fields.
+The default requires two independently validated providers. A named official primary
+source remains authoritative when every per-player scoring-stat difference is at most
+one. Both source values and the signed verifier-minus-primary difference are retained
+in the snapshot and run status. Any difference above one blocks publication, as do
+identity, coverage, completion and missing-source failures. This tolerance does not
+permit a verifier to replace the official primary values.
 A trusted host may explicitly permit one-source degraded operation, but this is off
 by default and status stays degraded. There is no silent fallback, averaging or
 choosing the most favourable statistics. Provider differences found in the earlier

@@ -6,6 +6,11 @@ const copy=v=>JSON.parse(JSON.stringify(v));
 const digest=v=>createHash('sha256').update(JSON.stringify(v)).digest('hex');
 const transient=s=>s===429||s>=500&&s<=599;
 const identity=r=>r[0].trim().toLowerCase()+'|'+r[1].trim().toLowerCase();
+const SCORING_STATISTICS=[
+ ['kicks',2],['handballs',3],['disposals',4],['marks',5],
+ ['goals',6],['behinds',7],['tackles',10],['hitouts',11]
+];
+const VERIFIER_TOLERANCE=1;
 function validateMatch(match,expected){
  if(!match||match.id!==expected.id||match.season!==expected.season||match.completed!==true||match.home!==expected.home||match.away!==expected.away||match.playedAt!==expected.playedAt)throw Error('Match identity, date, season or completion mismatch');
  if(!expected.rowDate||!expected.venue)throw Error('Verified row date and venue required');
@@ -25,7 +30,20 @@ function validateMatch(match,expected){
  for(const club of counts.keys())if(!Number.isInteger(expected.playerCounts?.[club])||expected.playerCounts[club]<=0||counts.get(club)!==expected.playerCounts[club])throw Error('Incomplete team/player coverage');
  return copy(match);
 }
-function scoringSignature(m){return m.rows.map(r=>[identity(r),...[2,3,4,5,6,7,10,11].map(i=>r[i])]).sort((a,b)=>a[0].localeCompare(b[0]));}
+function compareVerifier(primary,verifier,source){
+ const primaryRows=new Map(primary.rows.map(row=>[identity(row),row]));
+ const verifierRows=new Map(verifier.rows.map(row=>[identity(row),row]));
+ if(primaryRows.size!==verifierRows.size||[...primaryRows.keys()].some(key=>!verifierRows.has(key)))throw Error('Provider identity or coverage disagreement');
+ const differences=[];
+ for(const [player,row] of primaryRows){
+  const checked=verifierRows.get(player);
+  for(const [stat,index] of SCORING_STATISTICS){
+   if(row[index]===checked[index])continue;
+   differences.push({player,source,stat,primaryValue:row[index],verifierValue:checked[index],signedDifference:checked[index]-row[index]});
+  }
+ }
+ return differences;
+}
 async function retrieve(provider,expected,services){
  const attempts=3;
  for(let attempt=1;attempt<=attempts;attempt++){
@@ -37,21 +55,38 @@ async function retrieve(provider,expected,services){
  }
  throw Error('Retrieval attempts exhausted');
 }
-async function refresh(manifest,providers,services,{requireCrossCheck=true,allowSingleSource=false}={}){
+async function refresh(manifest,providers,services,{requireCrossCheck=true,allowSingleSource=false,primarySourceId=providers[0]?.id}={}){
  let staged=null,commitAttempted=false,committedHash=null;
  try{
   if(!manifest?.id||!Number.isInteger(manifest.season)||!Array.isArray(manifest.matches)||!manifest.matches.length)throw Error('Verified round manifest required');
   if(new Set(manifest.matches.map(m=>m.id)).size!==manifest.matches.length)throw Error('Duplicate expected match');
   if(!providers.length||providers.some(p=>!p.id)||new Set(providers.map(p=>p.id)).size!==providers.length)throw Error('Distinct provider identities required');
-  const matches=[],failures=[];let degraded=false;
+  if(!providers.some(provider=>provider.id===primarySourceId))throw Error('Named primary provider required');
+  const matches=[],failures=[],verificationDifferences=[];let degraded=false;
   for(const expected of manifest.matches){
    if(expected.season!==manifest.season||expected.home===expected.away||!Number.isFinite(Date.parse(expected.playedAt)))throw Error('Invalid manifest match');
    const successes=[];
    for(const provider of providers){try{successes.push({source:provider.id,match:await retrieve(provider,expected,services)});}catch(e){failures.push({match:expected.id,source:provider.id,error:e.message});}}
    if(!successes.length)throw Error('No validated source for match '+expected.id);
-   if(successes.some(s=>JSON.stringify(scoringSignature(s.match))!==JSON.stringify(scoringSignature(successes[0].match))))throw Error('Provider disagreement: '+expected.id);
    if(successes.length<2){degraded=true;if(requireCrossCheck||!allowSingleSource)throw Error('Independent cross-check unavailable: '+expected.id);}
-   matches.push({...successes[0].match,sources:successes.map(s=>s.source)});
+   const primary=successes.find(success=>success.source===primarySourceId);
+   if(!primary){
+    if(requireCrossCheck||!allowSingleSource)throw Error('Primary source unavailable: '+expected.id);
+    matches.push({...successes[0].match,sources:successes.map(success=>success.source),primarySource:successes[0].source,verificationDifferences:[]});
+    continue;
+   }
+   const matchDifferences=[];
+   for(const verifier of successes.filter(success=>success!==primary)){
+    let differences;
+    try{differences=compareVerifier(primary.match,verifier.match,verifier.source);}catch(error){throw Error(error.message+': '+expected.id);}
+    matchDifferences.push(...differences);
+   }
+   if(matchDifferences.some(difference=>Math.abs(difference.signedDifference)>VERIFIER_TOLERANCE)){
+    const error=Error('Provider disagreement exceeds tolerance: '+expected.id);error.verificationDifferences=matchDifferences;throw error;
+   }
+   const audited=matchDifferences.map(difference=>({...difference,match:expected.id,primarySource:primarySourceId}));
+   verificationDifferences.push(...audited);
+   matches.push({...primary.match,sources:successes.map(success=>success.source),primarySource:primarySourceId,verificationDifferences:audited});
   }
   const payload={schema:1,round:manifest.id,season:manifest.season,matches:matches.sort((a,b)=>a.id.localeCompare(b.id))};
   const hash=digest(payload);
@@ -68,10 +103,11 @@ async function refresh(manifest,providers,services,{requireCrossCheck=true,allow
    const verified=await services.readPublished(manifest.id);if(verified?.hash!==hash||digest(verified.payload)!==hash)throw Error('Publication readback failed');
    return result;
   });
-  const status={status:degraded?'degraded':'ok',round:manifest.id,hash,failures,committed};await services.recordStatus(status);return status;
+  const status={status:degraded?'degraded':'ok',round:manifest.id,hash,failures,verificationDifferences,committed};await services.recordStatus(status);return status;
  }catch(e){
   // Failed staging/commit leaves last good published pointer intact by host contract.
   const status={status:'error',round:manifest?.id||null,error:e.message,staged,publication:commitAttempted?'unknown':'unchanged'};
+  if(e.verificationDifferences)status.verificationDifferences=e.verificationDifferences;
   if(commitAttempted){try{const published=await services.readPublished(manifest.id);if(published?.hash===committedHash&&digest(published.payload)===committedHash)status.publication='verified-committed';}catch(readError){status.reconciliationError=readError.message;}}
   try{await services.recordStatus(status);}catch(statusError){status.statusWriteError=statusError.message;}
   return status;
