@@ -7,6 +7,7 @@ function canonical(value){
 }
 function createDraftStore(io){
  const clone=x=>JSON.parse(JSON.stringify(x));
+ const reject=message=>{const error=Error(message);error.code='DRAFT_REJECTED';throw error;};
  function record(row,hash){
   const r=io.readRecord(row);
   if(!r||typeof r.json!=='string'||io.hash(r.json)!==r.hash||(hash&&hash!==r.hash))throw Error('Draft snapshot checksum mismatch.');
@@ -41,16 +42,16 @@ function createDraftStore(io){
   return commit({schema:2,state:clone(state),receipts:[]});
  });}
  function dispatch(actor,action,now,apply){return io.withLock(()=>{
-  if(!actor||typeof actor.id!=='string'||!actor.id||typeof actor.team!=='string'||!actor.team)throw Error('Verified draft identity required.');
-  if(!action||typeof action!=='object'||Array.isArray(action)||typeof action.requestId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(action.requestId))throw Error('A unique request identifier is required.');
+  if(!actor||typeof actor.id!=='string'||!actor.id||typeof actor.team!=='string'||!actor.team)reject('Verified draft identity required.');
+  if(!action||typeof action!=='object'||Array.isArray(action)||typeof action.requestId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(action.requestId))reject('A unique request identifier is required.');
   const current=read();if(!current)throw Error('Draft storage is not initialized.');
   const key=canonical([actor.id,actor.team,action.requestId]),digest=io.hash(canonical(action));
   const prior=current.data.receipts.find(r=>r.key===key);
   if(prior){
-   if(prior.digest!==digest)throw Error('Request identifier was already used for another action.');
+   if(prior.digest!==digest)reject('Request identifier was already used for another action.');
    return {state:clone(current.data.state),receipt:{requestId:action.requestId,revision:prior.revision,replayed:true}};
   }
-  if(current.data.receipts.length>=10000)throw Error('Draft request history needs archival before further writes.');
+  if(current.data.receipts.length>=10000)reject('Draft request history needs archival before further writes.');
   const state=apply(clone(current.data.state),clone(action),clone(actor),now);
   if(state.revision!==current.data.state.revision+1)throw Error('Invalid next draft revision.');
   const receipt={key,digest,revision:state.revision};

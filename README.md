@@ -25,6 +25,11 @@ preview role and open **FFL HQ** to see Katy's deterministic guidance. Test role
 dates are examples, not granted real access or scheduled mock dates. Existing
 `index.html` and `draft-preview.html` remain in place.
 
+`shared-draft.html` is the separate prepared server-connected screen. Its empty
+connection defaults prevent requests until the reviewed Development installation;
+it does not reuse demo state. See [shared coach connection](docs/katy/shared-coach-connection.md)
+for request recovery, access boundaries and remaining connected tests.
+
 The prepared API adapter is uninstalled, requires explicit verified identity
 mappings, and blocks shared finalisation. See [the implementation record](docs/katy/implementation-record.md)
 and [acceptance gates](docs/katy/acceptance-and-release.md) before any Google work.
