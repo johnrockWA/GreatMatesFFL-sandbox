@@ -27,7 +27,7 @@ function draftWorkflowStore_() {
       return {hash:header[0],json:sheet.getRange(row,3,1,count).getValues()[0].join('')};
     },
     appendRecord:function(record){
-      sandboxAssertWritesEnabled_();
+      draftWorkflowAssertWrites_();
       const chunks=[];for(let i=0;i<record.json.length;i+=30000)chunks.push(record.json.slice(i,i+30000));
       if(!chunks.length||chunks.length>100)throw Error('Draft snapshot needs archival before further writes.');
       const row=Math.max(3,sheet.getLastRow()+1),values=[record.hash,chunks.length,...chunks];
@@ -35,13 +35,17 @@ function draftWorkflowStore_() {
       if(sheet.getMaxRows()<row)sheet.insertRowsAfter(sheet.getMaxRows(),row-sheet.getMaxRows());
       sheet.getRange(row,1,1,values.length).setValues([values]);return row;
     },
-    writeHead:function(head){sandboxAssertWritesEnabled_();sheet.getRange('B1').setValue(JSON.stringify(head));},
+    writeHead:function(head){draftWorkflowAssertWrites_();sheet.getRange('B1').setValue(JSON.stringify(head));},
     flush:function(){SpreadsheetApp.flush();},
     withLock:function(fn){const lock=LockService.getScriptLock();lock.waitLock(10000);try{return fn();}finally{lock.releaseLock();}}
   });
 }
 function draftWorkflowResponse_(state,actor,now){
-  const view=FFLDraft.view(state,actor,now);
+  const view=FFLDraft.view(state,actor.capabilities.includes('review')?actor:{...actor,role:'coach'},now);
+  view.serverNow=new Date(now).toISOString();
+  view.actorRole=actor.role;
+  view.principalKey=draftWorkflowPrincipalKey_(actor);
+  view.instanceId=PropertiesService.getScriptProperties().getProperty('FFL_DRAFT_INSTANCE');
   view.managedTeams=actor.managedTeams;
   view.managingTeam=actor.team;
   view.committeeCapabilities=actor.capabilities;
@@ -55,7 +59,21 @@ function getDraftWorkflow_(auth,managedTeam) {
 }
 function postDraftWorkflow_(auth,action,managedTeam) {
   const actor=draftWorkflowActor_(auth,managedTeam);authorizeDraftAction(actor,action);
-  sandboxAssertWritesEnabled_();
-  const result=draftWorkflowStore_().dispatch(actor,action,Date.now(),FFLDraft.apply);
+  draftWorkflowAssertWrites_();
+  const result=draftWorkflowStore_().dispatch(actor,action,Date.now(),function(state,command,who,now){try{authorizeDraftAction(who,command,state);return FFLDraft.apply(state,command,who,now);}catch(error){error.code='DRAFT_REJECTED';throw error;}});
   const response=draftWorkflowResponse_(result.state,actor,Date.now());response.receipt=result.receipt;return response;
+}
+
+// Draft-only writes never enable the legacy competition write switch.
+function draftWorkflowAssertWrites_(){
+  sandboxAssertProject_();
+  const p=PropertiesService.getScriptProperties();
+  if(!draftWorkflowProjectMatches_()||p.getProperty('FFL_DRAFT_WRITES_ENABLED')!=='true'||p.getProperty('FFL_SANDBOX_WRITES_ENABLED')==='true')throw Error('Isolated draft writes are disabled.');
+}
+
+function draftWorkflowPrincipalKey_(actor){return Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,actor.id));}
+
+function draftWorkflowProjectMatches_(){
+  const expected=PropertiesService.getScriptProperties().getProperty('FFL_DRAFT_PROJECT_ID');
+  return typeof expected==='string'&&expected.length>0&&ScriptApp.getScriptId()===expected;
 }

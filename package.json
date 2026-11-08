@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "description": "Source-only Katy foundation and isolated local workflow preview",
-  "engines": {"node": ">=22"},
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "test": "node --test ffl-workflow/tests/*.test.js",
-    "build": "python3 ffl-workflow/build-preview.py",
-    "build:check": "python3 ffl-workflow/build-preview.py --check",
+    "build": "python3 ffl-workflow/build-preview.py && python3 ffl-workflow/build-shared.py",
+    "build:check": "python3 ffl-workflow/build-preview.py --check && python3 ffl-workflow/build-shared.py --check",
     "check": "npm test && npm run build:check"
   }
 }
