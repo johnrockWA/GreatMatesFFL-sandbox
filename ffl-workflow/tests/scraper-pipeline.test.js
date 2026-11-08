@@ -24,9 +24,25 @@ test('changed HTML, partial team rows, wrong season and duplicate players retain
   const r=await S.refresh(x.manifest,[bad,x.provider('backup')],x.services);assert.equal(r.status,'error');assert.equal(JSON.stringify(x.pointer),before);
  }
 });
-test('provider disagreement blocks publication; single-source fallback requires explicit policy',async()=>{
- const x=setup(),bad=x.provider('secondary');bad.parse=async()=>{const m=clone(x.match);m.rows[0][10]=2;return m;};
- assert.match((await S.refresh(x.manifest,[x.provider('primary'),bad],x.services)).error,/disagreement/);assert.equal(x.pointer,null);
+test('official primary wins within tolerance and both values are audit logged',async()=>{
+ const x=setup(),verifier=x.provider('verifier');verifier.parse=async()=>{const m=clone(x.match);m.rows[0][10]=0;m.rows[1][10]=2;return m;};
+ const result=await S.refresh(x.manifest,[verifier,x.provider('official')],x.services,{primarySourceId:'official'});
+ assert.equal(result.status,'ok');assert.equal(x.pointer.payload.matches[0].rows[0][10],1);assert.equal(x.pointer.payload.matches[0].primarySource,'official');
+ assert.deepEqual(result.verificationDifferences,[
+  {player:'player a|a',source:'verifier',stat:'tackles',primaryValue:1,verifierValue:0,signedDifference:-1,match:'m1',primarySource:'official'},
+  {player:'player b|b',source:'verifier',stat:'tackles',primaryValue:1,verifierValue:2,signedDifference:1,match:'m1',primarySource:'official'}
+ ]);
+});
+test('difference above tolerance blocks publication and records exact values',async()=>{
+ const x=setup(),bad=x.provider('verifier');bad.parse=async()=>{const m=clone(x.match);m.rows[0][10]=3;return m;};
+ const result=await S.refresh(x.manifest,[x.provider('official'),bad],x.services,{primarySourceId:'official'});
+ assert.match(result.error,/exceeds tolerance/);assert.equal(x.pointer,null);assert.deepEqual(result.verificationDifferences,[{player:'player a|a',source:'verifier',stat:'tackles',primaryValue:1,verifierValue:3,signedDifference:2}]);
+});
+test('identity mismatch still blocks publication before tolerance is considered',async()=>{
+ const x=setup(),bad=x.provider('verifier');bad.parse=async()=>{const m=clone(x.match);m.rows[0][0]='Different player';return m;};
+ assert.match((await S.refresh(x.manifest,[x.provider('official'),bad],x.services,{primarySourceId:'official'})).error,/identity or coverage/);assert.equal(x.pointer,null);
+});
+test('single-source fallback requires explicit policy',async()=>{
  const y=setup();const r=await S.refresh(y.manifest,[y.provider('backup')],y.services,{requireCrossCheck:false,allowSingleSource:true});assert.equal(r.status,'degraded');assert.equal(y.statuses.at(-1).status,'degraded');
 });
 test('corrected statistics create a new snapshot without mutating the prior release',async()=>{
