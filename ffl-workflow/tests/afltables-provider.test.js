@@ -57,9 +57,9 @@ test('fetch uses only the declared public match URL and never forwards credentia
  for(const u of ['https://other.test/game','https://afltables.com/afl/stats/games/2026/031420260312.html?key=secret'])await assert.rejects(async()=>p.fetch({...x.expected,aflTablesUrl:u}),/Untrusted/);
  assert.equal(calls.length,1);
 });
-test('real adapter shape disagreement holds publication before staging',async()=>{
- const x=fixture(),match=A.normalize(x.parsed,x.expected,x.registry);const other=clone(match);other.rows[0][7]++;
+test('real adapter difference above tolerance holds publication before staging',async()=>{
+ const x=fixture(),match=A.normalize(x.parsed,x.expected,x.registry);const other=clone(match);other.rows[0][7]+=2;
  const provider=(id,m)=>({id,fetch:async()=>({status:200,body:''}),parse:()=>clone(m)});let stages=0,status;
- const result=await S.refresh({id:'r1',season:2026,matches:[x.expected]},[provider('AFLTables',match),provider('archive',other)],{stage:async()=>{stages++;},recordStatus:async s=>{status=s;}});
+ const result=await S.refresh({id:'r1',season:2026,matches:[x.expected]},[provider('AFLTables',match),provider('archive',other)],{stage:async()=>{stages++;},recordStatus:async s=>{status=s;}},{primarySourceId:'AFLTables'});
  assert.match(result.error,/disagreement/);assert.equal(result.publication,'unchanged');assert.equal(stages,0);assert.equal(status.status,'error');
 });
