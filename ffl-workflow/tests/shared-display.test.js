@@ -49,3 +49,17 @@ test('an unconfigured shared build fails closed without a demo or a network call
  assert.doesNotMatch(html,/__ENGINE__|__CLIENT__|__CONFIG__|__SHARED_UI__|const FIXTURE/);
  for(const script of html.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(script[1]);
 });
+test('draft login sends credentials once, clears the password and saves only a draft session',async()=>{
+ const p=screen(),saved=new Map(),requests=[];let refreshes=0;
+ p.ctx.sessionStorage={setItem:(k,v)=>saved.set(k,v)};p.ctx.fakeClient.refresh=async()=>refreshes++;
+ p.ctx.transport=async payload=>{requests.push(payload);return {ok:true,session:{token:'draft-token-with-more-than-32-characters'}};};
+ p.run("sharedEndpoint='https://script.google.com/macros/s/example/dev';sharedTransport=transport");
+ p.run("el('email').value='coach@example.invalid';el('password').value='test-only'");
+ await p.nodes.get('login').onsubmit({preventDefault(){}});
+ assert.equal(requests.length,1);assert.equal(requests[0].action,'loginDraftWorkflow');assert.equal(p.nodes.get('password').value,'');assert.equal(refreshes,1);
+ assert.equal(saved.get('ffl_shared_draft_session_v1'),'draft-token-with-more-than-32-characters');assert.ok(!JSON.stringify([...saved]).includes('test-only'));
+});
+test('expired authentication hides the prior private view and offers draft sign-in',()=>{
+ const p=screen();p.run('snapshot.authRequired=true;renderShared(snapshot)');
+ assert.equal(p.nodes.get('content').hidden,true);assert.equal(p.nodes.get('login').hidden,false);assert.equal(p.nodes.get('signout').hidden,true);
+});

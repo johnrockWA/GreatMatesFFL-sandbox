@@ -2,21 +2,21 @@
 'use strict';
 function createSharedDraftClient(options){
  const copy=x=>x==null?x:JSON.parse(JSON.stringify(x));
- let view=null,pending=null,receipt=null,busy=false,stale=true,message='Connecting…',key=null;
+ let view=null,pending=null,receipt=null,busy=false,stale=true,message='Connecting…',key=null,authRequired=false;
  const changed=()=>options.changed?.(snapshot());
- function snapshot(){return copy({view,pending,receipt,busy,stale,message});}
+ function snapshot(){return copy({view,pending,receipt,busy,stale,message,authRequired});}
  function stash(){if(key){if(pending)options.storage.setItem(key,JSON.stringify(pending));else options.storage.removeItem(key);}}
  function accept(next){
   if(next?.viewSchema!==1||next.instanceId!==options.instanceId||!Array.isArray(next.managedTeams)||!next.managedTeams.includes(next.managingTeam)||typeof next.principalKey!=='string'||!next.principalKey||!Number.isInteger(next.revision)||!next.choices?.[next.managingTeam])throw Error('Invalid shared draft response.');
   if(view&&(next.managingTeam!==view.managingTeam||next.principalKey!==view.principalKey))throw Error('The signed-in coach or managing team changed. Reopen the shared draft.');
   if(view&&next.revision<view.revision)throw Error('An older draft response was refused.');
-  view=copy(next);stale=false;
+  view=copy(next);stale=false;authRequired=false;
  }
  function body(action,team){return {action,token:options.token(),instanceId:options.instanceId,principalKey:view?.principalKey,managingTeam:team};}
  async function exchange(payload){
   let timer;try{return await Promise.race([options.send(payload),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Connection timed out.')),options.timeoutMs||15000);})]);}finally{clearTimeout(timer);}
  }
- function fail(result){const error=Error(result?.message||'The shared draft could not be reached.');error.code=result?.code;throw error;}
+ function fail(result){const error=Error(result?.message||'The shared draft could not be reached.');error.code=result?.code;if(error.code==='AUTH_REQUIRED')authRequired=true;throw error;}
  async function refresh(team){
   if(busy)throw Error('Wait for the current request.');
   if(view&&team&&team!==view.managingTeam)throw Error('Open the assigned team in a separate shared draft screen.');

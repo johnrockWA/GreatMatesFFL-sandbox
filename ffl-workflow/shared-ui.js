@@ -1,7 +1,8 @@
 /* The shared screen renders only server projections. Demo state is never loaded. */
 'use strict';
 const el=id=>document.getElementById(id),escapeHtml=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let client=null,ui=null,edits=null,editVersion=null,confirmJob=null,teamTarget=null;
+let client=null,ui=null,edits=null,editVersion=null,confirmJob=null,teamTarget=null,sharedEndpoint=null;
+const DRAFT_SESSION_KEY='ffl_shared_draft_session_v1';
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const format=x=>new Date(x).toLocaleString('en-AU',{timeZone:'Australia/Perth',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
 function playerName(v,id){return v.players.find(p=>p.id===id)?.name||id;}
@@ -13,7 +14,8 @@ function promptConfirmation(title,text,job){el('confirmtitle').textContent=title
 function renderShared(snapshot){
  ui=snapshot;const v=ui.view,blocked=controlsDisabled();
  el('connection').textContent=ui.message;el('refresh').disabled=ui.busy;el('retry').hidden=!ui.pending;el('retry').disabled=ui.busy;
- el('content').hidden=!v;if(!v)return;
+ el('login').hidden=!ui.authRequired;el('signout').hidden=ui.authRequired||!v;
+ el('content').hidden=!v||ui.authRequired;if(!v||ui.authRequired)return;
  const tid=v.managingTeam,c=v.choices[tid],working=edits||c.working,dirty=!!edits&&!same(edits,c.working),conflict=edits&&editVersion!==c.version;
  el('discard').hidden=!edits;el('discard').disabled=ui.busy||!!ui.pending;
  const phase=v.phase,submitted=c.submitted!==null&&c.version===c.submittedVersion;
@@ -75,14 +77,26 @@ document.addEventListener('click',event=>{
  if(b.dataset.move!==undefined){const i=Number(b.dataset.move),j=i+Number(b.dataset.direction);if(j<0||j>=queue.length)return;[queue[i],queue[j]]=[queue[j],queue[i]];perform('queue',{players:queue});return;}
  if(b.dataset.committee){const type=b.dataset.committee,revision=v.revision;promptConfirmation(b.textContent+'?',type==='prepare'?'Lock the last submitted choices for every team. Official squads stay unchanged.':type==='arm'?'Allow the draft to open at its scheduled time.':'Change the shared Development draft status.',()=>{if(controlsDisabled()||ui.view.revision!==revision){el('feedback').textContent='The draft changed. Review before confirming.';return;}perform(type,type==='pause'?{reason:'Committee paused draft for review'}:{});});}
 });
+async function sharedTransport(payload){const response=await fetch(sharedEndpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload),cache:'no-store',redirect:'follow'});if(!response.ok)throw Error('The shared draft is unavailable.');return response.json();}
+el('login').onsubmit=async event=>{
+ event.preventDefault();el('signin').disabled=true;el('feedback').textContent='Signing in…';
+ try{
+  if(!sharedEndpoint)throw Error('The shared Development connection has not been installed yet.');
+  const result=await sharedTransport({action:'loginDraftWorkflow',instanceId:SHARED_CONFIG.instanceId,email:el('email').value,password:el('password').value});
+  if(!result?.ok||typeof result.session?.token!=='string'||result.session.token.length<32)throw Error(result?.message||'Sign-in could not be confirmed.');
+  sessionStorage.setItem(DRAFT_SESSION_KEY,result.session.token);el('feedback').textContent='';await client.refresh();
+ }catch(error){el('feedback').textContent=error.message;}finally{el('password').value='';el('signin').disabled=false;}
+};
+el('signout').onclick=()=>{sessionStorage.removeItem(DRAFT_SESSION_KEY);location.reload();};
 async function connectShared(){
  try{
   if(!SHARED_CONFIG.endpoint||!SHARED_CONFIG.instanceId)throw Error('The shared Development connection has not been installed yet. Your saved demo choices have not been submitted here.');
   const endpoint=new URL(SHARED_CONFIG.endpoint);
   if(endpoint.origin!=='https://script.google.com'||endpoint.search||endpoint.hash||!/^\/(?:a\/macros\/rockpad\.com\.au|macros)\/s\/[^/]+\/(?:exec|dev)$/.test(endpoint.pathname))throw Error('Invalid Development endpoint.');
+  sharedEndpoint=endpoint.toString();
   teamTarget=new URL(location.href).searchParams.get('team')||undefined;
-  client=createSharedDraftClient({instanceId:SHARED_CONFIG.instanceId,managingTeam:teamTarget,storage:sessionStorage,token:()=>localStorage.getItem('ffl_sandbox_2027_token'),requestId:()=>crypto.randomUUID(),changed:renderShared,
-   send:async payload=>{const response=await fetch(endpoint.toString(),{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload),cache:'no-store',redirect:'follow'});if(!response.ok)throw Error('The shared draft is unavailable.');return response.json();}
+  client=createSharedDraftClient({instanceId:SHARED_CONFIG.instanceId,managingTeam:teamTarget,storage:sessionStorage,token:()=>sessionStorage.getItem(DRAFT_SESSION_KEY),requestId:()=>crypto.randomUUID(),changed:renderShared,
+   send:sharedTransport
   });
   await client.refresh();
   setInterval(()=>{const s=client.snapshot();if(!s.busy&&!s.pending&&document.visibilityState==='visible')client.refresh().catch(()=>{});},5000);
