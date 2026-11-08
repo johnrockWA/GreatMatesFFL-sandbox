@@ -5,7 +5,7 @@ test('preview builds consistently from an unrelated working directory',()=>{
   const one=path.join(dir,'one.html'),two=path.join(dir,'two.html');
   cp.execFileSync('python3',[builder,'--output',one],{cwd:dir});cp.execFileSync('python3',[builder,'--output',two],{cwd:os.tmpdir()});
   assert.deepEqual(fs.readFileSync(one),fs.readFileSync(two));
-  const html=fs.readFileSync(one,'utf8');assert.match(html,/FFL HQ/);assert.match(html,/Katy · Executive Administrator/);assert.doesNotMatch(html,/__ENGINE__|__KATY__|__FIXTURE__/);
-  let scripts=0;for(const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)){new vm.Script(m[1]);scripts++;}assert.equal(scripts,5);
+  const html=fs.readFileSync(one,'utf8');assert.match(html,/FFL HQ/);assert.match(html,/Administration by Katy/);assert.doesNotMatch(html,/Ask Katy|katychatform|MEET YOUR EXECUTIVE/);assert.doesNotMatch(html,/__ENGINE__|__KATY__|__FIXTURE__/);
+  let scripts=0;for(const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)){new vm.Script(m[1]);scripts++;}assert.equal(scripts,6);
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });

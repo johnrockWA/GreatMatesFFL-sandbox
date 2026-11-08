@@ -285,6 +285,11 @@
     font-family: 'DM Sans', sans-serif;
   }
 
+  .score-state-banner { margin:0 0 10px;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:12px;color:var(--muted);background:var(--surface2); }
+  .score-state-banner.warning { border-color:#d59b2d;color:#8a5c00;background:#fff8e5; }
+  .score-state-banner.danger { border-color:#c94a4a;color:#8c2222;background:#fff0f0; }
+  .score-state-banner.final { border-color:#3f8d62;color:#24623f;background:#edf9f1; }
+
   .fixture-deadline {
     font-size: 11px;
     color: var(--muted);
@@ -1295,6 +1300,7 @@
 
   #draft-tab-btn { display: none; }  /* hidden until isDraftVisible */
 </style>
+<script src="competition/score-status.js"></script>
 </head>
 <body>
 <div style="position:fixed;bottom:0;left:0;right:0;z-index:99999;background:#8a3c00;color:#fff;text-align:center;font:600 12px sans-serif;padding:6px;pointer-events:none">SANDBOX - TEST DATA - EMAILS SUPPRESSED</div>
@@ -1801,6 +1807,56 @@ function switchTab(name, btn) {
 }
 
 // ─── RESULTS TAB ─────────────────────────────────────────
+const SCORE_STATE_LABELS = {
+  provisional:['Provisional scores','live'],
+  'awaiting-verification':['Finished — awaiting verification','warning'],
+  disputed:['Statistics disputed — result on hold','danger'],
+  'correction-pending':['Correction awaiting approval','warning'],
+  'verified-final':['Verified final result','final'],
+  'awaiting-finalisation':['Verified — awaiting approval','warning'],
+  'collection-paused':['Score collection paused','warning'],
+  recorded:['Recorded scores — independent verification not recorded','neutral'],
+};
+function scoreStateInfo(raw, payload = {}) {
+  if (raw && typeof raw === 'object') {
+    const view = FFLScoreStatus.describe({...payload,scoreState:raw}, {hasScores:true,scoresComplete:FFLScoreStatus.finiteScore(payload.team1Score)&&FFLScoreStatus.finiteScore(payload.team2Score)});
+    return {state:view.code,label:view.label,tone:view.tone,canDeclareWinner:view.canDeclareResult};
+  }
+  const state = String(raw || 'recorded');
+  const found = SCORE_STATE_LABELS[state] || ['Score status unavailable','warning'];
+  return { state, label:found[0], tone:found[1], canDeclareWinner:state === 'verified-final' && !payload.correctionPending && !payload.collectionPaused && !!payload.snapshotId && scoreFreshnessInfo(payload)?.stale === false };
+}
+function scoreValue(scores, team) {
+  return Object.prototype.hasOwnProperty.call(scores || {}, team) && typeof scores[team] === 'number' && Number.isFinite(scores[team]) && scores[team] >= 0 ? scores[team] : null;
+}
+function scoreFreshnessInfo(data, now) {
+  const maxAgeMs=Number(data && data.freshnessMaxAgeMs);
+  const lastSuccess=Date.parse(data && data.lastSuccessAt);
+  const checkedAt=Number.isFinite(now) ? now : Date.now();
+  if(!Number.isFinite(maxAgeMs) || maxAgeMs<=0)return null;
+  if(!Number.isFinite(lastSuccess))return {stale:true,label:'No verified score collection recorded'};
+  if(checkedAt<lastSuccess)return {stale:true,label:'Score freshness check failed'};
+  return checkedAt-lastSuccess>maxAgeMs ? {stale:true,label:'Scores are stale'} : {stale:false,label:''};
+}
+function scoreStateBanner(data) {
+  if(data?.scoreState && typeof data.scoreState === 'object')return FFLScoreStatus.render(data,{hasScores:Object.values(data.scores||{}).some(FFLScoreStatus.finiteScore)});
+  const info=scoreStateInfo(data && (data.scoreState || data.status),data);
+  const updated=data && (data.updatedAt || data.asOf);
+  const paused=data && (data.collectionPaused || info.state === 'collection-paused');
+  const notices=[info.label];
+  if(data && data.correctionPending && info.state !== 'correction-pending')notices.push('Correction awaiting approval');
+  if(paused && info.state !== 'collection-paused')notices.push('Collection paused');
+  const freshness=scoreFreshnessInfo(data);
+  if(freshness && freshness.stale)notices.push(freshness.label);
+  if(data && data.lastAttemptAt)notices.push(`Last attempt ${formatPerthTimestamp(data.lastAttemptAt)}`);
+  if(data && data.lastSuccessAt)notices.push(`Last success ${formatPerthTimestamp(data.lastSuccessAt)}`);
+  if(data && data.publishedAt)notices.push(`Published ${formatPerthTimestamp(data.publishedAt)}`);
+  return `<div class="score-state-banner ${freshness&&freshness.stale?'danger':info.tone}">${notices.join(' · ')}${updated ? ` · Updated ${formatPerthTimestamp(updated)}` : ''}</div>`;
+}
+function formatPerthTimestamp(value) {
+  const d=new Date(value);if(isNaN(d.getTime()))return 'time unavailable';
+  return new Intl.DateTimeFormat('en-AU',{timeZone:'Australia/Perth',day:'numeric',month:'short',hour:'numeric',minute:'2-digit',hour12:true}).format(d)+' AWST';
+}
 async function renderResultsFixtures() {
   const card = document.getElementById('results-fixtures-card');
   if (!state.fixtures || !state.fixtures.fixtures) {
@@ -1835,27 +1891,28 @@ async function renderResultsFixtures() {
   `).join('');
 
   // Now fetch scores and re-render with real values
-  let scores = {};
+  let scores = {}, scoreData = null;
   try {
     const data = await apiGet('getRoundScores', { round: current });
+    scoreData = data;
     scores = data.scores || {};
   } catch(e) { /* leave scores empty — pending dashes stay */ }
 
-  card.innerHTML = matches.map(f => {
-    const hs = scores[f.home] != null ? scores[f.home] : 0;
-    const as = scores[f.away] != null ? scores[f.away] : 0;
+  card.innerHTML = (scoreData ? scoreStateBanner(scoreData) : '<div class="score-state-banner warning">Scores unavailable</div>') + matches.map(f => {
+    const hs = scoreValue(scores,f.home);
+    const as = scoreValue(scores,f.away);
     return `
       <div class="fixture-row current">
         <div class="fixture-round-badge">${roundDisplay(f.round)}</div>
         <div class="fixture-teams">
           <div class="fixture-team-line">
             <span class="fixture-team">${f.home}</span>
-            <span class="fixture-team-score">${hs}</span>
+            <span class="fixture-team-score${hs===null?' pending':''}">${hs===null?'–':hs}</span>
           </div>
           <div class="fixture-vs">vs</div>
           <div class="fixture-team-line">
             <span class="fixture-team">${f.away}</span>
-            <span class="fixture-team-score">${as}</span>
+            <span class="fixture-team-score${as===null?' pending':''}">${as===null?'–':as}</span>
           </div>
         </div>
       </div>`;
@@ -1986,7 +2043,7 @@ async function renderFinals() {
   const weekBlocks = FINALS_WEEKS.map((week, wi) => {
     const rendered = [];
     week.names.filter(n => byName[n]).forEach(n => {
-      rendered.push(renderFinalMatch(n, byName[n], lockFor[n], finalMatchIdx, wi));
+      rendered.push(renderFinalMatch(n, {...data,...byName[n]}, lockFor[n], finalMatchIdx, wi));
       finalMatchIdx++;
     });
     if (!rendered.length) return '';
@@ -2015,26 +2072,30 @@ async function renderFinals() {
 //
 // Scores still display live. What's withheld is the CALL, not the numbers.
 function renderFinalMatch(name, m, lock, idx, wi) {
-  // complete is authoritative; the m.winner fallback keeps this working against an
-  // older backend that doesn't send the flag yet.
-  const complete = (m.complete !== undefined) ? !!m.complete : (m.winner != null);
-  const decided  = complete && m.winner && m.winner !== 'Draw';
-  const isDraw   = complete && m.winner === 'Draw';
+  // Final status, paired snapshot, freshness and both numeric scores are required.
+  const statusInfo = scoreStateInfo(m.scoreState || (m.complete ? 'recorded' : 'provisional'),m);
+  const complete = statusInfo.canDeclareWinner && m.complete === true && FFLScoreStatus.finiteScore(m.team1Score) && FFLScoreStatus.finiteScore(m.team2Score);
+  const verifiedWinner = complete ? (m.team1Score === m.team2Score ? ([m.team1,m.team2].includes(m.verifiedWinner) ? m.verifiedWinner : null) : m.team1Score > m.team2Score ? m.team1 : m.team2) : null;
+  const decided  = complete && !!verifiedWinner;
   // Show scores whenever there are any, whether or not the match has finished.
   const played   = m.team1Score != null || m.team2Score != null;
   const t1 = m.team1 || 'To be decided';
   const t2 = m.team2 || 'To be decided';
-  const s1 = played ? (m.team1Score != null ? m.team1Score : 0) : '–';
-  const s2 = played ? (m.team2Score != null ? m.team2Score : 0) : '–';
-  const win1 = decided && m.winner === m.team1;
-  const win2 = decided && m.winner === m.team2;
+  const s1 = m.team1Score != null ? m.team1Score : '–';
+  const s2 = m.team2Score != null ? m.team2Score : '–';
+  const isDraw = complete && m.team1Score != null && m.team2Score != null && Number(s1) === Number(s2);
+  const win1 = decided && verifiedWinner === m.team1;
+  const win2 = decided && verifiedWinner === m.team2;
   const gold = 'color:var(--gold);font-weight:700';
-  const pend = played ? '' : ' pending';
+  const pend1 = m.team1Score == null ? ' pending' : '';
+  const pend2 = m.team2Score == null ? ' pending' : '';
 
   const lockLabel = (!played && lock) ? formatLockAWST(lock) : '';
   const note = isDraw
-    ? '<div class="fixture-round-badge" style="display:inline-block;margin-top:8px">Draw · decided on countback</div>'
-    : lockLabel
+    ? `<div class="fixture-round-badge" style="display:inline-block;margin-top:8px">Scores level · ${decided?'verified countback':'verification required'}</div>`
+      : played
+        ? `<div class="score-state-banner ${statusInfo.tone}" style="margin-top:8px">${statusInfo.label}</div>`
+      : lockLabel
       ? `<div class="fixture-round-badge" style="display:inline-block;margin-top:8px">Locks ${lockLabel}</div>`
       : '';
 
@@ -2056,12 +2117,12 @@ function renderFinalMatch(name, m, lock, idx, wi) {
       <div class="fixture-round-badge" style="display:inline-block;margin-bottom:8px">${name}</div>
       <div class="fixture-team-line">
         <span class="fixture-team" style="${win1 ? gold : ''}">${win1 ? '✓ ' : ''}${t1}</span>
-        <span class="fixture-team-score${pend}" style="${win1 ? gold : ''}">${s1}</span>
+        <span class="fixture-team-score${pend1}" style="${win1 ? gold : ''}">${s1}</span>
       </div>
       <div class="fixture-vs">v</div>
       <div class="fixture-team-line">
         <span class="fixture-team" style="${win2 ? gold : ''}">${win2 ? '✓ ' : ''}${t2}</span>
-        <span class="fixture-team-score${pend}" style="${win2 ? gold : ''}">${s2}</span>
+        <span class="fixture-team-score${pend2}" style="${win2 ? gold : ''}">${s2}</span>
       </div>
       ${note}
       ${expand}
@@ -3018,10 +3079,8 @@ async function renderRecords() {
     // Now each table states what "finished" means for its own data and passes it in:
     //   Season honours → a premier has been recorded
     //   Office bearers → the wind-up has happened
-    // Note: this is deliberately LOCAL to the badge. The backend also sends an
-    // `inProgress` flag per row, and gfDeclaredPremier() uses it to find the current
-    // season when crowning a drawn Grand Final — do not redefine that one to mean
-    // "season over" without fixing that lookup too.
+    // This is deliberately local to the badge. Score verification and any tied-final
+    // winner come from the single published score snapshot, not the records table.
     const IN_PROGRESS_BADGE =
       ' <span style="font-size:10px;font-weight:600;color:var(--muted);white-space:nowrap">IN PROGRESS</span>';
     const inProgress = (year, done) =>
@@ -3941,19 +4000,18 @@ function onDraftTabOpen() {
 // POS_ABBR, playerClubTag, formatLockAWST.
 // Turns on when the GF matchup is set AND we're within the lead window,
 // gated by App_Metadata: gf_view_mode (auto|on|off), gf_view_lead_days (default 3).
-// Preview: ?gfpreview=1  (force on)   &gfstate=done  (force crowning)
+// Preview: ?gfpreview=1 forces the layout only; it cannot crown a premier.
 // Kill switch: gf_view_mode = off  → standard Finals page returns.
 // ============================================================
 
 const GF_STATE = { crownKey: null };            // guards the one-shot confetti
-const GF_DRAW_PREMIER_SOURCE = 'records';       // 'records' | 'finalsmaster' — draw-premier source (isolated)
 
 function gfParams() {
   try { return new URLSearchParams(window.location.search); }
   catch (e) { return new URLSearchParams(''); }
 }
 
-function gfNum(v) { return (v === null || v === undefined || v === '') ? null : Number(v); }
+function gfNum(v) { return FFLScoreStatus.finiteScore(v) ? v : null; }
 
 function gfShortFinal(name) {
   const map = {
@@ -4016,37 +4074,26 @@ function gfRoadFor(team, bracket) {
     });
 }
 
-// Look up the declared premier for the current season (used only to crown a DRAWN GF).
-async function gfDeclaredPremier() {
-  if (GF_DRAW_PREMIER_SOURCE !== 'records') return null;       // FinalsMaster path can slot in here later
-  try {
-    const rec = await apiGet('getHistoricalRecords');
-    const rows = (rec && rec.seasonResults) || [];
-    const cur = rows.find(r => r.inProgress) || rows[0];
-    const name = cur && String(cur.premierFull || '').trim();
-    return name || null;
-  } catch (e) { return null; }
-}
-
 async function renderGrandFinalView(data, gf, seedsCard, bracketCard) {
-  const p = gfParams();
   const t1 = gf.team1 || 'To be decided';
   const t2 = gf.team2 || 'To be decided';
   const c1 = gfShort(t1), c2 = gfShort(t2);
 
-  // State: complete (crowning) vs live. Preview can force "done".
-  const forcedDone = p.get('gfstate') === 'done';
-  const complete = forcedDone || gf.complete === true;
-  const isDraw = complete && gf.winner === 'Draw';
+  // A winner is declared only from an explicitly verified snapshot.
+  const gfState = scoreStateInfo(gf.scoreState || (gf.complete ? 'recorded' : 'provisional'),{...data,...gf});
+  const complete = gfState.canDeclareWinner && gf.complete === true && gfNum(gf.team1Score) !== null && gfNum(gf.team2Score) !== null;
+  const isDraw = complete && gf.team1Score === gf.team2Score;
 
   // Headline totals — authoritative from the bracket.
   let s1 = gfNum(gf.team1Score), s2 = gfNum(gf.team2Score);
-  if (s1 === null && s2 === null && !forcedDone) { s1 = null; s2 = null; }
+  if (s1 === null && s2 === null) { s1 = null; s2 = null; }
 
   // Per-position breakdown.
   let details = null;
   try { details = await apiGet('getFinalsMatchDetails', { finalName: 'Grand Final', home: t1, away: t2 }); }
   catch (e) { details = null; }
+  const bracketSnapshot = data && (data.snapshotId || data.scoreSnapshotId);
+  if (details && (!bracketSnapshot || !details.snapshotId || details.snapshotId !== bracketSnapshot)) details = null;
   const homeMap = {}, awayMap = {};
   if (details && details.hasData) {
     (details.homeScores || []).forEach(x => homeMap[x.position] = x);
@@ -4060,12 +4107,10 @@ async function renderGrandFinalView(data, gf, seedsCard, bracketCard) {
   let winnerName = null, holdDraw = false;
   if (complete) {
     if (isDraw) {
-      winnerName = await gfDeclaredPremier();         // sheet decides on a draw
+      winnerName = [t1,t2].includes(gf.verifiedWinner) ? gf.verifiedWinner : null;
       if (!winnerName) holdDraw = true;               // not resolved yet → calm holding state
-    } else if (gf.winner) {
-      winnerName = gf.winner;
-    } else if (forcedDone && s1 !== null && s2 !== null) {
-      winnerName = s1 > s2 ? t1 : s2 > s1 ? t2 : null; // preview only
+    } else {
+      winnerName = gf.team1Score > gf.team2Score ? t1 : t2;
     }
   }
   const aWin = !!winnerName && winnerName === t1;
@@ -4083,7 +4128,7 @@ async function renderGrandFinalView(data, gf, seedsCard, bracketCard) {
   if (holdDraw) { statusCls = 'draw'; statusTxt = 'Scores level — premier decided by countback'; }
   else if (winnerName) { statusCls = 'done'; statusTxt = 'Full time · ' + winnerName + (isDraw ? ' (countback)' : '') + ' are Premiers'; }
   else if (!played && gfLock) { statusCls = 'pre'; statusTxt = 'Locks ' + formatLockAWST(gfLock); }
-  else { statusCls = 'live'; statusTxt = 'Live'; }
+  else { statusCls = gfState.tone === 'danger' ? 'draw' : 'live'; statusTxt = gfState.label; }
 
   // ---- scoreboard ----
   const sideHTML = (team, coach, score, win, lose, lead) => `
@@ -4091,7 +4136,7 @@ async function renderGrandFinalView(data, gf, seedsCard, bracketCard) {
       <div class="gf-tname">${team}</div>
       <div class="gf-coach">${coach && coach !== team ? coach : ''}</div>
       <div class="gf-score ${win || lead ? 'lead' : ''}" data-to="${score === null ? 0 : score}">${score === null ? '–' : 0}</div>
-      <div class="gf-ribbon ${win ? 'show' : ''}">🏆 Premiers</div>
+      ${win ? '<div class="gf-ribbon show">🏆 Premiers</div>' : ''}
     </div>`;
 
   // ---- road to the GF ----
@@ -4184,7 +4229,7 @@ async function renderGrandFinalView(data, gf, seedsCard, bracketCard) {
         </div>
         ${roadBlock}
         ${panel}
-        <p class="gf-caption">Scores update live · the premier is crowned once every position is final.</p>
+        <p class="gf-caption">Scores are shown as received · the premier is confirmed after verification.</p>
       </div>
       <canvas class="gf-confetti"></canvas>
     </div>`;

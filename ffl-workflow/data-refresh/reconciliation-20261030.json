@@ -1,0 +1,1810 @@
+{
+  "asOf": "2026-10-30",
+  "players": 670,
+  "squadPlayers": 200,
+  "refreshedSquadPlayers": 200,
+  "unresolved": [],
+  "changes": [
+    {
+      "id": "p1",
+      "name": "Ben King",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 120,
+      "gamesAfter": 143,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p2",
+      "name": "Caleb Serong",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 127,
+      "gamesAfter": 151,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p3",
+      "name": "Christian Petracca",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 212,
+      "gamesAfter": 232,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p4",
+      "name": "Daniel Curtin",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 32,
+      "gamesAfter": 50,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p5",
+      "name": "Jack Ross",
+      "clubBefore": "Richmond",
+      "clubAfter": "Richmond",
+      "gamesBefore": 93,
+      "gamesAfter": 112,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p6",
+      "name": "Jacob Hopper",
+      "clubBefore": "Richmond",
+      "clubAfter": "Richmond",
+      "gamesBefore": 165,
+      "gamesAfter": 177,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p7",
+      "name": "Jake Stringer",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "GWS Giants",
+      "gamesBefore": 227,
+      "gamesAfter": 250,
+      "listStatus": "delisted"
+    },
+    {
+      "id": "p8",
+      "name": "Jarrod Witts",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 205,
+      "gamesAfter": 218,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p9",
+      "name": "Luke Ryan",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 179,
+      "gamesAfter": 205,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p10",
+      "name": "Mitch Lewis",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 78,
+      "gamesAfter": 102,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p11",
+      "name": "Ned Long",
+      "clubBefore": "Collingwood",
+      "clubAfter": "Collingwood",
+      "gamesBefore": 37,
+      "gamesAfter": 59,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p12",
+      "name": "Patrick Cripps",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 230,
+      "gamesAfter": 255,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p13",
+      "name": "Paul Curtis",
+      "clubBefore": "North Melbourne",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 78,
+      "gamesAfter": 98,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p14",
+      "name": "Rowan Marshall",
+      "clubBefore": "St Kilda",
+      "clubAfter": "Geelong",
+      "gamesBefore": 156,
+      "gamesAfter": 177,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p15",
+      "name": "Ryley Sanders",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 35,
+      "gamesAfter": 58,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p16",
+      "name": "Sean Darcy",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 127,
+      "gamesAfter": 134,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p17",
+      "name": "Tim Taranto",
+      "clubBefore": "Richmond",
+      "clubAfter": "Richmond",
+      "gamesBefore": 173,
+      "gamesAfter": 194,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p18",
+      "name": "Tom Stewart",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 191,
+      "gamesAfter": 214,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p19",
+      "name": "Zach Reid",
+      "clubBefore": "Essendon",
+      "clubAfter": "Essendon",
+      "gamesBefore": 19,
+      "gamesAfter": 42,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p20",
+      "name": "Zeke Uwland",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 0,
+      "gamesAfter": 17,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p21",
+      "name": "Bailey Smith",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 126,
+      "gamesAfter": 150,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p22",
+      "name": "Brody Mihocek",
+      "clubBefore": "Melbourne",
+      "clubAfter": "Melbourne",
+      "gamesBefore": 159,
+      "gamesAfter": 169,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p23",
+      "name": "Caleb Windsor",
+      "clubBefore": "Melbourne",
+      "clubAfter": "Melbourne",
+      "gamesBefore": 36,
+      "gamesAfter": 57,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p24",
+      "name": "Chad Warner",
+      "clubBefore": "Sydney",
+      "clubAfter": "Sydney",
+      "gamesBefore": 108,
+      "gamesAfter": 130,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p25",
+      "name": "Cody Weightman",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 76,
+      "gamesAfter": 87,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p26",
+      "name": "Conor Nash",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 120,
+      "gamesAfter": 130,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p27",
+      "name": "Darcy Fogarty",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 126,
+      "gamesAfter": 142,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p28",
+      "name": "Darcy Parish",
+      "clubBefore": "Essendon",
+      "clubAfter": "Essendon",
+      "gamesBefore": 165,
+      "gamesAfter": 179,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p29",
+      "name": "Harry Dean",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 0,
+      "gamesAfter": 22,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p30",
+      "name": "Jeremy Cameron",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 280,
+      "gamesAfter": 299,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p31",
+      "name": "John Noble",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 137,
+      "gamesAfter": 160,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p32",
+      "name": "Josh Worrell",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 55,
+      "gamesAfter": 79,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p33",
+      "name": "Lachlan McAndrew",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 2,
+      "gamesAfter": 26,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p34",
+      "name": "Liam Reidy",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 3,
+      "gamesAfter": 7,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p35",
+      "name": "Mitchell Georgiades",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 92,
+      "gamesAfter": 113,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p36",
+      "name": "Nic Newman",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 134,
+      "gamesAfter": 150,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p37",
+      "name": "Sullivan Robey",
+      "clubBefore": "Essendon",
+      "clubAfter": "Essendon",
+      "gamesBefore": 0,
+      "gamesAfter": 15,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p38",
+      "name": "Toby Nankervis",
+      "clubBefore": "Richmond",
+      "clubAfter": "Richmond",
+      "gamesBefore": 179,
+      "gamesAfter": 191,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p39",
+      "name": "Tom McCarthy",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 10,
+      "gamesAfter": 32,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p40",
+      "name": "Tom Sparrow",
+      "clubBefore": "Melbourne",
+      "clubAfter": "Melbourne",
+      "gamesBefore": 117,
+      "gamesAfter": 141,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p41",
+      "name": "Adam Cerra",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 148,
+      "gamesAfter": 170,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p42",
+      "name": "Andrew Brayshaw",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 170,
+      "gamesAfter": 197,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p43",
+      "name": "Cameron Rayner",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 167,
+      "gamesAfter": 194,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p44",
+      "name": "Charlie Banfield",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 0,
+      "gamesAfter": 3,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p45",
+      "name": "Harris Andrews",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 239,
+      "gamesAfter": 263,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p46",
+      "name": "Harry Sheezel",
+      "clubBefore": "North Melbourne",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 67,
+      "gamesAfter": 89,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p47",
+      "name": "Jack Graham",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 149,
+      "gamesAfter": 162,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p48",
+      "name": "Jack Gunston",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 283,
+      "gamesAfter": 302,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p49",
+      "name": "Jackson Macrae",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 270,
+      "gamesAfter": 282,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p50",
+      "name": "Jacob Van Rooyen",
+      "clubBefore": "Melbourne",
+      "clubAfter": "Melbourne",
+      "gamesBefore": 57,
+      "gamesAfter": 79,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p51",
+      "name": "Jake Waterman",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 112,
+      "gamesAfter": 135,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p52",
+      "name": "Jobe Shanahan",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 9,
+      "gamesAfter": 32,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p53",
+      "name": "Jordan Ridley",
+      "clubBefore": "Essendon",
+      "clubAfter": "Geelong",
+      "gamesBefore": 104,
+      "gamesAfter": 111,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p54",
+      "name": "Keidean Coleman",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Essendon",
+      "gamesBefore": 66,
+      "gamesAfter": 79,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p55",
+      "name": "Levi Ashcroft",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 27,
+      "gamesAfter": 54,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p56",
+      "name": "Max Gawn",
+      "clubBefore": "Melbourne",
+      "clubAfter": "Melbourne",
+      "gamesBefore": 247,
+      "gamesAfter": 271,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p57",
+      "name": "Nick Watson",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 43,
+      "gamesAfter": 66,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p58",
+      "name": "Rhys Stanley",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 229,
+      "gamesAfter": 230,
+      "listStatus": "retired"
+    },
+    {
+      "id": "p59",
+      "name": "Sam Draper",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 78,
+      "gamesAfter": 104,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p60",
+      "name": "Sam Flanders",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 89,
+      "gamesAfter": 101,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p61",
+      "name": "Christian Salem",
+      "clubBefore": "Melbourne",
+      "clubAfter": "Melbourne",
+      "gamesBefore": 199,
+      "gamesAfter": 208,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p62",
+      "name": "Dante Visentini",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 14,
+      "gamesAfter": 29,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p63",
+      "name": "George Hewett",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 202,
+      "gamesAfter": 223,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p64",
+      "name": "Izak Rankine",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 105,
+      "gamesAfter": 127,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p65",
+      "name": "Jake Soligo",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 85,
+      "gamesAfter": 107,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p66",
+      "name": "Jarman Impey",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 221,
+      "gamesAfter": 244,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p67",
+      "name": "Josh Rachele",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 70,
+      "gamesAfter": 95,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p68",
+      "name": "Jye Amiss",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 71,
+      "gamesAfter": 97,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p69",
+      "name": "Kieren Briggs",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "Richmond",
+      "gamesBefore": 70,
+      "gamesAfter": 88,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p70",
+      "name": "Lloyd Meek",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 77,
+      "gamesAfter": 102,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p71",
+      "name": "Matthew Kennedy",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 141,
+      "gamesAfter": 165,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p72",
+      "name": "Murphy Reid",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 24,
+      "gamesAfter": 49,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p73",
+      "name": "Nasiah Wanganeen-Milera",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 86,
+      "gamesAfter": 103,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p74",
+      "name": "Oliver Dempsey",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 58,
+      "gamesAfter": 83,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p75",
+      "name": "Patrick Voss",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 27,
+      "gamesAfter": 53,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p76",
+      "name": "Riley Thilthorpe",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 78,
+      "gamesAfter": 100,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p77",
+      "name": "Sam Berry",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 76,
+      "gamesAfter": 100,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p78",
+      "name": "Steele Sidebottom",
+      "clubBefore": "Collingwood",
+      "clubAfter": "Collingwood",
+      "gamesBefore": 354,
+      "gamesAfter": 375,
+      "listStatus": "retired"
+    },
+    {
+      "id": "p79",
+      "name": "Will Ashcroft",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 58,
+      "gamesAfter": 85,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p80",
+      "name": "Zach Merrett",
+      "clubBefore": "Essendon",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 251,
+      "gamesAfter": 274,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p81",
+      "name": "Adam Treloar",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 258,
+      "gamesAfter": 263,
+      "listStatus": "retired"
+    },
+    {
+      "id": "p82",
+      "name": "Callum Mills",
+      "clubBefore": "Sydney",
+      "clubAfter": "Sydney",
+      "gamesBefore": 174,
+      "gamesAfter": 197,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p83",
+      "name": "Errol Gulden",
+      "clubBefore": "Sydney",
+      "clubAfter": "Sydney",
+      "gamesBefore": 103,
+      "gamesAfter": 116,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p84",
+      "name": "Jack Ginnivan",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 90,
+      "gamesAfter": 114,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p85",
+      "name": "Jack Whitlock",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 4,
+      "gamesAfter": 27,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p86",
+      "name": "Jayden Short",
+      "clubBefore": "Richmond",
+      "clubAfter": "Richmond",
+      "gamesBefore": 190,
+      "gamesAfter": 211,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p87",
+      "name": "Joel Amartey",
+      "clubBefore": "Sydney",
+      "clubAfter": "Carlton",
+      "gamesBefore": 61,
+      "gamesAfter": 76,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p88",
+      "name": "Jordon Sweet",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 47,
+      "gamesAfter": 69,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p89",
+      "name": "Josh Lindsay",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": null,
+      "gamesAfter": 15,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p90",
+      "name": "Lachie Neale",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Collingwood",
+      "gamesBefore": 294,
+      "gamesAfter": 321,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p91",
+      "name": "Lachie Whitfield",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "Carlton",
+      "gamesBefore": 257,
+      "gamesAfter": 278,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p92",
+      "name": "Marc Pittonet",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 80,
+      "gamesAfter": 102,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p93",
+      "name": "Ned Moyle",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 13,
+      "gamesAfter": 29,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p94",
+      "name": "Nick Larkey",
+      "clubBefore": "North Melbourne",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 134,
+      "gamesAfter": 157,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p95",
+      "name": "Oscar Allen",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 105,
+      "gamesAfter": 120,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p96",
+      "name": "Sam Walsh",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 133,
+      "gamesAfter": 158,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p97",
+      "name": "Tom Atkins",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 153,
+      "gamesAfter": 178,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p98",
+      "name": "Touk Miller",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 214,
+      "gamesAfter": 237,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p99",
+      "name": "Tylar Young",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 35,
+      "gamesAfter": 58,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p100",
+      "name": "Will Day",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 76,
+      "gamesAfter": 89,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p101",
+      "name": "Callum Coleman-Jones",
+      "clubBefore": "North Melbourne",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 32,
+      "gamesAfter": 37,
+      "listStatus": "delisted"
+    },
+    {
+      "id": "p102",
+      "name": "Calsher Dear",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 26,
+      "gamesAfter": 31,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p103",
+      "name": "Charlie Curnow",
+      "clubBefore": "Sydney",
+      "clubAfter": "Sydney",
+      "gamesBefore": 149,
+      "gamesAfter": 173,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p104",
+      "name": "Clayton Oliver",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "GWS Giants",
+      "gamesBefore": 205,
+      "gamesAfter": 228,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p105",
+      "name": "Colby McKercher",
+      "clubBefore": "North Melbourne",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 39,
+      "gamesAfter": 62,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p106",
+      "name": "Connor O'Sullivan",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 26,
+      "gamesAfter": 51,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p107",
+      "name": "Dylan Moore",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 126,
+      "gamesAfter": 150,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p108",
+      "name": "Harry McKay",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 140,
+      "gamesAfter": 163,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p109",
+      "name": "Hayden Young",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 89,
+      "gamesAfter": 107,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p110",
+      "name": "Hugh McCluggage",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 209,
+      "gamesAfter": 226,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p111",
+      "name": "Jack Lukosius",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 123,
+      "gamesAfter": 131,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p112",
+      "name": "Jack Sinclair",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 210,
+      "gamesAfter": 225,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p113",
+      "name": "Jake Lever",
+      "clubBefore": "Melbourne",
+      "clubAfter": "Melbourne",
+      "gamesBefore": 186,
+      "gamesAfter": 208,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p114",
+      "name": "Jason Horne-Francis",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 80,
+      "gamesAfter": 101,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p115",
+      "name": "Jed Walter",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 16,
+      "gamesAfter": 48,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p116",
+      "name": "Max Hall",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 23,
+      "gamesAfter": 46,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p117",
+      "name": "Toby Conway",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 6,
+      "gamesAfter": 6,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p118",
+      "name": "Tristan Xerri",
+      "clubBefore": "North Melbourne",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 76,
+      "gamesAfter": 95,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p119",
+      "name": "Willem Duursma",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 0,
+      "gamesAfter": 22,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p120",
+      "name": "Zak Butters",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 139,
+      "gamesAfter": 156,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p121",
+      "name": "Aaron Naughton",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 166,
+      "gamesAfter": 190,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p122",
+      "name": "Bailey Dale",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 178,
+      "gamesAfter": 198,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p123",
+      "name": "Bailey J. Williams",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 88,
+      "gamesAfter": 107,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p124",
+      "name": "Charlie Cameron",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 254,
+      "gamesAfter": 281,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p125",
+      "name": "Darcy Fort",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 57,
+      "gamesAfter": 83,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p126",
+      "name": "Dayne Zorko",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 304,
+      "gamesAfter": 321,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p127",
+      "name": "Harley Reid",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 39,
+      "gamesAfter": 62,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p128",
+      "name": "Jagga Smith",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 25,
+      "gamesAfter": 25,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p129",
+      "name": "Jai Newcombe",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 102,
+      "gamesAfter": 127,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p130",
+      "name": "Jesse Hogan",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "Collingwood",
+      "gamesBefore": 181,
+      "gamesAfter": 190,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p131",
+      "name": "Jordan Clark",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 126,
+      "gamesAfter": 153,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p132",
+      "name": "Josh Battle",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 149,
+      "gamesAfter": 172,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p133",
+      "name": "Josh Dunkley",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 194,
+      "gamesAfter": 221,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p134",
+      "name": "Kysaiah Pickett",
+      "clubBefore": "Melbourne",
+      "clubAfter": "Melbourne",
+      "gamesBefore": 126,
+      "gamesAfter": 150,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p135",
+      "name": "Luke Parker",
+      "clubBefore": "North Melbourne",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 315,
+      "gamesAfter": 338,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p136",
+      "name": "Oliver Wines",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 273,
+      "gamesAfter": 292,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p137",
+      "name": "Tim English",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 154,
+      "gamesAfter": 171,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p138",
+      "name": "Toby Greene",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "Geelong",
+      "gamesBefore": 261,
+      "gamesAfter": 282,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p139",
+      "name": "Tom Liberatore",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 257,
+      "gamesAfter": 268,
+      "listStatus": "retired"
+    },
+    {
+      "id": "p140",
+      "name": "Zac Bailey",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 166,
+      "gamesAfter": 192,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p141",
+      "name": "Archie Roberts",
+      "clubBefore": "Essendon",
+      "clubAfter": "Essendon",
+      "gamesBefore": 27,
+      "gamesAfter": 48,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p142",
+      "name": "Brodie Grundy",
+      "clubBefore": "Sydney",
+      "clubAfter": "Sydney",
+      "gamesBefore": 242,
+      "gamesAfter": 265,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p143",
+      "name": "Callum Wilkie",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 155,
+      "gamesAfter": 178,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p144",
+      "name": "Daniel Annable",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 0,
+      "gamesAfter": 3,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p145",
+      "name": "Elliot Yeo",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 212,
+      "gamesAfter": 233,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p146",
+      "name": "Jack Higgins",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 145,
+      "gamesAfter": 161,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p147",
+      "name": "Jack Steele",
+      "clubBefore": "Melbourne",
+      "clubAfter": "Melbourne",
+      "gamesBefore": 202,
+      "gamesAfter": 226,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p148",
+      "name": "Jye Caldwell",
+      "clubBefore": "Essendon",
+      "clubAfter": "Essendon",
+      "gamesBefore": 89,
+      "gamesAfter": 106,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p149",
+      "name": "Mac Andrew",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 65,
+      "gamesAfter": 88,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p150",
+      "name": "Matt Flynn",
+      "clubBefore": "West Coast",
+      "clubAfter": "West Coast",
+      "gamesBefore": 55,
+      "gamesAfter": 59,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p151",
+      "name": "Max Holmes",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 102,
+      "gamesAfter": 122,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p152",
+      "name": "Max King",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 83,
+      "gamesAfter": 84,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p153",
+      "name": "Nate Caddy",
+      "clubBefore": "Essendon",
+      "clubAfter": "Essendon",
+      "gamesBefore": 27,
+      "gamesAfter": 49,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p154",
+      "name": "Nick Blakey",
+      "clubBefore": "Sydney",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 151,
+      "gamesAfter": 173,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p155",
+      "name": "Nick Bryan",
+      "clubBefore": "Essendon",
+      "clubAfter": "Essendon",
+      "gamesBefore": 23,
+      "gamesAfter": 36,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p156",
+      "name": "Nick Daicos",
+      "clubBefore": "Collingwood",
+      "clubAfter": "Collingwood",
+      "gamesBefore": 95,
+      "gamesAfter": 118,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p157",
+      "name": "Rory Laird",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 269,
+      "gamesAfter": 289,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p158",
+      "name": "Thomas Lynch",
+      "clubBefore": "Richmond",
+      "clubAfter": "Richmond",
+      "gamesBefore": 236,
+      "gamesAfter": 251,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p159",
+      "name": "Tom De Koning",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 100,
+      "gamesAfter": 120,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p160",
+      "name": "Will Setterfield",
+      "clubBefore": "Essendon",
+      "clubAfter": "Essendon",
+      "gamesBefore": 84,
+      "gamesAfter": 95,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p161",
+      "name": "Aaron Cadman",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "GWS Giants",
+      "gamesBefore": 59,
+      "gamesAfter": 77,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p162",
+      "name": "Aliir Aliir",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 178,
+      "gamesAfter": 200,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p163",
+      "name": "Connor Rozee",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 150,
+      "gamesAfter": 152,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p164",
+      "name": "Darcy Cameron",
+      "clubBefore": "Collingwood",
+      "clubAfter": "Collingwood",
+      "gamesBefore": 120,
+      "gamesAfter": 143,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p165",
+      "name": "Darcy Wilmot",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 83,
+      "gamesAfter": 110,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p166",
+      "name": "Darcy Wilson",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 41,
+      "gamesAfter": 63,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p167",
+      "name": "Isaac Heeney",
+      "clubBefore": "Sydney",
+      "clubAfter": "Sydney",
+      "gamesBefore": 224,
+      "gamesAfter": 244,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p168",
+      "name": "Jamarra Ugle-Hagan",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 67,
+      "gamesAfter": 70,
+      "listStatus": "relist-pending"
+    },
+    {
+      "id": "p169",
+      "name": "James Rowbottom",
+      "clubBefore": "Sydney",
+      "clubAfter": "Sydney",
+      "gamesBefore": 140,
+      "gamesAfter": 163,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p170",
+      "name": "Jaspa Fletcher",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 68,
+      "gamesAfter": 95,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p171",
+      "name": "Josh Daicos",
+      "clubBefore": "Collingwood",
+      "clubAfter": "Collingwood",
+      "gamesBefore": 151,
+      "gamesAfter": 175,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p172",
+      "name": "Mason Cox",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 139,
+      "gamesAfter": 159,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p173",
+      "name": "Matthew Rowell",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 110,
+      "gamesAfter": 128,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p174",
+      "name": "Mitchell Edwards",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 0,
+      "gamesAfter": 20,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p175",
+      "name": "Ned Reeves",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 43,
+      "gamesAfter": 58,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p176",
+      "name": "Nick Haynes",
+      "clubBefore": "Carlton",
+      "clubAfter": "Carlton",
+      "gamesBefore": 234,
+      "gamesAfter": 253,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p177",
+      "name": "Noah Anderson",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 129,
+      "gamesAfter": 151,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p178",
+      "name": "Oliver Henry",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 85,
+      "gamesAfter": 109,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p179",
+      "name": "Shannon Neale",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 45,
+      "gamesAfter": 70,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p180",
+      "name": "Wayne Milera",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": null,
+      "gamesAfter": 143,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p181",
+      "name": "Ben Long",
+      "clubBefore": "Gold Coast",
+      "clubAfter": "Gold Coast",
+      "gamesBefore": 135,
+      "gamesAfter": 156,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p182",
+      "name": "Cooper Trembath",
+      "clubBefore": "North Melbourne",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 3,
+      "gamesAfter": 26,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p183",
+      "name": "Ed Richards",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 148,
+      "gamesAfter": 172,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p184",
+      "name": "Finn Callaghan",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "GWS Giants",
+      "gamesBefore": 71,
+      "gamesAfter": 90,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p185",
+      "name": "Hugo Garcia",
+      "clubBefore": "St Kilda",
+      "clubAfter": "St Kilda",
+      "gamesBefore": 26,
+      "gamesAfter": 49,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p186",
+      "name": "Jacob Farrow",
+      "clubBefore": "Essendon",
+      "clubAfter": "Essendon",
+      "gamesBefore": 0,
+      "gamesAfter": 21,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p187",
+      "name": "James Sicily",
+      "clubBefore": "Hawthorn",
+      "clubAfter": "Hawthorn",
+      "gamesBefore": 179,
+      "gamesAfter": 203,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p188",
+      "name": "Joel Freijah",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 36,
+      "gamesAfter": 61,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p189",
+      "name": "Jordan Dawson",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 156,
+      "gamesAfter": 178,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p190",
+      "name": "Josh Treacy",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 80,
+      "gamesAfter": 107,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p191",
+      "name": "Lachlan Ash",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "GWS Giants",
+      "gamesBefore": 125,
+      "gamesAfter": 148,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p192",
+      "name": "Logan Morris",
+      "clubBefore": "Brisbane Lions",
+      "clubAfter": "Brisbane Lions",
+      "gamesBefore": 45,
+      "gamesAfter": 71,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p193",
+      "name": "Luke Davies-Uniacke",
+      "clubBefore": "North Melbourne",
+      "clubAfter": "North Melbourne",
+      "gamesBefore": 130,
+      "gamesAfter": 153,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p194",
+      "name": "Luke Jackson",
+      "clubBefore": "Fremantle",
+      "clubAfter": "Fremantle",
+      "gamesBefore": 119,
+      "gamesAfter": 146,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p195",
+      "name": "Marcus Bontempelli",
+      "clubBefore": "Western Bulldogs",
+      "clubAfter": "Western Bulldogs",
+      "gamesBefore": 258,
+      "gamesAfter": 282,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p196",
+      "name": "Nicholas Madden",
+      "clubBefore": "GWS Giants",
+      "clubAfter": "GWS Giants",
+      "gamesBefore": 3,
+      "gamesAfter": 12,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p197",
+      "name": "Patrick Retschko",
+      "clubBefore": "Richmond",
+      "clubAfter": "Richmond",
+      "gamesBefore": 0,
+      "gamesAfter": 18,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p198",
+      "name": "Reilly O'Brien",
+      "clubBefore": "Adelaide",
+      "clubAfter": "Adelaide",
+      "gamesBefore": 146,
+      "gamesAfter": 148,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p199",
+      "name": "Shaun Mannagh",
+      "clubBefore": "Geelong",
+      "clubAfter": "Geelong",
+      "gamesBefore": 35,
+      "gamesAfter": 60,
+      "listStatus": "active-at-trade-cutoff"
+    },
+    {
+      "id": "p200",
+      "name": "Willem Drew",
+      "clubBefore": "Port Adelaide",
+      "clubAfter": "Port Adelaide",
+      "gamesBefore": 130,
+      "gamesAfter": 152,
+      "listStatus": "active-at-trade-cutoff"
+    }
+  ],
+  "sourceErrors": []
+}

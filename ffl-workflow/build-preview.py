@@ -8,13 +8,14 @@ ROOT = Path(__file__).resolve().parent
 DEFAULT_OUTPUT = ROOT.parent / 'draft-workflow-preview.html'
 
 def build():
-    fixture = json.loads((ROOT / 'fixtures/demo-20261007.json').read_text(encoding='utf-8'))
+    fixture = json.loads((ROOT / 'fixtures/demo-post-trade-20261030.json').read_text(encoding='utf-8'))
     # The checked-in fixture is the old public demo, not a verified league snapshot.
     fixture_json = json.dumps(fixture, ensure_ascii=False).replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026').replace('\u2028', '\\u2028').replace('\u2029', '\\u2029')
     replacements = {
         '__LOGO__': 'data:image/jpeg;base64,' + base64.b64encode((ROOT / 'assets/ffl-logo.jpg').read_bytes()).decode('ascii'),
         '__ENGINE__': (ROOT / 'draft-engine.js').read_text(encoding='utf-8'),
         '__FIXTURE__': fixture_json,
+        '__NOTIFICATIONS__': (ROOT / 'notifications.js').read_text(encoding='utf-8'),
         '__KATY__': (ROOT / 'katy.js').read_text(encoding='utf-8'),
         '__ADMIN__': (ROOT / 'admin-ui.js').read_text(encoding='utf-8'),
         '__UI__': (ROOT / 'preview-ui.js').read_text(encoding='utf-8'),
