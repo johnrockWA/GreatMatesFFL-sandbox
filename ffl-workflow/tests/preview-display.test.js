@@ -23,9 +23,10 @@ test('coach display hides opponent choices and removes committee markup on role 
  p.run("role='commissioner'; now=FFLDraft.date(state.config.locksAt); run('prepare'); role='coach'; render()");
  assert.ok(p.nodes.get('board').innerHTML.includes(opponentName));assert.doesNotMatch(p.nodes.get('board').innerHTML,/Choices private until approval/);
 });
-test('Katy greeting and factual approval guidance render without enabling general AI',()=>{
- const p=preview();assert.match(p.nodes.get('katybanter').textContent,/Hello, coach/);
- p.run("role='commissioner';workspace='admin';render()");assert.match(p.nodes.get('admincontent').innerHTML,/Conversational AI off/);assert.match(p.nodes.get('admincontent').innerHTML,/setup approval becomes available after the deadline/);
+test('background administration shows task status and committee next actions',()=>{
+ const p=preview();assert.match(p.nodes.get('leagueupdate').textContent,/still need submitting/);
+ assert.equal(p.nodes.has('katybanter'),false);assert.equal(p.nodes.has('katychatlog'),false);
+ p.run("role='commissioner';workspace='admin';render()");assert.match(p.nodes.get('admincontent').innerHTML,/Next action/);assert.match(p.nodes.get('admincontent').innerHTML,/setup approval becomes available after the deadline/);
 });
 test('Rockstars can retain Dunkley and saved demos receive only the confirmed history correction',()=>{
  const p=preview();
@@ -73,14 +74,6 @@ test('in-app draft notification follows the validated turn and flags the delayed
  p.run("selected=state.plan[state.picks.length].team;now+=3600001;role='commissioner';workspace='admin';render()");assert.equal(p.nodes.get('turnalert').hidden,false);assert.match(p.nodes.get('notificationstatus').textContent,/Email|email/);assert.match(p.nodes.get('notificationstatus').textContent,/no email sent/);
 });
 
-test('chat reflects current public status, escapes text, and clears on identity changes',()=>{
- const p=preview();p.run("sendChat('deadlines')");assert.match(p.nodes.get('katychatlog').innerHTML,/AWST/);
- p.run("sendChat('<img src=x onerror=alert(1)>')");assert.doesNotMatch(p.nodes.get('katychatlog').innerHTML,/<img/);assert.match(p.nodes.get('katychatlog').innerHTML,/&lt;img/);
- p.run("selected='7';render()");assert.equal(p.nodes.get('katychatlog').innerHTML,'');
- p.run("sendChat('whose turn');role='commissioner';render()");assert.equal(p.nodes.get('katychatlog').innerHTML,'');
- p.run("sendChat('banter')");p.nodes.get('clearchat').onclick();assert.equal(p.nodes.get('katychatlog').innerHTML,'');
-});
-
 test('Rockstars exact retains submit through the button and retain a clear receipt after edits',()=>{
  const p=preview();p.run("selected='7';const ids=['Jai Newcombe','Josh Dunkley','Jagga Smith'].map(n=>state.players.find(p=>p.name===n).id);run('save',{value:{normal:ids.slice(0,2),fookies:[ids[2]],delists:[]}});render()");
  p.nodes.get('submit').onclick();assert.equal(p.nodes.get('status').textContent,'Submitted');assert.equal(p.nodes.get('submit').disabled,true);
@@ -92,4 +85,16 @@ test('Rockstars exact retains submit through the button and retain a clear recei
 });
 test('failed submission displays its reason beside the submit button',()=>{
  const p=preview();p.run("now=FFLDraft.date(state.config.locksAt)");p.nodes.get('submit').onclick();assert.match(p.nodes.get('submissionfeedback').textContent,/could not be confirmed.*closed/);
+});
+
+test('a draft pick needs confirmation and a changed turn invalidates the old confirmation',()=>{
+ const p=preview();p.run("role='commissioner';for(const t of state.teams)run('submit',{},actor(t.id));now=FFLDraft.date(state.config.locksAt);run('prepare');run('arm');now=FFLDraft.date(state.config.draftAt);role='coach';const candidate=state.players.find(p=>FFLDraft.available(state,p.id).ok).id;confirmPick(candidate)");
+ assert.equal(p.run('state.picks.length'),0);assert.equal(p.nodes.get('approvaldialog').open,true);
+ p.nodes.get('approvalconfirm').onclick();assert.equal(p.run('state.picks.length'),1);
+ p.run("selected=state.plan[state.picks.length].team;const candidate2=state.players.find(p=>FFLDraft.available(state,p.id).ok).id;confirmPick(candidate2);state.revision++");
+ p.nodes.get('approvalconfirm').onclick();assert.equal(p.run('state.picks.length'),1);assert.match(p.nodes.get('message').textContent,/draft has changed/);
+});
+test('changing managed team cancels the authority of a pending pick',()=>{
+ const p=preview();p.run("role='commissioner';for(const t of state.teams)run('submit',{},actor(t.id));now=FFLDraft.date(state.config.locksAt);run('prepare');run('arm');now=FFLDraft.date(state.config.draftAt);role='coach';confirmPick(state.players.find(p=>FFLDraft.available(state,p.id).ok).id);selected=state.teams[1].id");
+ p.nodes.get('approvalconfirm').onclick();assert.equal(p.run('state.picks.length'),0);assert.match(p.nodes.get('message').textContent,/draft has changed/);
 });

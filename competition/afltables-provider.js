@@ -4,7 +4,8 @@
 const extract=require('./afltables-extract');
 const MONTHS={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
 const CLUBS={'Greater Western Sydney':'GWS Giants'};
-const VENUES={'M.C.G.':'Melbourne Cricket Ground',Docklands:'Marvel Stadium','Kardinia Park':'GMHBA Stadium','S.C.G.':'Sydney Cricket Ground',Carrara:'People First Stadium'};
+const VENUES={'M.C.G.':'Melbourne Cricket Ground',Docklands:'Marvel Stadium','Kardinia Park':'GMHBA Stadium','S.C.G.':'Sydney Cricket Ground',Carrara:'People First Stadium','Perth Stadium':'Optus Stadium','Adelaide Oval':'Adelaide Oval',Gabba:'Gabba','Sydney Showground':'ENGIE Stadium','Traeger Park':'TIO Traeger Park'};
+const FINALS=new Set(['Wildcard Final','Qualifying Final','Elimination Final','Semi Final','Preliminary Final','Grand Final']);
 const profile=value=>{
  if(typeof value!=='string')throw Error('Untrusted player profile');
  const url=value.startsWith('../../players/')?'https://afltables.com/afl/stats/'+value.slice(6):value;
@@ -22,8 +23,9 @@ function registryIndex(registry){
 }
 function normalize(parsed,expected,registry){
  const meta=parsed.scoreTables?.[0]?.[0]?.[1]||'';
- const source=/^Round: (\d+) Venue: (.+?) Date: \w{3}, (\d{2})-(\w{3})-(\d{4}) (\d{1,2}):(\d{2}) (AM|PM)/.exec(meta);
- if(!source||Number(source[1])!==expected.aflTablesRound||Number(source[5])!==expected.season)throw Error('Provider round/date identity mismatch');
+ const source=/^Round: (.+?) Venue: (.+?) Date: \w{3}, (\d{1,2})-(\w{3})-(\d{4}) (\d{1,2}):(\d{2}) (AM|PM)/.exec(meta);
+ const round=source?.[1],expectedRound=expected.aflTablesRound;
+ if(!source||(!/^\d+$/.test(round)&&!FINALS.has(round))||String(expectedRound)!==round||Number(source[5])!==expected.season)throw Error('Provider round/date identity mismatch');
  const venue=VENUES[source[2]];if(!venue||venue!==expected.venue)throw Error('Unmapped or mismatched venue');
  if(!Number.isInteger(expected.sourceUtcOffsetMinutes)||!Number.isInteger(expected.playerCounts?.[expected.home])||!Number.isInteger(expected.playerCounts?.[expected.away]))throw Error('Verified fixture time zone and coverage required');
  const month=MONTHS[source[4]],hour=Number(source[6])%12+(source[8]==='PM'?12:0);
@@ -52,6 +54,7 @@ function normalize(parsed,expected,registry){
    if(p.length!==13||!p[0]?.includes(', ')||!Number.isInteger(p[2])||p.slice(3).some(v=>!Number.isInteger(v)||v<0)||p[3]+p[4]!==p[5])throw Error('Malformed source player/statistics');
    const sourceProfile=profile(p[1]),person=index.get(sourceProfile);
    if(!person||!roster.includes(person.id)||seen.has(person.id))throw Error('Unknown or duplicate canonical player');
+   if(expected.jumperNumbers&&expected.jumperNumbers[person.id]!==p[2])throw Error('AFL Tables player jumper mismatch');
    seen.add(person.id);playerIds.push(person.id);sourceProfiles.push(sourceProfile);
    const values=p.slice(3);goals+=values[8];behinds+=values[9];
    rows.push([person.name,club,...values,6*values[8]+values[9],null,clubs[1-i],expected.venue,expected.rowDate]);
@@ -59,7 +62,7 @@ function normalize(parsed,expected,registry){
   if(goals!==finalGoals||behinds>finalBehinds)throw Error('Player/team goal totals mismatch');
  }
  return {id:expected.id,season:expected.season,home:expected.home,away:expected.away,playedAt:kickoff,completed:true,rows,playerIds,sourceProfiles,
-  unavailableStatistics:['rating'],derivedStatistics:{scorePoints:'6*goals+behinds'},provider:'AFLTables',providerRound:Number(source[1])};
+  unavailableStatistics:['rating'],derivedStatistics:{scorePoints:'6*goals+behinds'},provider:'AFLTables',providerRound:/^\d+$/.test(round)?Number(round):round};
 }
 function createProvider({transport,registry}){
  const frozen=registry.map(p=>({...p}));registryIndex(frozen);

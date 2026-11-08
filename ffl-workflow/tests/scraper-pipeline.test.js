@@ -29,14 +29,14 @@ test('official primary wins within tolerance and both values are audit logged',a
  const result=await S.refresh(x.manifest,[verifier,x.provider('official')],x.services,{primarySourceId:'official'});
  assert.equal(result.status,'ok');assert.equal(x.pointer.payload.matches[0].rows[0][10],1);assert.equal(x.pointer.payload.matches[0].primarySource,'official');
  assert.deepEqual(result.verificationDifferences,[
-  {player:'player a|a',source:'verifier',stat:'tackles',primaryValue:1,verifierValue:0,signedDifference:-1,match:'m1',primarySource:'official'},
-  {player:'player b|b',source:'verifier',stat:'tackles',primaryValue:1,verifierValue:2,signedDifference:1,match:'m1',primarySource:'official'}
+  {player:'player a|a',source:'verifier',stat:'goals',primaryValue:1,verifierValue:0,signedDifference:-1,match:'m1',primarySource:'official'},
+  {player:'player b|b',source:'verifier',stat:'goals',primaryValue:1,verifierValue:2,signedDifference:1,match:'m1',primarySource:'official'}
  ]);
 });
 test('difference above tolerance blocks publication and records exact values',async()=>{
  const x=setup(),bad=x.provider('verifier');bad.parse=async()=>{const m=clone(x.match);m.rows[0][10]=3;return m;};
  const result=await S.refresh(x.manifest,[x.provider('official'),bad],x.services,{primarySourceId:'official'});
- assert.match(result.error,/exceeds tolerance/);assert.equal(x.pointer,null);assert.deepEqual(result.verificationDifferences,[{player:'player a|a',source:'verifier',stat:'tackles',primaryValue:1,verifierValue:3,signedDifference:2}]);
+ assert.match(result.error,/exceeds tolerance/);assert.equal(x.pointer,null);assert.deepEqual(result.verificationDifferences,[{player:'player a|a',source:'verifier',stat:'goals',primaryValue:1,verifierValue:3,signedDifference:2}]);
 });
 test('identity mismatch still blocks publication before tolerance is considered',async()=>{
  const x=setup(),bad=x.provider('verifier');bad.parse=async()=>{const m=clone(x.match);m.rows[0][0]='Different player';return m;};

@@ -12,4 +12,16 @@ The extractor expects 23 players per side, as in this 2026 fixture set. Other se
 
 Validation: 81 branch tests, deterministic preview build check and clean diff check. Three additional private-evidence runs use the actual captured round with simulated storage to prove disagreement, primary unavailability and missing-player rejection before staging. The actual Apps Script adapter run is read-only and preserves diagnostic state. This is not a connected durable-storage, concurrency, deployment-rollback or whole-system recovery sign-off.
 
-Open gates: source-of-truth/correction policy, live independent source, target storage integration, whole-system recovery and deployment-owner verification. Keep the legacy competition unchanged and all operational writers, schedulers and email disabled.
+John subsequently selected official AFL statistics as primary, FinalSiren as the completed-game verifier, and live scoring as an optional feature that remains off. Existing canonical names and closed historical results are retained; corrections require approval. See `AFL-SOURCE-AND-LIVE-PLAN.md` and the pure `afl-source-policy.js` assessment. This changes the intended source policy, not the running scraper. AFL Tables remains diagnostic rather than an automatic fallback.
+
+Open gates: reliable official and verifier transport, applying the policy in the operational host, target storage integration, whole-system recovery and deployment-owner verification. Keep the legacy competition unchanged and all operational writers, schedulers and email disabled.
+
+## Verifier role, 7 November 2026
+
+AFL Tables is now the selected completed-game verifier in Development. Official AFL
+remains primary. Named finals labels, single-digit dates and additional mapped venues
+are supported only against explicit fixture manifests; live/incomplete games fail closed.
+AFL Tables lists AFL among its sources (https://afltables.com/afl/notes.html), so
+separate retrieval does not establish independent statistical collection. See
+`AFLTABLES-VERIFIER.md` for the wider diagnostics and connected-store outcome.
+This supersedes the earlier FinalSiren-only policy above.

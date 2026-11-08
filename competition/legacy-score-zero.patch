@@ -1,0 +1,11 @@
+--- a/Code.gs
++++ b/Code.gs
+@@ -2363,7 +2363,7 @@
+ 
+     const raw = data[i][sCol];
+     const n   = parseFloat(raw);
+-    if (!isNaN(n) && n > 0) scores[rowTeam] = Math.round(n * 10) / 10;
++    if (!isNaN(n) && n >= 0) scores[rowTeam] = Math.round(n * 10) / 10;
+   }
+ 
+   return { round, scores };

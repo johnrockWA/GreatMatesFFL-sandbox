@@ -13,7 +13,7 @@ function draftAlerts(s,now){
  const since=s.picks.length?stamp(s.picks.at(-1).at):opened;
  const key=['draft',s.config.kind,s.config.season,s.config.opensAt,epoch?.eventId||epoch?.at||'initial',s.picks.length,turn.team].join(':');
  const common={team:turn.team,teamName:team.name,pick:turn.label,context:'draft',turnKey:key};
- const alert={...common,id:key+':in-app',channel:'in-app',title:team.name+' — your pick '+turn.label,text:'Your turn is ready in the draft room. You make the selection; Katy handles the rules.',notBefore:since};
+ const alert={...common,id:key+':in-app',channel:'in-app',title:team.name+' — your pick '+turn.label,text:'Your turn is ready in the draft room. Open the draft room to make your selection.',notBefore:since};
  // User requested OVER one hour, not at precisely 60 minutes. One email per turn.
  if(now<=since+HOUR)return [alert];
  return [alert,{...common,id:key+':email',channel:'email',title:'Your FFL draft pick is waiting — '+team.name,text:'Pick '+turn.label+' is yours. It has been over an hour since '+(s.picks.length?'the last recorded selection.':'the draft opened.')+' Open the draft room to select your player.',notBefore:since+HOUR+1}];

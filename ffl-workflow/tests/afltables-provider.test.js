@@ -57,9 +57,30 @@ test('fetch uses only the declared public match URL and never forwards credentia
  for(const u of ['https://other.test/game','https://afltables.com/afl/stats/games/2026/031420260312.html?key=secret'])await assert.rejects(async()=>p.fetch({...x.expected,aflTablesUrl:u}),/Untrusted/);
  assert.equal(calls.length,1);
 });
-test('real adapter difference above tolerance holds publication before staging',async()=>{
+test('real adapter shape disagreement holds publication before staging',async()=>{
  const x=fixture(),match=A.normalize(x.parsed,x.expected,x.registry);const other=clone(match);other.rows[0][7]+=2;
  const provider=(id,m)=>({id,fetch:async()=>({status:200,body:''}),parse:()=>clone(m)});let stages=0,status;
- const result=await S.refresh({id:'r1',season:2026,matches:[x.expected]},[provider('AFLTables',match),provider('archive',other)],{stage:async()=>{stages++;},recordStatus:async s=>{status=s;}},{primarySourceId:'AFLTables'});
+ const result=await S.refresh({id:'r1',season:2026,matches:[x.expected]},[provider('AFLTables',match),provider('archive',other)],{stage:async()=>{stages++;},recordStatus:async s=>{status=s;}});
  assert.match(result.error,/disagreement/);assert.equal(result.publication,'unchanged');assert.equal(stages,0);assert.equal(status.status,'error');
+});
+test('all named finals stages require an exact explicit fixture label',()=>{
+ for(const stage of ['Wildcard Final','Qualifying Final','Elimination Final','Semi Final','Preliminary Final','Grand Final']){
+  const x=fixture();x.expected.aflTablesRound=stage;
+  x.parsed.scoreTables[0][0][1]=x.parsed.scoreTables[0][0][1].replace('Round: 2','Round: '+stage);
+  assert.equal(A.normalize(x.parsed,x.expected,x.registry).providerRound,stage);
+  x.expected.aflTablesRound='Grand Final';if(stage!=='Grand Final')assert.throws(()=>A.normalize(x.parsed,x.expected,x.registry),/round/);
+ }
+ const x=fixture();x.expected.aflTablesRound='Final';x.parsed.scoreTables[0][0][1]=x.parsed.scoreTables[0][0][1].replace('Round: 2','Round: Final');
+ assert.throws(()=>A.normalize(x.parsed,x.expected,x.registry),/round/);
+});
+test('single-digit source dates parse without changing the kickoff identity',()=>{
+ const x=fixture();x.parsed.title=x.parsed.title.replace('12-Mar','2-Mar');x.parsed.scoreTables[0][0][1]=x.parsed.scoreTables[0][0][1].replace('12-Mar','2-Mar');
+ x.expected.playedAt='2026-03-02T08:30:00.000Z';assert.equal(A.normalize(x.parsed,x.expected,x.registry).playedAt,x.expected.playedAt);
+});
+
+test('declared fixture jumper numbers bind profile identities to the match team sheet',()=>{
+ const x=fixture();x.expected.jumperNumbers=Object.fromEntries(x.registry.map((p,i)=>[p.id,i%23+1]));
+ assert.equal(A.normalize(x.parsed,x.expected,x.registry).rows.length,46);
+ x.parsed.teams[0].players[0][2]=99;assert.throws(()=>A.normalize(x.parsed,x.expected,x.registry),/jumper/);
+ delete x.expected.jumperNumbers[x.registry[0].id];assert.throws(()=>A.normalize(x.parsed,x.expected,x.registry),/jumper/);
 });

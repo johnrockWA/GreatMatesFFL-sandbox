@@ -8,7 +8,7 @@ const transient=s=>s===429||s>=500&&s<=599;
 const identity=r=>r[0].trim().toLowerCase()+'|'+r[1].trim().toLowerCase();
 const SCORING_STATISTICS=[
  ['kicks',2],['handballs',3],['disposals',4],['marks',5],
- ['goals',6],['behinds',7],['tackles',10],['hitouts',11]
+ ['hitouts',6],['tackles',7],['goals',10],['behinds',11]
 ];
 const VERIFIER_TOLERANCE=1;
 function validateMatch(match,expected){

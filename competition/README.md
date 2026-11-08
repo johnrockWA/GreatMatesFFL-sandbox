@@ -64,6 +64,23 @@ Still open: shared login/ownership, real submission writes and reload/lockout te
 new draft squad publication, scheduled scraper/parser inspection and failure recovery,
 finals ties/countback, reminders/mail transport, backup/restore and deployment.
 
+## Score display states
+
+`score-state.js` defines the successor's fail-closed display contract. Scores can be
+provisional, awaiting verification, disputed, awaiting an approved correction,
+verified final, collection-paused or an older recorded result whose independent
+verification was not captured. Missing values remain missing while numeric zero is
+retained. Only `verified-final` can declare a winner, and a tied final also requires
+an explicit verified winner. Finals detail is withheld unless both the summary and
+detail identify the same snapshot. Freshness uses a supplied positive age limit and
+the last successful collection time; attempt, success and publication times remain
+separate so a recent failed attempt cannot make old published scores look current.
+
+The prepared `ffl-workflow/api/ScoreRead.gs` adapter reads one checksummed snapshot,
+rejects an unauthorized identity, corrupt payload or changing head, and returns only
+allowlisted public score fields. It is source only: there is no deployed route, write,
+trigger, mail operation or production connection.
+
 ## Scraper review follow-up
 
 Read-only browser capture of the bound sandbox scraper (Auto Scraper v5.5) on
@@ -80,3 +97,15 @@ reviewed transaction, correction audit, rollback and integration before deployme
 The editor was not modified and no Apps Script function was executed. The current
 browser account's sandbox Triggers page showed zero triggers; other accounts'
 production triggers were not inspected and are not inferred from this view.
+
+## Combined sandbox integration — 8 November 2026
+
+`sandbox-integration.js` joins official-source normalization, AFL Tables assessment,
+position scoring, immutable shadow storage, public score projection and guarded
+Final Five evaluation. All storage is injected. It installs no endpoint, schedule,
+Google code or competition writer. Shadow verification never certifies final results.
+
+The integration branch combines the pending finals, score-state and verifier-policy
+reviews with the prepared Development source. `docs/katy/coach-experience.md` records
+the current coach-first interface direction; earlier chat-led designs are superseded.
+See `docs/katy/integration-replay-20261108.json` for anonymized captured-replay scope.

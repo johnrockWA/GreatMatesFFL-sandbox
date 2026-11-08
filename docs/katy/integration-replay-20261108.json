@@ -1,0 +1,15 @@
+{
+  "scope": "Offline replay of previously captured source responses; injected in-memory durable-store contract",
+  "matches": 27,
+  "appearances": 1242,
+  "candidates": 27,
+  "toleratedDifferences": 2,
+  "roundGames": 9,
+  "roundPlayers": 414,
+  "teams": 10,
+  "correctionPending": true,
+  "duplicateRetry": "same revision",
+  "greaterDiscrepancy": "held before staging; prior snapshot retained",
+  "productionChanged": false,
+  "connectedCheck": false
+}

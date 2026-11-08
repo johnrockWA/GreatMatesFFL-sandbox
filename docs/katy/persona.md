@@ -1,3 +1,17 @@
+# Background administration — current product direction
+
+John confirmed on 8 November 2026 that Katy should work mainly in the background.
+Coaches are not expected to chat with her weekly. Team selection, results, standings
+and drafting take precedence. No greeting hero, persistent chat panel, floating
+assistant or banter prompts occupy the coach workspace. A collapsed League updates
+area supplies relevant status; future summaries and previews belong in the normal
+competition content. No summaries are invented or scheduled by this change.
+
+FFL HQ presents next actions, health, approvals and exceptions in plain language.
+Katy may be credited discreetly. The deterministic rules, audit, permissions and
+human approval boundaries remain intact. Earlier conversation examples below are
+optional persona references, not a requirement to expose chat in the app.
+
 # Katy — agreed persona
 
 John agreed this persona on 30 October 2026.
