@@ -11,6 +11,14 @@ function selectionText(v,choice){return choice?[...choice.normal,...choice.fooki
 function ownDiscardWarning(v,id){const turn=v.plan[v.picks.length];return v.config.kind==='preseason'&&v.prepared&&['drafting','ready','paused'].includes(v.phase)&&turn?.round===1&&v.baselineSquads[v.managingTeam].includes(id)&&!v.picks.some(p=>p.player===id)&&FFLDraft.available(v,id).reason!=='Retained'?'You delisted this player — available Round 2.':'';}
 function controlsDisabled(){return !ui||ui.busy||ui.stale||!!ui.pending;}
 function promptConfirmation(title,text,job){el('confirmtitle').textContent=title;el('confirmtext').textContent=text;confirmJob=job;el('confirm').showModal();}
+function renderKaty(v,{submitted,dirty}){
+ const turn=v.plan[v.picks.length],state=FFLKatyAvatar.select({phase:v.phase,managingTeam:v.managingTeam,turnTeam:turn?.team,submitted,serverNow:v.serverNow,locksAt:v.config.locksAt});
+ el('katyavatar').src=KATY_AVATARS[state.asset];el('katyavatar').alt='Katy · '+state.label;el('katylabel').textContent='Katy · '+state.label;
+ el('katydetail').textContent=state===FFLKatyAvatar.states.deadline?'Selections close '+format(v.config.locksAt)+' AWST. Save and submit before lockout.'
+  :state===FFLKatyAvatar.states.submitted?(dirty?'Your last submission is recorded. New edits remain unsent.':'Your latest submitted selections are recorded below.')
+  :state===FFLKatyAvatar.states.draftTurn?'The server has confirmed this team is on the clock. Availability and confirmation checks still apply.'
+  :'Shared status and deadlines are shown from the server record.';
+}
 function renderShared(snapshot){
  ui=snapshot;const v=ui.view,blocked=controlsDisabled();
  el('connection').textContent=ui.message;el('refresh').disabled=ui.busy;el('retry').hidden=!ui.pending;el('retry').disabled=ui.busy;
@@ -24,6 +32,7 @@ function renderShared(snapshot){
  el('phase').textContent=phase==='selection'?'Selections open':phase==='drafting'?'Draft is live':phase==='review'?'Committee review':phase==='paused'?'Draft paused':phase==='ready'?'Waiting for draft opening':phase==='validation'?'Picks complete · awaiting review':phase==='scheduled'?'Before the selection window':phase;
  el('next').textContent=phase==='selection'?(dirty?'You have unsaved changes. Save them, then submit your selections.':submitted?'Submitted. You can revise and resubmit until '+format(v.config.locksAt)+' AWST.':'Save your choices, then submit by '+format(v.config.locksAt)+' AWST.'):'Selection changes are closed. '+(phase==='drafting'?'Confirm your pick when your team is on the clock.':'Check the shared draft status before continuing.');
  el('checked').textContent='Checked '+format(v.serverNow)+' AWST · shared revision '+v.revision+(ui.stale?' · Refresh required':'');
+ renderKaty(v,{submitted,dirty});
  el('squadtitle').textContent=teamName(v,tid)+' · '+(v.config.kind==='preseason'?'Retains':'Delists');
  el('selectionstatus').textContent=conflict?'Your saved choices changed in another session. Refresh has kept your unsaved edits; review them against the saved choices before continuing.':dirty?'Unsaved changes on this screen':submitted?'Submitted':c.submitted?'Saved changes not submitted':'Not submitted';
  el('squad').innerHTML=v.baselineSquads[tid].map(id=>{

@@ -3,11 +3,20 @@ import argparse,base64,json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 OUTPUT=ROOT.parent/'shared-draft.html'
+def image(path):
+    return 'data:image/webp;base64,'+base64.b64encode(path.read_bytes()).decode()
 def build():
     values={
       '__LOGO__':'data:image/jpeg;base64,'+base64.b64encode((ROOT/'assets/ffl-logo.jpg').read_bytes()).decode(),
       '__ENGINE__':(ROOT/'draft-engine.js').read_text(),
       '__CLIENT__':(ROOT/'shared-client.js').read_text(),
+      '__KATY_AVATAR_LOGIC__':(ROOT/'katy-avatar.js').read_text(),
+      '__KATY_AVATARS__':json.dumps({
+        'administrator':image(ROOT/'assets/katy/administrator.webp'),
+        'deadline':image(ROOT/'assets/katy/deadline.webp'),
+        'submitted':image(ROOT/'assets/katy/submitted.webp'),
+        'draft-turn':image(ROOT/'assets/katy/draft-turn.webp'),
+      }),
       # Exact reviewed deployment and instance are supplied at installation.
       # Empty defaults fail closed; URL query strings cannot redirect credentials.
       '__CONFIG__':json.dumps({'endpoint':'','instanceId':''}),
