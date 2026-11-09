@@ -30,3 +30,9 @@ league board, moves the managing-team selector and coach task first, adds a conc
 next-action line, and confirms picks. The preview remains a local simulation;
 assigned-team authentication, shared queue persistence and weekly matchup landing
 remain integration work, not features certified by this UI pass.
+
+The shared-screen proposal keeps Katy inside the existing coach-task panel as a
+small administration status. Four recognisable looks switch only from server state:
+ordinary administration, a three-hour selection deadline, a recorded submission,
+and the coach's confirmed draft turn. The image never selects, ranks, recommends or
+changes a player. Final public assets still require John's approval before release.

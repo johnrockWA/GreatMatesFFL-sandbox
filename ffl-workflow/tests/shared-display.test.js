@@ -5,8 +5,8 @@ const {E,fixture,prepared,start,coach}=require('./helpers.cjs');
 function screen(state=fixture(),now=start){
  const nodes=new Map(),events={},windowEvents={},sent=[];
  const document={getElementById(id){if(!nodes.has(id))nodes.set(id,{value:'',textContent:'',innerHTML:'',hidden:false,disabled:false,dataset:{},addEventListener(){},showModal(){this.open=true;},close(){this.open=false;}});return nodes.get(id);},addEventListener:(name,fn)=>events[name]=fn};
- const ctx=vm.createContext({document,window:{addEventListener:(name,fn)=>windowEvents[name]=fn},SHARED_CONFIG:{endpoint:'',instanceId:''},console});
- for(const name of ['draft-engine.js','shared-ui.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',name),'utf8'),ctx,{filename:name});
+ const ctx=vm.createContext({document,window:{addEventListener:(name,fn)=>windowEvents[name]=fn},SHARED_CONFIG:{endpoint:'',instanceId:''},KATY_AVATARS:{administrator:'admin',deadline:'deadline',submitted:'submitted','draft-turn':'turn'},console});
+ for(const name of ['draft-engine.js','katy-avatar.js','shared-ui.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',name),'utf8'),ctx,{filename:name});
  const v={...E.view(state,coach,now),serverNow:new Date(now).toISOString(),instanceId:'test',principalKey:'alpha',managingTeam:'a',managedTeams:['a'],committeeCapabilities:[]};
  ctx.snapshot={view:v,pending:null,receipt:null,busy:false,stale:false,message:'Checked'};
  ctx.fakeClient={snapshot:()=>ctx.snapshot,dispatch:async(type,data)=>{sent.push({type,data});}};
@@ -28,6 +28,11 @@ test('pending confirmation prevents a second save and unsaved edits warn before 
  let prevented=false;const event={preventDefault(){prevented=true;}};p.windowEvents.beforeunload(event);assert.equal(prevented,true);
  p.run("snapshot.pending={command:{type:'save'}};renderShared(snapshot)");
  assert.equal(p.nodes.get('retry').hidden,false);assert.equal(p.nodes.get('save').disabled,true);assert.equal(p.nodes.get('team').disabled,true);
+});
+test('shared task panel changes Katy look without adding selection advice',()=>{
+ const open=screen();assert.equal(open.nodes.get('katyavatar').src,'admin');assert.match(open.nodes.get('katydetail').textContent,/server record/);
+ let submitted=fixture();submitted=E.apply(submitted,{type:'submit',revision:0},coach,start);const done=screen(submitted);assert.equal(done.nodes.get('katyavatar').src,'submitted');assert.match(done.nodes.get('katydetail').textContent,/recorded/);
+ const turn=screen(prepared(),start+172800000);assert.equal(turn.nodes.get('katyavatar').src,'turn');assert.doesNotMatch(turn.nodes.get('katydetail').textContent,/recommend|rank|captain|trade|line.?up|best player/i);
 });
 test('shared pick confirmation loses authority after a refresh or a failed connection',()=>{
  const p=screen(prepared(),start+172800000);p.run("pickConfirmation('p20')");assert.equal(p.nodes.get('confirm').open,true);assert.equal(p.sent.length,0);
