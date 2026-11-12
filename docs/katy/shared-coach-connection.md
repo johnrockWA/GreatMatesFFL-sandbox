@@ -53,6 +53,28 @@ cleared after sign-in attempts and never enter recovery records, logs or source.
 
 ## Verification and remaining work
 
+### 12 November 2026 Development follow-up
+
+The owner-only Development rehearsal now uses separate draft login, synthetic
+players and two signed-in browser sessions. Background refresh no longer blocks
+queue controls or replaces newer write responses. This is an isolated rehearsal;
+operational competition writes and final publication remain disabled.
+
+The first simultaneous queue reorder exposed a server defect: both requests
+reported success at the same revision with different receipts. The adapter now
+opens and validates the sheet only after acquiring the script lock, preventing
+pre-lock sheet reads from priming stale cached data. The installed Development
+adapter was retested: one request saved at revision 15 and the other was rejected
+as stale. The original queue order was restored, and both tabs showed revision 16
+with queue controls available.
+
+204 source tests pass, including lock-before-sheet-open and lock-release-on-error
+coverage. Generated builds match. The connected result proves this queue conflict
+case only: simultaneous draft picks, reconnects, clock boundaries and a multi-coach
+mock remain outstanding. The rehearsal is still in its retains stage.
+
+### Earlier source and installation baseline (8 November)
+
 196 source tests pass. Both generated HTML builds match their builders, and all
 inline shared scripts parse. The tests exercise two source clients, serialized
 pick contention, privacy, access denial, deadline rejection, retries, timeouts,
