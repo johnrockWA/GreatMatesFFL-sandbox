@@ -1,7 +1,7 @@
 /* The shared screen renders only server projections. Demo state is never loaded. */
 'use strict';
 const el=id=>document.getElementById(id),escapeHtml=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let client=null,ui=null,edits=null,editVersion=null,confirmJob=null,teamTarget=null,sharedEndpoint=null;
+let client=null,ui=null,edits=null,editVersion=null,confirmJob=null,teamTarget=null,sharedEndpoint=null,renderedContentKey=null;
 const DRAFT_SESSION_KEY='ffl_shared_draft_session_v1';
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const format=x=>new Date(x).toLocaleString('en-AU',{timeZone:'Australia/Perth',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
@@ -13,9 +13,16 @@ function controlsDisabled(){return !ui||ui.busy||ui.stale||!!ui.pending;}
 function promptConfirmation(title,text,job){el('confirmtitle').textContent=title;el('confirmtext').textContent=text;confirmJob=job;el('confirm').showModal();}
 function renderShared(snapshot){
  ui=snapshot;const v=ui.view,blocked=controlsDisabled();
- el('connection').textContent=ui.message;el('refresh').disabled=ui.busy;el('retry').hidden=!ui.pending;el('retry').disabled=ui.busy;
+ el('connection').textContent=ui.message;el('refresh').disabled=ui.busy||!!ui.refreshing;el('retry').hidden=!ui.pending;el('retry').disabled=ui.busy;
  el('login').hidden=!ui.authRequired;el('signout').hidden=ui.authRequired||!v;
- el('content').hidden=!v||ui.authRequired;if(!v||ui.authRequired)return;
+ el('content').hidden=!v||ui.authRequired;if(!v||ui.authRequired){renderedContentKey=null;return;}
+ el('checked').textContent='Checked '+format(v.serverNow)+' AWST · shared revision '+v.revision+(ui.stale?' · Refresh required':'');
+ // A clock-only poll must not replace focused selects or buttons under a click.
+ // Phase, permissions, choices and revisions remain part of the render key.
+ const {serverNow,...contentView}=v;
+ const contentKey=JSON.stringify({view:contentView,blocked,busy:ui.busy,pending:ui.pending,receipt:ui.receipt,edits,editVersion,search:el('search').value});
+ if(contentKey===renderedContentKey)return;
+ renderedContentKey=contentKey;
  const tid=v.managingTeam,c=v.choices[tid],working=edits||c.working,dirty=!!edits&&!same(edits,c.working),conflict=edits&&editVersion!==c.version;
  el('discard').hidden=!edits;el('discard').disabled=ui.busy||!!ui.pending;
  const phase=v.phase,submitted=c.submitted!==null&&c.version===c.submittedVersion;
@@ -23,7 +30,6 @@ function renderShared(snapshot){
  el('team').disabled=ui.busy||!!ui.pending||dirty||!!conflict;
  el('phase').textContent=phase==='selection'?'Selections open':phase==='drafting'?'Draft is live':phase==='review'?'Committee review':phase==='paused'?'Draft paused':phase==='ready'?'Waiting for draft opening':phase==='validation'?'Picks complete · awaiting review':phase==='scheduled'?'Before the selection window':phase;
  el('next').textContent=phase==='selection'?(dirty?'You have unsaved changes. Save them, then submit your selections.':submitted?'Submitted. You can revise and resubmit until '+format(v.config.locksAt)+' AWST.':'Save your choices, then submit by '+format(v.config.locksAt)+' AWST.'):'Selection changes are closed. '+(phase==='drafting'?'Confirm your pick when your team is on the clock.':'Check the shared draft status before continuing.');
- el('checked').textContent='Checked '+format(v.serverNow)+' AWST · shared revision '+v.revision+(ui.stale?' · Refresh required':'');
  el('squadtitle').textContent=teamName(v,tid)+' · '+(v.config.kind==='preseason'?'Retains':'Delists');
  el('selectionstatus').textContent=conflict?'Your saved choices changed in another session. Refresh has kept your unsaved edits; review them against the saved choices before continuing.':dirty?'Unsaved changes on this screen':submitted?'Submitted':c.submitted?'Saved changes not submitted':'Not submitted';
  el('squad').innerHTML=v.baselineSquads[tid].map(id=>{
@@ -99,7 +105,7 @@ async function connectShared(){
    send:sharedTransport
   });
   await client.refresh();
-  setInterval(()=>{const s=client.snapshot();if(!s.busy&&!s.pending&&document.visibilityState==='visible')client.refresh().catch(()=>{});},5000);
+  setInterval(()=>{const s=client.snapshot();if(!s.busy&&!s.refreshing&&!s.pending&&document.visibilityState==='visible')client.refresh(undefined,{background:true}).catch(()=>{});},5000);
  }catch(error){el('connection').textContent=error.message;if(!client)el('refresh').disabled=true;}
 }
 connectShared();

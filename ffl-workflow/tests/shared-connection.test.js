@@ -86,3 +86,44 @@ test('a timed-out accepted write recovers its receipt while late replies cannot 
  await assert.rejects(a.c.dispatch('submit'),/timed out/);assert.equal(h.store.read().data.state.revision,1);assert.ok(a.c.snapshot().pending);
  a.options.send=send;await a.c.retry();resolve();await Promise.resolve();assert.equal(a.c.snapshot().receipt.replayed,true);assert.equal(a.c.snapshot().pending,null);assert.equal(h.store.read().data.state.revision,1);
 });
+
+test('background reads leave actions usable and cannot overwrite a newer write receipt',async()=>{
+ const h=host(),a=client(h);await a.c.refresh();const send=a.options.send;let finish;
+ a.options.send=body=>body.action==='readDraftWorkflow'?new Promise(resolve=>{const old=h.service(body);finish=()=>resolve(old);}):send(body);
+ const poll=a.c.refresh(undefined,{background:true});
+ assert.equal(a.c.snapshot().refreshing,true);assert.equal(a.c.snapshot().busy,false);
+ await a.c.dispatch('queue',{players:['p20']});
+ assert.equal(a.c.snapshot().view.revision,1);assert.equal(a.c.snapshot().receipt.revision,1);
+ finish();await poll;
+ assert.equal(a.c.snapshot().view.revision,1);assert.deepEqual(a.c.snapshot().view.queues.a,['p20']);
+ assert.equal(a.c.snapshot().stale,false);assert.match(a.c.snapshot().message,/Saved centrally/);
+});
+test('a superseded background failure cannot disable a successful write',async()=>{
+ const h=host(),a=client(h);await a.c.refresh();const send=a.options.send;let fail;
+ a.options.send=body=>body.action==='readDraftWorkflow'?new Promise((resolve,reject)=>{fail=reject;}):send(body);
+ const poll=a.c.refresh(undefined,{background:true});await a.c.dispatch('submit');
+ fail(Error('Old read disconnected'));await poll;
+ assert.equal(a.c.snapshot().stale,false);assert.equal(a.c.snapshot().pending,null);assert.equal(a.c.snapshot().receipt.revision,1);
+});
+test('background authentication failure hides private state and blocks writes',async()=>{
+ const h=host(),a=client(h);await a.c.refresh();delete h.tokens.alpha;
+ await assert.rejects(a.c.refresh(undefined,{background:true}));
+ assert.equal(a.c.snapshot().authRequired,true);assert.equal(a.c.snapshot().stale,true);
+ await assert.rejects(a.c.dispatch('submit'),/Refresh/);assert.equal(h.store.read().data.state.revision,0);
+});
+test('only one read runs at a time and foreground refresh still blocks writes',async()=>{
+ const h=host(),a=client(h);await a.c.refresh();const send=a.options.send;let finish;
+ a.options.send=body=>new Promise(resolve=>{finish=()=>resolve(h.service(body));});
+ const poll=a.c.refresh(undefined,{background:true});
+ await assert.rejects(a.c.refresh(undefined,{background:true}),/Wait/);finish();await poll;
+ const refresh=a.c.refresh();assert.equal(a.c.snapshot().busy,true);
+ await assert.rejects(a.c.dispatch('submit'),/pending request/);finish();await refresh;
+ a.options.send=send;await a.c.dispatch('submit');assert.equal(a.c.snapshot().view.revision,1);
+});
+test('a background read cannot clear an in-flight write or its recovery record',async()=>{
+ const h=host(),a=client(h);await a.c.refresh();let finishRead,finishWrite;
+ a.options.send=body=>new Promise(resolve=>{const result=h.service(body);if(body.action==='readDraftWorkflow')finishRead=()=>resolve(result);else finishWrite=()=>resolve(result);});
+ const poll=a.c.refresh(undefined,{background:true});const write=a.c.dispatch('submit');
+ finishRead();await poll;assert.equal(a.c.snapshot().busy,true);assert.ok(a.c.snapshot().pending);
+ finishWrite();await write;assert.equal(a.c.snapshot().busy,false);assert.equal(a.c.snapshot().pending,null);
+});
