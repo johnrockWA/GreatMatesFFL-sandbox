@@ -63,3 +63,22 @@ test('expired authentication hides the prior private view and offers draft sign-
  const p=screen();p.run('snapshot.authRequired=true;renderShared(snapshot)');
  assert.equal(p.nodes.get('content').hidden,true);assert.equal(p.nodes.get('login').hidden,false);assert.equal(p.nodes.get('signout').hidden,true);
 });
+
+test('clock-only background refresh preserves interactive DOM and local edits',()=>{
+ const p=screen();p.events.change({target:{dataset:{choice:'p0'},value:'normal'}});
+ let replacements=0;
+ for(const id of ['squad','queue','pool','team']){
+  const node=p.nodes.get(id);let html=node.innerHTML;
+  Object.defineProperty(node,'innerHTML',{get:()=>html,set:value=>{replacements++;html=value;}});
+ }
+ p.run('snapshot.refreshing=true;renderShared(snapshot)');
+ assert.equal(p.run('controlsDisabled()'),false);assert.equal(p.nodes.get('save').disabled,false);
+ p.run('snapshot.refreshing=false;snapshot.view.serverNow=new Date(Date.parse(snapshot.view.serverNow)+5000).toISOString();renderShared(snapshot)');
+ assert.equal(replacements,0);assert.match(p.nodes.get('selectionstatus').textContent,/Unsaved/);
+ p.run('snapshot.view.revision++;snapshot.view.choices.a.version++;renderShared(snapshot)');
+ assert.ok(replacements>0);assert.match(p.nodes.get('selectionstatus').textContent,/another session/);assert.equal(p.nodes.get('save').disabled,true);
+});
+test('phase changes at the same revision still update the controls',()=>{
+ const p=screen();p.run("snapshot.view.phase='review';renderShared(snapshot)");
+ assert.equal(p.nodes.get('phase').textContent,'Committee review');assert.match(p.nodes.get('squad').innerHTML,/disabled/);
+});
