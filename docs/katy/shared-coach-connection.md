@@ -73,6 +73,36 @@ coverage. Generated builds match. The connected result proves this queue conflic
 case only: simultaneous draft picks, reconnects, clock boundaries and a multi-coach
 mock remain outstanding. The rehearsal is still in its retains stage.
 
+### 12 November, 19:31–19:33 AWST: connected pick rehearsal
+
+An owner-only synthetic preparation step preserved submitted retains, closed the
+synthetic selection window, supplied the test opponent's empty retains and armed
+the draft through audited engine actions. It opened pick 1.01 at revision 20.
+The before/after protected-data fingerprint matched and coach grants stayed
+unchanged. The temporary helper and diagnostic entry-point change were then
+removed; the original owner host was read back byte-for-byte (normalized line
+endings) and verified saved. `rehearsal/PrepareOwnerPicks.gs` records the private
+helper for reproducibility; it is not part of the generated app or installed host.
+
+Two authenticated tabs confirmed Test Player 25 for Rockstars at pick 1.01 using
+concurrent browser clicks. Both clicks completed. One received a saved receipt at
+revision 21; the other was rejected. The board advanced to the synthetic opponent
+at pick 1.02, with Test Player 25 marked as picked by Rockstars. Refreshing the
+rejected tab and fully reloading the successful tab both recovered revision 21,
+the picked-player label and disabled draft buttons for the non-active team.
+
+This is an actual connected competing-pick and ordinary reload check, using two
+sessions of the same coach. It is not a multi-coach trial or a lost-response test.
+The rejection currently says "Picking for another team has not been granted"
+because turn authorization runs before the stale-revision check. Improve that
+message, and clear the old rejection notice after successful refresh. No duplicate
+pick was observed. The rehearsal remains at revision 21, awaiting the synthetic
+opponent; official publication remains disabled.
+
+205 source tests pass, including synthetic setup, repeat-run safety and rejection
+of unexpected player data. Remaining connected checks include different coach
+identities, lost-response recovery, clock boundaries and a complete small mock.
+
 ### Earlier source and installation baseline (8 November)
 
 196 source tests pass. Both generated HTML builds match their builders, and all
