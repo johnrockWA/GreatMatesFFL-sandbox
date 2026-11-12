@@ -16,7 +16,9 @@ function draftWorkflowSheet_() {
   return sheet;
 }
 function draftWorkflowStore_() {
-  const sheet=draftWorkflowSheet_();
+  // Open and validate the sheet only after acquiring the transaction lock.
+  // Even the marker read can populate Sheets' read-ahead cache before a wait.
+  let sheet=null;
   const hash=json=>Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,json));
   return createDraftStore({hash,
     readHead:function(){return JSON.parse(sheet.getRange('B1').getValue()||'null');},
@@ -37,7 +39,11 @@ function draftWorkflowStore_() {
     },
     writeHead:function(head){draftWorkflowAssertWrites_();sheet.getRange('B1').setValue(JSON.stringify(head));},
     flush:function(){SpreadsheetApp.flush();},
-    withLock:function(fn){const lock=LockService.getScriptLock();lock.waitLock(10000);try{return fn();}finally{lock.releaseLock();}}
+    withLock:function(fn){
+      const lock=LockService.getScriptLock();lock.waitLock(10000);
+      try{sheet=draftWorkflowSheet_();return fn();}
+      finally{sheet=null;lock.releaseLock();}
+    }
   });
 }
 function draftWorkflowResponse_(state,actor,now){

@@ -38,3 +38,13 @@ test('a committee role does not itself disclose private selections or queues',()
  let v=c.getDraftWorkflow_({valid:true,email:grant.email,team:'Alpha'});assert.equal(v.choices.b,undefined);assert.equal(v.audit,undefined);
  const reviewed=adapter([{...grant,role:'president',capabilities:['review']}]);reviewed.draftWorkflowStore_=c.draftWorkflowStore_;v=reviewed.getDraftWorkflow_({valid:true,email:grant.email,team:'Alpha'});assert.ok(v.choices.b);assert.equal(v.queues.b,undefined);
 });
+
+test('storage opens its sheet under the lock for every operation, never before waiting',()=>{
+ const c=adapter();let held=false,opens=0,failOpen=false;const calls=[];
+ c.LockService={getScriptLock:()=>({waitLock(){assert.equal(held,false);held=true;calls.push('lock');},releaseLock(){assert.equal(held,true);held=false;calls.push('release');}})};
+ c.draftWorkflowSheet_=()=>{assert.equal(held,true);opens++;calls.push('open');if(failOpen)throw Error('Sheet unavailable');return {getRange:cell=>({getValue(){assert.equal(held,true);assert.equal(cell,'B1');return '';}})};};
+ const store=c.draftWorkflowStore_();assert.equal(opens,0);
+ assert.equal(store.read(),null);assert.equal(store.read(),null);
+ assert.deepEqual(calls,['lock','open','release','lock','open','release']);assert.equal(opens,2);
+ failOpen=true;assert.throws(()=>store.read(),/Sheet unavailable/);assert.equal(held,false);
+});
