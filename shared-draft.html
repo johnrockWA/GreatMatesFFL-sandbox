@@ -181,7 +181,8 @@ function createSharedDraftClient(options){
   return deliver();
  }
  async function retry(){if(busy||!pending)throw Error('No pending request to retry.');return deliver();}
- return {snapshot,refresh,dispatch,retry};
+ function signedOut(){if(pending)throw Error('Recover the pending request before signing out.');++readGeneration;view=null;receipt=null;key=null;busy=false;refreshing=false;stale=true;authRequired=true;message='Signed out. Sign in to your draft.';changed();}
+ return {snapshot,refresh,dispatch,retry,signedOut};
 }
 if(typeof module!=='undefined')module.exports={createSharedDraftClient};
 </script><script>const SHARED_CONFIG={"endpoint": "", "instanceId": ""};</script><script>/* The shared screen renders only server projections. Demo state is never loaded. */
@@ -285,7 +286,7 @@ el('signout').onclick=async()=>{
  try{
   const result=await sharedTransport({action:'logoutDraftWorkflow',instanceId:SHARED_CONFIG.instanceId,token:sessionStorage.getItem(DRAFT_SESSION_KEY)});
   if(!result?.ok||result.signedOut!==true)throw Error('Sign-out could not be confirmed. Try again.');
-  sessionStorage.removeItem(DRAFT_SESSION_KEY);location.reload();
+  sessionStorage.removeItem(DRAFT_SESSION_KEY);edits=null;editVersion=null;confirmJob=null;client.signedOut();
  }catch(error){el('feedback').textContent=error.message;}finally{el('signout').disabled=false;}
 };
 async function connectShared(){

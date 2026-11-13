@@ -67,3 +67,9 @@ test('unknown request identifiers, wrong-team edits and actions past the lockout
  assert.throws(()=>h.store.dispatch(coach,command('submit',0,'late'),start+86400000,E.apply),/window is closed/);
  assert.equal(h.store.read().data.state.revision,0);
 });
+test('backup record read acquires the host transaction lock before accessing storage',()=>{
+ const h=host();h.store.initialize(fixture());const head=h.getHead();let inside=false;
+ const io={...h.io,withLock:fn=>{assert.equal(inside,false);inside=true;try{return fn();}finally{inside=false;}},readRecord:n=>{assert.equal(inside,true);return h.io.readRecord(n);}};
+ assert.equal(createDraftStore(io).readRecord(head.row,head.hash).hash,head.hash);
+ assert.throws(()=>createDraftStore(io).readRecord(head.row,'wrong'),/checksum/);
+});

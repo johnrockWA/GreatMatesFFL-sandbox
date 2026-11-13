@@ -63,6 +63,7 @@ function createSharedDraftClient(options){
   return deliver();
  }
  async function retry(){if(busy||!pending)throw Error('No pending request to retry.');return deliver();}
- return {snapshot,refresh,dispatch,retry};
+ function signedOut(){if(pending)throw Error('Recover the pending request before signing out.');++readGeneration;view=null;receipt=null;key=null;busy=false;refreshing=false;stale=true;authRequired=true;message='Signed out. Sign in to your draft.';changed();}
+ return {snapshot,refresh,dispatch,retry,signedOut};
 }
 if(typeof module!=='undefined')module.exports={createSharedDraftClient};

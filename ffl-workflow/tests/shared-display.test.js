@@ -96,5 +96,5 @@ test('sign-out waits for revocation and preserves pending recovery on failure',a
  p.ctx.transport=async()=>{requests++;throw Error('Offline');};p.run('sharedTransport=transport');
  p.ctx.snapshot.pending={command:{type:'pick'}};await p.nodes.get('signout').onclick();assert.equal(requests,0);assert.match(p.nodes.get('feedback').textContent,/pending/);
  p.ctx.snapshot.pending=null;await p.nodes.get('signout').onclick();assert.equal(saved.size,1);assert.equal(reloads,0);
- p.ctx.transport=async()=>({ok:true,signedOut:true});p.run('sharedTransport=transport');await p.nodes.get('signout').onclick();assert.equal(saved.size,0);assert.equal(reloads,1);
+ p.ctx.transport=async()=>({ok:true,signedOut:true});p.ctx.signOutClient={signedOut(){p.ctx.snapshot.view=null;p.ctx.snapshot.authRequired=true;p.run('renderShared(snapshot)');}};p.run('sharedTransport=transport;client=signOutClient');await p.nodes.get('signout').onclick();assert.equal(saved.size,0);assert.equal(reloads,0);assert.equal(p.nodes.get('login').hidden,false);assert.equal(p.nodes.get('content').hidden,true);
 });

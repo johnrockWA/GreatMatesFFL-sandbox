@@ -58,6 +58,6 @@ function createDraftStore(io){
   const result=commit({schema:2,state,receipts:[...current.data.receipts,receipt]});
   return {state:clone(state),receipt:{requestId:action.requestId,revision:state.revision,replayed:false,...result}};
  });}
- return {initialize,dispatch,read:()=>io.withLock(()=>read()),readRecord:record};
+ return {initialize,dispatch,read:()=>io.withLock(()=>read()),readRecord:(row,hash)=>io.withLock(()=>record(row,hash))};
 }
 if(typeof module!=='undefined')module.exports={createDraftStore,canonical};

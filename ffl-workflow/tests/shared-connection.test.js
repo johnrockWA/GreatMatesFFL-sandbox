@@ -127,3 +127,10 @@ test('a background read cannot clear an in-flight write or its recovery record',
  finishRead();await poll;assert.equal(a.c.snapshot().busy,true);assert.ok(a.c.snapshot().pending);
  finishWrite();await write;assert.equal(a.c.snapshot().busy,false);assert.equal(a.c.snapshot().pending,null);
 });
+test('acknowledged sign-out discards private state and ignores an in-flight old session read',async()=>{
+ const h=host(),a=client(h);await a.c.refresh();let resolve;
+ a.options.send=body=>new Promise(r=>{resolve=()=>r(h.service(body));});
+ const old=a.c.refresh(undefined,{background:true});a.c.signedOut();resolve();await old;
+ assert.equal(a.c.snapshot().view,null);assert.equal(a.c.snapshot().authRequired,true);assert.equal(a.c.snapshot().refreshing,false);
+ a.options.send=async body=>h.service(body);a.token('beta');await a.c.refresh();assert.equal(a.c.snapshot().view.managingTeam,'b');
+});

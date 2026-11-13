@@ -99,7 +99,7 @@ el('signout').onclick=async()=>{
  try{
   const result=await sharedTransport({action:'logoutDraftWorkflow',instanceId:SHARED_CONFIG.instanceId,token:sessionStorage.getItem(DRAFT_SESSION_KEY)});
   if(!result?.ok||result.signedOut!==true)throw Error('Sign-out could not be confirmed. Try again.');
-  sessionStorage.removeItem(DRAFT_SESSION_KEY);location.reload();
+  sessionStorage.removeItem(DRAFT_SESSION_KEY);edits=null;editVersion=null;confirmJob=null;client.signedOut();
  }catch(error){el('feedback').textContent=error.message;}finally{el('signout').disabled=false;}
 };
 async function connectShared(){

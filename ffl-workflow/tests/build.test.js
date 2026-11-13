@@ -18,5 +18,15 @@ test('private Development package is reproducible, preserves guards and contains
   const page=fs.readFileSync(path.join(out,'OwnerDraftLogin.gs'),'utf8'),bundle=fs.readFileSync(path.join(out,'SharedDraftWorkflow.gs'),'utf8');new vm.Script(page);new vm.Script(bundle);
   const html=JSON.parse(page.match(/createHtmlOutput\((".*")\)\.setTitle/)[1]);for(const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
   assert.match(html,/logoutDraftWorkflow/);assert.match(html,/fflOwnerSharedDraftRequest/);assert.match(bundle,/function createDraftAuth/);assert.ok(!page.includes('john@'));
+  const integration=path.join(__dirname,'../build-integration.py');
+  cp.execFileSync('python3',[integration,'--package-dir',out]);
+  const lab=fs.readFileSync(path.join(out,'IntegrationRehearsal.gs'),'utf8');new vm.Script(lab);
+  const labHtml=JSON.parse(lab.match(/createHtmlOutput\((".*")\.replace/)[1]);
+  assert.match(labHtml,/"instanceId": "__INTEGRATION_INSTANCE__"/);
+  for(const m of labHtml.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
+  const manifest=JSON.parse(fs.readFileSync(path.join(out,'manifest.json'),'utf8'));
+  assert.equal(manifest.files['IntegrationRehearsal.gs'],require('node:crypto').createHash('sha256').update(lab).digest('hex'));
+  assert.throws(()=>cp.execFileSync('python3',[integration,'--package-dir',out],{stdio:'pipe'}),/Rebuild the clean/);
+
  }finally{fs.rmSync(dir,{recursive:true,force:true});}
 });
