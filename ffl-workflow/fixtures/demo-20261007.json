@@ -1852,7 +1852,7 @@
       "id": "p128",
       "name": "Jagga Smith",
       "club": "Carlton",
-      "careerGames": 0,
+      "careerGames": 25,
       "history": {
         "7": {
           "verified": true,
@@ -1927,14 +1927,14 @@
       "careerGames": 194,
       "history": {
         "7": {
-          "verified": false,
-          "retains": 0,
+          "verified": true,
+          "retains": 1,
           "recordedNormalYears": [
             2026
           ]
         }
       },
-      "historyReview": true
+      "historyReview": false
     },
     {
       "id": "p134",
@@ -3112,5 +3112,40 @@
       "p199",
       "p200"
     ]
-  }
+  },
+  "historyCorrections": [
+    {
+      "id": "dunkley-rockstars-20261030",
+      "player": "p133",
+      "team": "7",
+      "before": {
+        "verified": false,
+        "retains": 0,
+        "recordedNormalYears": [
+          2026
+        ]
+      },
+      "after": {
+        "verified": true,
+        "retains": 1,
+        "recordedNormalYears": [
+          2026
+        ]
+      },
+      "confirmedBy": "John, Rockstars coach",
+      "confirmedOn": "2026-10-30",
+      "basis": "Coach confirmed Josh Dunkley was retained last year and remains eligible for preseason retention."
+    }
+  ],
+  "careerGamesCorrections": [
+    {
+      "id": "jagga-smith-20261030",
+      "player": "p128",
+      "before": 0,
+      "after": 25,
+      "confirmedBy": "John, Rockstars coach",
+      "confirmedOn": "2026-10-30",
+      "basis": "Coach reported the saved career-games value should be 25, not 0. Not independently refreshed from an AFL statistics source."
+    }
+  ]
 }

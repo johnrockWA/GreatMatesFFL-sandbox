@@ -1,0 +1,307 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>Great Mates FFL · Shared draft</title><style>
+:root{color-scheme:dark;font:16px system-ui;background:#101722;color:#eef4fa}*{box-sizing:border-box}body{margin:0}header,main{max-width:1280px;margin:auto;padding:20px}header{border-bottom:1px solid #344056;display:flex;gap:14px;align-items:center}header img{width:48px;border-radius:8px}h1{font-size:28px;margin:10px 0}h2{font-size:21px}p{line-height:1.6}a{color:#a8d8ff}button,input,select{font:inherit;padding:11px;border:1px solid #53657d;border-radius:8px;background:#223246;color:#eef4fa;min-height:44px;max-width:100%}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:#a73543;border-color:#db6872}.panel{padding:20px;border:1px solid #34465b;background:#172131;border-radius:12px;margin:16px 0}.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.muted,small{color:#afbed0}small{display:block;font-size:13px;line-height:1.6}.pill{background:#234a4a;color:#bdf5e7;padding:5px 9px;border-radius:5px;font-size:12px}.warning{background:#4f3b21;color:#ffdda4}.grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:20px}label{display:flex;flex-direction:column;gap:6px;font-size:13px}.scroll{overflow:auto;max-height:540px}table{width:100%;border-collapse:collapse}td,th{text-align:left;border-bottom:1px solid #34465b;padding:12px 6px;font-size:14px}.taken strong{text-decoration:line-through;color:#c8a0aa}.queue-item{display:flex;gap:8px;align-items:center;justify-content:space-between;border-bottom:1px solid #34465b;padding:10px 0}.queue-item .toolbar{gap:4px}.status{border-left:3px solid #75c9bd}dialog{color:inherit;background:#172131;border:1px solid #53657d;border-radius:12px;max-width:520px;width:calc(100% - 32px);padding:24px}dialog::backdrop{background:#050b15bb}[hidden]{display:none!important}details{margin:12px 0}summary{cursor:pointer;min-height:44px;padding:10px 0}@media(max-width:760px){.grid{grid-template-columns:1fr}header,main{padding:14px}.panel{padding:14px}h1{font-size:25px}.queue-item{flex-wrap:wrap}}
+</style></head><body><header><img src="data:image/jpeg;base64,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" alt="Great Mates FFL"><div><strong>GREAT MATES FFL</strong><small>Development · shared draft connection</small></div></header><main><span class="pill warning">DEVELOPMENT · ACCESS CHECK REQUIRED</span><h1>Your draft room</h1><p id="connection" class="panel status" role="status" aria-live="polite">Connecting to the shared draft…</p><div class="toolbar"><button id="refresh">Refresh shared draft</button><button id="retry" hidden>Recover pending request</button><a href="index.html">Back to FFL</a></div><button id="signout" hidden>Sign out of draft</button><form id="login" class="panel" hidden><h2>Sign in to your draft</h2><p>Use your FFL email and password. Access is limited to assigned teams.</p><div class="toolbar"><label>Email<input id="email" type="email" autocomplete="username" required></label><label>Password<input id="password" type="password" autocomplete="current-password" required></label><button id="signin" class="primary" type="submit">Sign in</button></div></form><p id="feedback" role="status" aria-live="polite"></p><div id="content" hidden><section class="panel"><div class="toolbar"><label>Managing<select id="team"></select></label><span id="phase" class="pill"></span></div><p id="next"></p><small id="checked"></small></section><div class="grid"><section class="panel"><h2 id="squadtitle">Your selections</h2><p id="selectionstatus" role="status"></p><div class="scroll"><table><thead><tr><th>Player</th><th>Career GP</th><th>Choice</th></tr></thead><tbody id="squad"></tbody></table></div><div class="toolbar"><button id="save">Save choices</button><button id="discard" hidden>Use saved choices</button><button id="submit" class="primary">Submit selections</button></div><p id="submission" role="status" aria-live="polite"></p></section><aside><section class="panel"><h2>Your private queue</h2><div id="queue"></div></section><section class="panel"><h2>Official squad</h2><p>Draft actions remain separate from official squad and dynasty records. Final publication is disabled.</p><details><summary>View your squad</summary><div id="official"></div></details></section></aside></div><details class="panel"><summary>League board</summary><div id="board"></div></details><section class="panel"><div class="toolbar"><h2>Player pool</h2><label>Search<input id="search" placeholder="Player or AFL club" type="search"></label><span id="turn" class="pill"></span></div><div class="scroll"><table><thead><tr><th>Player / availability</th><th>Career GP</th><th>Queue</th><th>Draft</th></tr></thead><tbody id="pool"></tbody></table></div></section><section id="hq" class="panel" hidden><h2>FFL HQ</h2><p>Only explicitly granted committee actions are available. Final squad publication remains disabled.</p><div id="hqsummary"></div><div id="hqcontrols" class="toolbar"></div></section></div><dialog id="confirm"><h2 id="confirmtitle"></h2><p id="confirmtext"></p><p class="muted">This action saves to the shared Development draft.</p><div class="toolbar"><button id="cancel">Go back</button><button id="confirmbutton" class="primary">Confirm</button></div></dialog></main><script>/* Shared pure draft rules. Clock and authenticated actor must be supplied by the server. */
+var FFLDraft = (function () {
+'use strict';
+const RULE_VERSION='provisional-build03', SOFTWARE_VERSION='katy-foundation-c1.2';
+const copy=x=>JSON.parse(JSON.stringify(x));
+const fail=m=>{throw new Error(m);};
+const unique=a=>new Set(a).size===a.length;
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const committee=a=>a && ['commissioner','president'].includes(a.role);
+function date(x){if(typeof x!=='string'||!/(Z|[+-]\d\d:\d\d)$/.test(x)||!Number.isFinite(Date.parse(x)))fail('Use a complete date/time with timezone.');return Date.parse(x);}
+function schedule(c){if(!['preseason','midseason'].includes(c.kind)||!Number.isInteger(c.season))fail('Invalid season or draft type.');if(!(date(c.opensAt)<date(c.locksAt)&&date(c.locksAt)<=date(c.draftAt)))fail('Opening must precede locking; drafting cannot precede locking.');}
+function create(c,teams,players,squads){schedule(c);if(!teams.length||!unique(teams.map(t=>t.id)))fail('Invalid teams.');if(!players.length||!unique(players.map(p=>p.id)))fail('Invalid player pool.');const ids=new Set(players.map(p=>p.id)),owned=[];for(const t of teams){const list=squads[t.id];if(!Array.isArray(list)||list.length!==20||!unique(list)||list.some(id=>!ids.has(id)))fail('Each starting squad must contain 20 distinct known players.');owned.push(...list);}if(!unique(owned))fail('A player belongs to multiple teams.');return {schema:1,revision:0,config:copy(c),teams:copy(teams),players:copy(players),officialSquads:copy(squads),baselineSquads:copy(squads),choices:Object.fromEntries(teams.map(t=>[t.id,{working:{normal:[],fookies:[],delists:[]},submitted:null,version:0,submittedVersion:null}])),queues:Object.fromEntries(teams.map(t=>[t.id,[]])),locked:null,prepared:false,armed:false,plan:[],picks:[],paused:false,finalizedAt:null,audit:[],notices:[],reminderKeys:[]};}
+function phase(s,now){if(s.finalizedAt)return now>=date(s.finalizedAt)+(s.config.kind==='preseason'?7:3)*86400000?'hidden':'closed';if(now<date(s.config.opensAt))return 'scheduled';if(now<date(s.config.locksAt))return 'selection';if(!s.prepared)return 'review';if(s.paused)return 'paused';if(s.picks.length===s.plan.length)return 'validation';return !s.armed||now<date(s.config.draftAt)?'ready':'drafting';}
+function player(s,id){return s.players.find(p=>p.id===id)||fail('Unknown player.');}
+function team(s,id){return s.teams.find(t=>t.id===id)||fail('Unknown team.');}
+// One factual eligibility result for rules and coach display.
+function retentionStatus(s,tid,pid){
+ team(s,tid);const p=player(s,pid),h=p.history?.[tid];
+ if(['retired','delisted','relist-pending'].includes(p.listStatus))return {code:'list-unconfirmed',allowed:false,label:'Not on the confirmed active list',detail:'AFL list status: '+p.listStatus+'. Retention is unavailable until active list status is confirmed.'};
+ if(!Number.isInteger(p.careerGames)||p.careerGames<0)return {code:'games-unverified',allowed:false,label:'Career games need verification',detail:'Career games must be verified before retention.'};
+ if(p.careerGames<=50)return {code:'fookie-eligible',allowed:true,label:'Fookie eligible',detail:'Eligible in a fookie slot or a free normal slot; does not advance the dynasty clock.'};
+ if(!h||h.verified!==true||!Number.isInteger(h.retains)||h.retains<0)return {code:'history-unverified',allowed:false,label:'Retention eligibility unverified',detail:'Historical career games must be checked before normal-slot entries can count as dynasty years.'};
+ if(h.retains>=3)return {code:'dynasty-limit',allowed:false,label:'Dynasty Player',detail:'Cannot be retained for '+s.config.season+'. Three qualifying consecutive retentions'+((h.qualifyingYears||h.recordedNormalYears)?.length?' ('+(h.qualifyingYears||h.recordedNormalYears).slice(-3).join(', ')+')':'')+'. Must enter the draft.'};
+ return {code:'normal-eligible',allowed:true,label:'Eligible to retain',detail:h.retains+' of 3 qualifying consecutive retentions used.'};
+}
+function selection(s,id,v,incomplete=false){team(s,id);if(!v||!['normal','fookies','delists'].every(k=>Array.isArray(v[k])))fail('Invalid selections.');const all=[...v.normal,...v.fookies,...v.delists];if(!unique(all)||all.some(p=>!s.baselineSquads[id].includes(p)))fail('Select distinct players from this team’s starting squad.');if(s.config.kind==='preseason'){if(v.normal.length>2)fail('Choose up to two normal retains. You also have two separate fookie slots.');if(v.fookies.length>2)fail('Choose up to two fookie-slot retains. Additional eligible fookies can use any free normal slots.');if(v.delists.length)fail('Delists are only used in the midseason draft.');for(const pid of all){const p=player(s,pid),eligibility=retentionStatus(s,id,pid);if(!eligibility.allowed){if(eligibility.code==='list-unconfirmed')fail(p.name+': AFL list status requires verification ('+p.listStatus+').');if(eligibility.code==='games-unverified')fail(p.name+': career games require verification.');if(eligibility.code==='history-unverified')fail(p.name+': retention history requires verification.');fail(p.name+' is a Dynasty Player and has reached three consecutive dynasty retentions.');}if(v.fookies.includes(pid)&&p.careerGames>50)fail(p.name+' is not fookie eligible.');}}else if(v.normal.length||v.fookies.length||(!incomplete&&v.delists.length<2)||v.delists.length>4)fail('Choose two to four delists.');return copy(v);}
+function status(s,id){const c=s.choices[id];return c.submitted===null?'Not Submitted':c.version===c.submittedVersion?'Submitted':'Submitted · changes not submitted';}
+function allocation(s,locked){const counts={};for(const t of s.teams){const v=selection(s,t.id,locked[t.id]);counts[t.id]=s.config.kind==='preseason'?20-v.normal.length-v.fookies.length:v.delists.length;}const plan=[];for(let r=1;r<=Math.max(...Object.values(counts));r++)for(const [i,t] of s.teams.entries())if(counts[t.id]>=r)plan.push({team:t.id,round:r,slot:i+1,label:r+'.'+String(i+1).padStart(2,'0')});return plan;}
+function available(s,pid,pickIndex=s.picks.length){const p=player(s,pid);if(['retired','delisted','relist-pending'].includes(p.listStatus))return {ok:false,reason:'Not in the confirmed active AFL list: '+p.listStatus};if(s.picks.some(x=>x.player===pid))return {ok:false,reason:'Drafted',pick:s.picks.find(x=>x.player===pid)};if(!s.prepared)return {ok:false,reason:'Draft has not opened'};for(const t of s.teams){const c=s.locked[t.id];const kept=s.config.kind==='preseason'?[...c.normal,...c.fookies]:s.baselineSquads[t.id].filter(id=>!c.delists.includes(id));if(kept.includes(pid))return {ok:false,reason:'Retained',team:t.id};}const turn=s.plan[pickIndex];if(!turn)return {ok:false,reason:'Draft complete'};if(s.config.kind==='preseason'&&turn.round===1&&s.baselineSquads[turn.team].includes(p.id))return {ok:false,reason:'You delisted this player — you can draft him from Round 2'};return {ok:true};}
+function finalSquads(s){const out={};for(const t of s.teams){const c=s.locked[t.id];const base=s.config.kind==='preseason'?[...c.normal,...c.fookies]:s.baselineSquads[t.id].filter(id=>!c.delists.includes(id));out[t.id]=[...base,...s.picks.filter(p=>p.team===t.id).map(p=>p.player)];if(out[t.id].length!==20||!unique(out[t.id]))fail('Final squad invalid for '+t.name);}if(!unique(Object.values(out).flat()))fail('Player appears in multiple final squads.');return out;}
+// Record only the fields an accepted action can change, rather than copying private state.
+function evidence(s,a,target){
+ if(['save','submit','override'].includes(a.type))return copy(s.choices[target]);
+ if(a.type==='queue')return {players:copy(s.queues[target])};
+ if(a.type==='schedule')return {config:copy(s.config)};
+ if(a.type==='trade')return {squads:copy({[a.from]:s.baselineSquads[a.from],[a.to]:s.baselineSquads[a.to]})};
+ if(a.type==='prepare')return {prepared:s.prepared,armed:s.armed,locked:copy(s.locked),plan:copy(s.plan)};
+ if(a.type==='pick')return {pickIndex:a.expectedPick,pick:copy(s.picks[a.expectedPick]||null)};
+ if(a.type==='finalize')return {officialSquads:copy(s.officialSquads),retentionResults:copy(s.retentionResults||[]),finalizedAt:s.finalizedAt};
+ return {prepared:s.prepared,armed:s.armed,paused:s.paused};
+}
+function apply(input,a,actor,now){
+ if(!actor||!actor.id)fail('Authentication required.');if(!Number.isFinite(now))fail('Server time required.');
+ if(!['coach','commissioner','president'].includes(actor.role))fail('Verified draft role required.');
+ if(!a||typeof a!=='object'||Array.isArray(a))fail('Invalid action.');
+ if(a.reason!==undefined&&(typeof a.reason!=='string'||a.reason.length>1000))fail('Use a reason of at most 1000 characters.');
+ if(a.requestId!==undefined&&(typeof a.requestId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(a.requestId)))fail('Invalid request identifier.');
+ if(a.revision!==input.revision)fail('The draft changed. Refresh and try again.');
+ const s=copy(input),ph=phase(s,now);let target=a.team||actor.team;
+ const admin=['schedule','override','prepare','arm','pause','resume','finalize','trade'];
+ if(admin.includes(a.type)&&!committee(actor))fail('Commissioner or president access required.');
+ if(['save','submit','queue'].includes(a.type)&&target!==actor.team)fail('You can only edit your own team.');
+ if(['save','submit','queue'].includes(a.type))team(s,target);
+ const reason=()=>{if(typeof a.reason!=='string'||!a.reason.trim())fail('A reason is required.');};
+ if(a.type==='schedule'){if(s.prepared||s.picks.length||s.finalizedAt)fail('Schedule is locked after preparation.');reason();if(!a.dates||Object.keys(a.dates).some(k=>!['opensAt','locksAt','draftAt'].includes(k)))fail('Only schedule dates may change.');const c={...s.config,...a.dates};schedule(c);s.config=c;}
+ else if(a.type==='save'){if(ph!=='selection')fail('The selection window is closed.');s.choices[target].working=selection(s,target,a.value,true);s.choices[target].version++;}
+ else if(a.type==='submit'){if(ph!=='selection')fail('The selection window is closed.');const c=s.choices[target];c.submitted=selection(s,target,c.working);c.submittedVersion=c.version;s.notices.push({id:'receipt-'+(s.revision+1),team:target,text:'Selections submitted',at:new Date(now).toISOString(),emailStatus:'suppressed'});}
+ else if(a.type==='queue'){if(['scheduled','hidden','closed','validation'].includes(ph))fail('Queue editing is closed.');if(!Array.isArray(a.players)||!unique(a.players)||a.players.length>s.players.length)fail('Invalid queue.');a.players.forEach(id=>player(s,id));s.queues[target]=copy(a.players);}
+ else if(a.type==='override'){if(!['review','ready','paused','validation'].includes(ph))fail('Close selections or pause the draft before adjusting them.');if(s.picks.length&&ph!=='paused')fail('Pause the draft before correcting selections.');reason();team(s,target);const v=selection(s,target,a.value);s.choices[target]={working:v,submitted:copy(v),version:s.choices[target].version+1,submittedVersion:s.choices[target].version+1};if(s.prepared){s.armed=false;const locked=copy(s.locked);locked[target]=v;const plan=allocation(s,locked);if(s.picks.some((p,i)=>!plan[i]||p.team!==plan[i].team||p.round!==plan[i].round))fail('This correction changes completed pick order. Resolve completed picks before applying it.');s.locked=locked;s.plan=plan;const past=s.picks;s.picks=[];for(const p of past){if(!available(s,p.player,s.picks.length).ok)fail('Correction conflicts with a completed pick.');s.picks.push(p);}}}
+ else if(a.type==='trade'){if(ph!=='review'||s.prepared)fail('Trades are reviewed after the deadline and before draft preparation.');reason();team(s,a.from);team(s,a.to);if(a.from===a.to||!s.baselineSquads[a.from].includes(a.player)||!s.baselineSquads[a.to].includes(a.exchange))fail('Choose one owned player from each trading team.');s.baselineSquads[a.from]=s.baselineSquads[a.from].map(x=>x===a.player?a.exchange:x);s.baselineSquads[a.to]=s.baselineSquads[a.to].map(x=>x===a.exchange?a.player:x);}
+ else if(a.type==='prepare'){if(ph!=='review')fail('Wait for the selection deadline.');const locked={};for(const t of s.teams){if(s.choices[t.id].submitted===null)fail(t.name+' has no submitted selections. Committee resolution is required.');locked[t.id]=selection(s,t.id,s.choices[t.id].submitted);}s.locked=locked;s.plan=allocation(s,locked);s.prepared=true;s.armed=false;}
+ else if(a.type==='arm'){if(!s.prepared||!['ready','paused'].includes(ph))fail('Approve selections before arming the draft.');s.armed=true;}
+ else if(a.type==='pick'){if(ph!=='drafting')fail('Drafting is not open.');const turn=s.plan[s.picks.length];if(a.expectedPick!==s.picks.length)fail('The current pick has changed.');if(actor.team!==turn.team&&!committee(actor))fail('It is not your team’s turn.');if(actor.team!==turn.team)reason();const ok=available(s,a.player);if(!ok.ok)fail(ok.reason);s.picks.push({...turn,player:a.player,at:new Date(now).toISOString()});}
+ else if(a.type==='pause'){if(!['drafting','validation','ready'].includes(ph))fail('There is no active draft to pause.');reason();s.paused=true;}
+ else if(a.type==='resume'){if(!s.paused)fail('Draft is not paused.');if(!s.armed)fail('Selections changed. Arm the corrected draft before resuming.');s.paused=false;}
+ else if(a.type==='finalize'){if(ph!=='validation'||s.paused)fail('Complete all picks and resume before validation.');s.officialSquads=finalSquads(s);s.finalizedAt=new Date(now).toISOString();s.retentionResults=s.config.kind==='preseason'?s.teams.flatMap(t=>[...s.locked[t.id].normal,...s.locked[t.id].fookies].map(id=>{const p=player(s,id),h=p.history?.[t.id];return {season:s.config.season,team:t.id,player:id,slot:s.locked[t.id].fookies.includes(id)?'fookie':'normal',fookieEligible:p.careerGames<=50,dynastyYears:p.careerGames<=50?(h?.retains||0):(h?.retains||0)+1};})):[];}
+ else fail('Unknown action.');
+ // A pick's team is derived from the validated turn, not from the request's team label.
+ const eventTeam=a.type==='pick'?s.picks[s.picks.length-1].team:
+   ['save','submit','queue','override'].includes(a.type)?target:null;
+ s.revision++;
+ s.audit.push({schema:1,eventId:'draft-event-'+s.revision,revision:s.revision,
+   type:a.type,actor:actor.id,role:actor.role,team:eventTeam,
+   reason:a.reason||'',requestId:a.requestId||null,at:new Date(now).toISOString(),
+   ruleVersion:RULE_VERSION,softwareVersion:SOFTWARE_VERSION,
+   before:evidence(input,a,target),after:evidence(s,a,target)});
+ return s;
+}
+function reminders(input,now){const s=copy(input);if(phase(s,now)!=='selection')return s;for(const t of s.teams){const events=[['open',date(s.config.opensAt)],['48h',Math.max(date(s.config.opensAt),date(s.config.locksAt)-48*3600000)],['6h',Math.max(date(s.config.opensAt),date(s.config.locksAt)-6*3600000)]];const due=events.filter(e=>now>=e[1]&&!s.reminderKeys.includes(t.id+':'+e[0]));if(!due.length)continue;due.forEach(e=>s.reminderKeys.push(t.id+':'+e[0]));const event=due[due.length-1];if(event[0]!=='open'&&status(s,t.id)==='Submitted')continue;s.notices.push({id:t.id+':'+event[0],team:t.id,text:event[0]==='open'?'Selection window is open':'Selections need submission before the deadline',at:new Date(now).toISOString(),emailStatus:'suppressed'});}if(!same(s.notices,input.notices)||!same(s.reminderKeys,input.reminderKeys))s.revision++;return s;}
+function statsProjection(x){return {games:x.games,averages:Object.fromEntries(['kicks','handballs','disposals','marks','hitouts','tackles','goals','behinds','freeFor','freeAgainst'].map(k=>[k,x.averages[k]])),fflAverages:Object.fromEntries(['forward','ruck','marker','midfielder','tackler','allRounder'].map(k=>[k,x.fflAverages[k]]))};}
+function view(s,actor,now){
+ if(!actor||!actor.id)fail('Authentication required.');
+ if(!['coach','commissioner','president'].includes(actor.role))fail('Verified draft role required.');
+ if(!Number.isFinite(now))fail('Server time required.');
+ if(!committee(actor))team(s,actor.team);
+ const ph=phase(s,now),own=Object.prototype.hasOwnProperty.call(s.choices,actor.team);
+ const selected=v=>v===null?null:{normal:copy(v.normal),fookies:copy(v.fookies),delists:copy(v.delists)};
+ const choices=Object.fromEntries(s.teams.filter(t=>committee(actor)||t.id===actor.team).map(t=>{
+   const c=s.choices[t.id];return [t.id,{working:selected(c.working),submitted:selected(c.submitted),version:c.version,submittedVersion:c.submittedVersion}];
+ }));
+ const turn=p=>({team:p.team,round:p.round,slot:p.slot,label:p.label});
+ // Explicit public/role projections. Future state fields are private by default.
+ const v={viewSchema:1,schema:s.schema,revision:s.revision,
+   ruleVersion:RULE_VERSION,softwareVersion:SOFTWARE_VERSION,
+   config:{kind:s.config.kind,season:s.config.season,opensAt:s.config.opensAt,locksAt:s.config.locksAt,draftAt:s.config.draftAt},
+   teams:s.teams.map(t=>({id:t.id,name:t.name,short:t.short||t.name})),
+   players:s.players.map(p=>({id:p.id,name:p.name,club:p.club||'',careerGames:p.careerGames,listStatus:p.listStatus||'unverified',stats2026:p.stats2026?{season:p.stats2026.season,asOf:p.stats2026.asOf,source:p.stats2026.source,regularSeason:statsProjection(p.stats2026.regularSeason),includingFinals:statsProjection(p.stats2026.includingFinals)}:null,
+     historyReview:!!p.historyReview,history:Object.fromEntries(Object.entries(p.history||{}).map(([id,h])=>[id,{verified:h.verified===true,retains:h.retains,recordedNormalYears:h.recordedNormalYears||[],qualifyingYears:h.qualifyingYears||[],evidenceSource:h.evidenceSource||null}]))})),
+   officialSquads:s.officialSquads,baselineSquads:s.baselineSquads,
+   prepared:s.prepared,armed:s.armed,paused:s.paused,finalizedAt:s.finalizedAt,
+   phase:ph,visible:!['scheduled','hidden'].includes(ph),
+   submissionProgress:s.teams.map(t=>({team:t.id,submitted:s.choices[t.id].submitted!==null})),
+   // Committee approval is the only point at which locked choices become public.
+   locked:s.prepared?Object.fromEntries(s.teams.map(t=>[t.id,selected(s.locked[t.id])])):null,
+   plan:s.prepared?s.plan.map(turn):[],picks:s.prepared?s.picks.map(p=>({...turn(p),player:p.player,at:p.at})):[],
+   choices,
+   queues:own?{[actor.team]:s.queues[actor.team]||[]}:{},
+   notices:own?s.notices.filter(n=>n.team===actor.team).map(n=>({id:n.id,team:n.team,text:n.text,at:n.at,emailStatus:n.emailStatus})):[],
+   retentionResults:s.finalizedAt?s.retentionResults||[]:[]};
+ if(committee(actor))v.audit=s.audit.filter(e=>e.type!=='queue'||e.actor===actor.id);
+ return copy(v);
+}
+return {create,apply,phase,status,selection,retentionStatus,available,finalSquads,reminders,view,date,
+ ruleVersion:RULE_VERSION,softwareVersion:SOFTWARE_VERSION};
+})();
+if(typeof module!=='undefined')module.exports=FFLDraft;
+</script><script>/* Shared screen state: server views only, durable request IDs, no demo fallback. */
+'use strict';
+function createSharedDraftClient(options){
+ const copy=x=>x==null?x:JSON.parse(JSON.stringify(x));
+ let view=null,pending=null,receipt=null,busy=false,refreshing=false,readGeneration=0,stale=true,message='Connecting…',key=null,authRequired=false;
+ const changed=()=>options.changed?.(snapshot());
+ function snapshot(){return copy({view,pending,receipt,busy,refreshing,stale,message,authRequired});}
+ function stash(){if(key){if(pending)options.storage.setItem(key,JSON.stringify(pending));else options.storage.removeItem(key);}}
+ function accept(next){
+  if(next?.viewSchema!==1||next.instanceId!==options.instanceId||!Array.isArray(next.managedTeams)||!next.managedTeams.includes(next.managingTeam)||typeof next.principalKey!=='string'||!next.principalKey||!Number.isInteger(next.revision)||!next.choices?.[next.managingTeam])throw Error('Invalid shared draft response.');
+  if(view&&(next.managingTeam!==view.managingTeam||next.principalKey!==view.principalKey))throw Error('The signed-in coach or managing team changed. Reopen the shared draft.');
+  if(view&&next.revision<view.revision)throw Error('An older draft response was refused.');
+  view=copy(next);stale=false;authRequired=false;
+ }
+ function body(action,team){return {action,token:options.token(),instanceId:options.instanceId,principalKey:view?.principalKey,managingTeam:team};}
+ async function exchange(payload){
+  let timer;try{return await Promise.race([options.send(payload),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Connection timed out.')),options.timeoutMs||15000);})]);}finally{clearTimeout(timer);}
+ }
+ function fail(result){const error=Error(result?.message||'The shared draft could not be reached.');error.code=result?.code;if(error.code==='AUTH_REQUIRED')authRequired=true;throw error;}
+ async function refresh(team,{background=false}={}){
+  if(busy||refreshing)throw Error('Wait for the current request.');
+  if(view&&team&&team!==view.managingTeam)throw Error('Open the assigned team in a separate shared draft screen.');
+  const generation=++readGeneration,quiet=background&&!!view&&!stale&&!pending;
+  refreshing=true;if(!quiet)busy=true;changed();
+  try{
+   const result=await exchange(body('readDraftWorkflow',team||view?.managingTeam||options.managingTeam));
+   // A write started after this read: its response/receipt owns the newer state.
+   if(generation!==readGeneration)return snapshot();
+   if(!result?.ok)fail(result);
+   accept(result.view);
+   if(!key){key=['ffl-shared-v1',view.instanceId,view.principalKey,view.managingTeam].join(':');const saved=options.storage.getItem(key);if(saved){pending=JSON.parse(saved);if(!pending||pending.team!==view.managingTeam||pending.instanceId!==view.instanceId||typeof pending.command?.requestId!=='string')throw Error('Stored request needs review.');}}
+   message=pending?'A request is awaiting confirmation. Retry it to recover the saved result.':'Up to date with the shared draft.';
+  }catch(error){if(generation!==readGeneration)return snapshot();stale=true;message=error.message;throw error;}finally{if(generation===readGeneration){refreshing=false;if(!quiet)busy=false;changed();}}
+  return snapshot();
+ }
+ async function deliver(){
+  ++readGeneration;refreshing=false;
+  busy=true;message='Confirming with the shared draft…';changed();
+  try{
+   const result=await exchange({...body('writeDraftWorkflow',pending.team),command:copy(pending.command)});
+   if(!result?.ok)fail(result);
+   // A generic success or a receipt for another request is not an acknowledgement.
+   if(result.view?.receipt?.requestId!==pending.command.requestId||!Number.isInteger(result.view.receipt.revision)||result.view.receipt.revision>result.view.revision)throw Error('A matching receipt was not returned.');
+   accept(result.view);
+   // Keep the request recoverable if clearing browser storage fails after acceptance.
+   if(key)options.storage.removeItem(key);
+   receipt=copy(result.view.receipt);pending=null;
+   message='Saved centrally · receipt '+receipt.requestId+' · revision '+receipt.revision+'.';
+  }catch(error){
+   if(error.code==='REJECTED'){pending=null;stash();message='Not saved: '+error.message;}
+   else message='Confirmation pending. '+error.message;
+   stale=true;throw error;
+  }finally{busy=false;changed();}
+  return snapshot();
+ }
+ async function dispatch(type,data={}){
+  if(busy||pending)throw Error('Resolve the pending request before making another change.');
+  if(!view||stale)throw Error('Refresh the shared draft before making a change.');
+  const command={...copy(data),type,revision:view.revision,requestId:options.requestId()};
+  if(typeof command.requestId!=='string'||!/^[A-Za-z0-9_-]{1,128}$/.test(command.requestId))throw Error('A unique request identifier is required.');
+  pending={instanceId:view.instanceId,team:view.managingTeam,command};
+  try{stash();}catch(error){pending=null;throw Error('Recovery storage is unavailable. No request was sent.');}
+  return deliver();
+ }
+ async function retry(){if(busy||!pending)throw Error('No pending request to retry.');return deliver();}
+ function signedOut(){if(pending)throw Error('Recover the pending request before signing out.');++readGeneration;view=null;receipt=null;key=null;busy=false;refreshing=false;stale=true;authRequired=true;message='Signed out. Sign in to your draft.';changed();}
+ return {snapshot,refresh,dispatch,retry,signedOut};
+}
+if(typeof module!=='undefined')module.exports={createSharedDraftClient};
+</script><script>const SHARED_CONFIG={"endpoint": "", "instanceId": ""};</script><script>/* The shared screen renders only server projections. Demo state is never loaded. */
+'use strict';
+const el=id=>document.getElementById(id),escapeHtml=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let client=null,ui=null,edits=null,editVersion=null,confirmJob=null,teamTarget=null,sharedEndpoint=null,renderedContentKey=null;
+const DRAFT_SESSION_KEY='ffl_shared_draft_session_v1';
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const format=x=>new Date(x).toLocaleString('en-AU',{timeZone:'Australia/Perth',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+function playerName(v,id){return v.players.find(p=>p.id===id)?.name||id;}
+function teamName(v,id){return v.teams.find(t=>t.id===id)?.name||id;}
+function selectionText(v,choice){return choice?[...choice.normal,...choice.fookies,...choice.delists].map(id=>playerName(v,id)).join(', ')||'No retains selected':'No submission yet';}
+function ownDiscardWarning(v,id){const turn=v.plan[v.picks.length];return v.config.kind==='preseason'&&v.prepared&&['drafting','ready','paused'].includes(v.phase)&&turn?.round===1&&v.baselineSquads[v.managingTeam].includes(id)&&!v.picks.some(p=>p.player===id)&&FFLDraft.available(v,id).reason!=='Retained'?'You delisted this player — available Round 2.':'';}
+function controlsDisabled(){return !ui||ui.busy||ui.stale||!!ui.pending;}
+function promptConfirmation(title,text,job){el('confirmtitle').textContent=title;el('confirmtext').textContent=text;confirmJob=job;el('confirm').showModal();}
+function renderShared(snapshot){
+ ui=snapshot;const v=ui.view,blocked=controlsDisabled();
+ el('connection').textContent=ui.message;el('refresh').disabled=ui.busy||!!ui.refreshing;el('retry').hidden=!ui.pending;el('retry').disabled=ui.busy;
+ el('login').hidden=!ui.authRequired;el('signout').hidden=ui.authRequired||!v;
+ el('content').hidden=!v||ui.authRequired;if(!v||ui.authRequired){renderedContentKey=null;return;}
+ el('checked').textContent='Checked '+format(v.serverNow)+' AWST · shared revision '+v.revision+(ui.stale?' · Refresh required':'');
+ // A clock-only poll must not replace focused selects or buttons under a click.
+ // Phase, permissions, choices and revisions remain part of the render key.
+ const {serverNow,...contentView}=v;
+ const contentKey=JSON.stringify({view:contentView,blocked,busy:ui.busy,pending:ui.pending,receipt:ui.receipt,edits,editVersion,search:el('search').value});
+ if(contentKey===renderedContentKey)return;
+ renderedContentKey=contentKey;
+ const tid=v.managingTeam,c=v.choices[tid],working=edits||c.working,dirty=!!edits&&!same(edits,c.working),conflict=edits&&editVersion!==c.version;
+ el('discard').hidden=!edits;el('discard').disabled=ui.busy||!!ui.pending;
+ const phase=v.phase,submitted=c.submitted!==null&&c.version===c.submittedVersion;
+ el('team').innerHTML=v.managedTeams.map(id=>'<option value="'+escapeHtml(id)+'"'+(id===tid?' selected':'')+'>'+escapeHtml(teamName(v,id))+'</option>').join('');
+ el('team').disabled=ui.busy||!!ui.pending||dirty||!!conflict;
+ el('phase').textContent=phase==='selection'?'Selections open':phase==='drafting'?'Draft is live':phase==='review'?'Committee review':phase==='paused'?'Draft paused':phase==='ready'?'Waiting for draft opening':phase==='validation'?'Picks complete · awaiting review':phase==='scheduled'?'Before the selection window':phase;
+ el('next').textContent=phase==='selection'?(dirty?'You have unsaved changes. Save them, then submit your selections.':submitted?'Submitted. You can revise and resubmit until '+format(v.config.locksAt)+' AWST.':'Save your choices, then submit by '+format(v.config.locksAt)+' AWST.'):'Selection changes are closed. '+(phase==='drafting'?'Confirm your pick when your team is on the clock.':'Check the shared draft status before continuing.');
+ el('squadtitle').textContent=teamName(v,tid)+' · '+(v.config.kind==='preseason'?'Retains':'Delists');
+ el('selectionstatus').textContent=conflict?'Your saved choices changed in another session. Refresh has kept your unsaved edits; review them against the saved choices before continuing.':dirty?'Unsaved changes on this screen':submitted?'Submitted':c.submitted?'Saved changes not submitted':'Not submitted';
+ el('squad').innerHTML=v.baselineSquads[tid].map(id=>{
+  const p=v.players.find(p=>p.id===id),status=FFLDraft.retentionStatus(v,tid,id),choice=working.normal.includes(id)?'normal':working.fookies.includes(id)?'fookies':working.delists.includes(id)?'delists':'release';
+  const choices=v.config.kind==='preseason'?[['release','Release'],['normal','Normal retain'],['fookies','Fookie slot']]:[['release','Keep'],['delists','Delist']];
+  return '<tr><td><strong>'+escapeHtml(p.name)+'</strong><small>'+escapeHtml(p.club)+' · '+escapeHtml(status.label)+'</small></td><td>'+escapeHtml(p.careerGames??'Unverified')+'</td><td><select aria-label="Choice for '+escapeHtml(p.name)+'" data-choice="'+escapeHtml(id)+'" '+(blocked||phase!=='selection'?'disabled':'')+'>'+choices.map(([key,label])=>'<option value="'+key+'"'+(choice===key?' selected':'')+(key==='normal'&&!status.allowed||key==='fookies'&&(!status.allowed||p.careerGames>50)?' disabled':'')+'>'+label+'</option>').join('')+'</select></td></tr>';
+ }).join('');
+ el('save').disabled=blocked||!dirty||!!conflict||phase!=='selection';el('save').textContent=ui.pending?.command.type==='save'?'Awaiting save confirmation':'Save choices';
+ el('submit').disabled=blocked||dirty||!!conflict||submitted||phase!=='selection';el('submit').textContent=submitted?'Selections submitted':'Submit selections';
+ el('submission').textContent='Last submitted: '+selectionText(v,c.submitted)+'. '+(ui.receipt?'Latest action receipt: '+ui.receipt.requestId+' · revision '+ui.receipt.revision+'. ':'')+(dirty?'Unsaved edits are not part of that submission.':c.submitted&&c.version!==c.submittedVersion?'Saved working changes still need submitting.':'');
+ el('official').innerHTML=v.officialSquads[tid].map(id=>'<p>'+escapeHtml(playerName(v,id))+'</p>').join('');
+ el('board').innerHTML=v.teams.map(t=>{const own=v.choices[t.id],choice=v.locked?.[t.id]||own?.submitted,progress=v.submissionProgress.find(p=>p.team===t.id);return '<p><strong>'+escapeHtml(t.name)+'</strong> · '+(progress.submitted?'Submitted':'Not submitted')+'<small>'+(choice?escapeHtml(selectionText(v,choice)):'Choices private until approval')+'</small></p>';}).join('');
+ const queue=v.queues[tid]||[];
+ el('queue').innerHTML=queue.map((id,i)=>{const taken=v.picks.find(p=>p.player===id);return '<div class="queue-item '+(taken?'taken':'')+'"><div><strong>'+escapeHtml(playerName(v,id))+'</strong><small>'+(taken?escapeHtml(teamName(v,taken.team)+' · Pick '+taken.label):escapeHtml(ownDiscardWarning(v,id)||'Queued'))+'</small></div><div class="toolbar"><button data-move="'+i+'" data-direction="-1" aria-label="Move '+escapeHtml(playerName(v,id))+' up" '+(blocked||i===0?'disabled':'')+'>↑</button><button data-move="'+i+'" data-direction="1" aria-label="Move '+escapeHtml(playerName(v,id))+' down" '+(blocked||i===queue.length-1?'disabled':'')+'>↓</button><button data-remove="'+escapeHtml(id)+'" aria-label="Remove '+escapeHtml(playerName(v,id))+'" '+(blocked?'disabled':'')+'>×</button></div></div>';}).join('')||'<p class="muted">Queue players from the pool below.</p>';
+ const turn=v.plan[v.picks.length];el('turn').textContent=turn?teamName(v,turn.team)+' · Pick '+turn.label:'Draft not prepared';
+ const q=el('search').value.toLowerCase();
+ el('pool').innerHTML=v.players.filter(p=>(p.name+' '+p.club).toLowerCase().includes(q)).map(p=>{const availability=v.prepared?FFLDraft.available(v,p.id):{ok:false,reason:'Selections open before draft approval'},pick=v.picks.find(x=>x.player===p.id),stats=p.stats2026?.regularSeason;return '<tr class="'+(pick||availability.reason==='Retained'?'taken':'')+'"><td><strong>'+escapeHtml(p.name)+'</strong><small>'+escapeHtml(p.club)+(pick?' · '+escapeHtml(teamName(v,pick.team)+' · Pick '+pick.label):!availability.ok?' · '+escapeHtml(availability.reason):'')+'</small>'+(stats?'<details><summary>'+stats.games+' regular-season games</summary><small>'+escapeHtml(Object.entries(stats.fflAverages).map(([k,n])=>k+' '+(n==null?'—':Number(n).toFixed(1))).join(' · '))+'</small></details>':'')+'</td><td>'+escapeHtml(p.careerGames??'Unverified')+'</td><td><button data-queue="'+escapeHtml(p.id)+'" '+(blocked||['scheduled','validation','closed','hidden'].includes(phase)?'disabled':'')+'>'+(queue.includes(p.id)?'Queued':'Queue')+'</button></td><td><button data-pick="'+escapeHtml(p.id)+'" '+(!blocked&&phase==='drafting'&&turn?.team===tid&&availability.ok?'':'disabled')+'>Draft</button></td></tr>';}).join('');
+ const caps=v.committeeCapabilities||[];el('hq').hidden=!caps.length;
+ el('hqsummary').textContent=v.submissionProgress.filter(p=>p.submitted).length+' / '+v.teams.length+' submitted · '+v.picks.length+' picks recorded. Competition health has not been checked by this screen.';
+ el('hqcontrols').innerHTML=[['prepare','Approve selections',phase==='review'&&v.submissionProgress.every(p=>p.submitted)],['arm','Arm draft',v.prepared&&!v.armed&&['ready','paused'].includes(phase)],['pause','Pause draft',['ready','drafting','validation'].includes(phase)],['resume','Resume draft',phase==='paused'&&v.armed]].filter(([type])=>caps.includes(type)).map(([type,label,enabled])=>'<button data-committee="'+type+'" '+(blocked||!enabled?'disabled':'')+'>'+label+'</button>').join('');
+}
+async function perform(type,data={}){
+ try{el('feedback').textContent='';await client.dispatch(type,data);if(type==='save'){edits=null;editVersion=null;renderShared(client.snapshot());}}
+ catch(error){el('feedback').textContent=error.message;}
+}
+function pickConfirmation(player){
+ const v=ui.view,revision=v.revision,team=v.managingTeam,expectedPick=v.picks.length,turn=v.plan[expectedPick];
+ if(controlsDisabled()||v.phase!=='drafting'||turn?.team!==team)return;
+ promptConfirmation('Confirm your pick',playerName(v,player)+' for '+teamName(v,team)+' · Pick '+turn.label+'.',()=>{
+  const current=client.snapshot();
+  if(current.stale||current.pending||current.busy||current.view.revision!==revision||current.view.managingTeam!==team){el('feedback').textContent='The draft changed. Review the current turn before picking.';return;}
+  perform('pick',{player,expectedPick});
+ });
+}
+el('refresh').onclick=async()=>{try{const recovered=await client.refresh();if(!recovered.stale&&!recovered.pending)el('feedback').textContent='';}catch(error){el('feedback').textContent=error.message;}};
+el('retry').onclick=async()=>{try{const pendingType=client.snapshot().pending?.command.type;await client.retry();el('feedback').textContent='';if(pendingType==='save'){edits=null;editVersion=null;renderShared(client.snapshot());}}catch(error){el('feedback').textContent=error.message;}};
+el('discard').onclick=()=>promptConfirmation('Use the saved choices?','This discards only the unsaved changes on this screen.',()=>{edits=null;editVersion=null;renderShared(client.snapshot());});
+el('save').onclick=()=>perform('save',{value:edits});
+el('submit').onclick=()=>{if(edits&&!same(edits,ui.view.choices[ui.view.managingTeam].working))return;const revision=ui.view.revision;promptConfirmation('Submit your selections?',selectionText(ui.view,ui.view.choices[ui.view.managingTeam].working),()=>{if(controlsDisabled()||ui.view.revision!==revision){el('feedback').textContent='Your choices changed. Review them before submitting.';return;}perform('submit');});};
+el('search').oninput=()=>{if(ui)renderShared(ui);};
+window.addEventListener('beforeunload',event=>{if(ui?.pending||(edits&&ui?.view&&!same(edits,ui.view.choices[ui.view.managingTeam].working))){event.preventDefault();event.returnValue='';}});
+el('team').onchange=()=>{const target=el('team').value;if(controlsDisabled())return;const url=new URL(location.href);url.searchParams.set('team',target);location.assign(url.toString());};
+el('cancel').onclick=()=>{confirmJob=null;el('confirm').close();};el('confirmbutton').onclick=()=>{const job=confirmJob;confirmJob=null;el('confirm').close();job?.();};el('confirm').addEventListener('cancel',()=>{confirmJob=null;});
+document.addEventListener('change',event=>{const id=event.target.dataset.choice;if(!id||controlsDisabled()||ui.view.phase!=='selection')return;const v=ui.view;if(!edits){edits=JSON.parse(JSON.stringify(v.choices[v.managingTeam].working));editVersion=v.choices[v.managingTeam].version;}for(const key of ['normal','fookies','delists'])edits[key]=edits[key].filter(p=>p!==id);if(event.target.value!=='release')edits[event.target.value].push(id);renderShared(ui);});
+document.addEventListener('click',event=>{
+ const b=event.target.closest('button');if(!b||b.disabled||controlsDisabled())return;
+ const v=ui.view,queue=[...(v.queues[v.managingTeam]||[])];
+ if(b.dataset.pick){pickConfirmation(b.dataset.pick);return;}
+ if(b.dataset.queue){if(!queue.includes(b.dataset.queue))perform('queue',{players:[...queue,b.dataset.queue]});return;}
+ if(b.dataset.remove){perform('queue',{players:queue.filter(id=>id!==b.dataset.remove)});return;}
+ if(b.dataset.move!==undefined){const i=Number(b.dataset.move),j=i+Number(b.dataset.direction);if(j<0||j>=queue.length)return;[queue[i],queue[j]]=[queue[j],queue[i]];perform('queue',{players:queue});return;}
+ if(b.dataset.committee){const type=b.dataset.committee,revision=v.revision;promptConfirmation(b.textContent+'?',type==='prepare'?'Lock the last submitted choices for every team. Official squads stay unchanged.':type==='arm'?'Allow the draft to open at its scheduled time.':'Change the shared Development draft status.',()=>{if(controlsDisabled()||ui.view.revision!==revision){el('feedback').textContent='The draft changed. Review before confirming.';return;}perform(type,type==='pause'?{reason:'Committee paused draft for review'}:{});});}
+});
+async function sharedTransport(payload){const response=await fetch(sharedEndpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload),cache:'no-store',redirect:'follow'});if(!response.ok)throw Error('The shared draft is unavailable.');return response.json();}
+el('login').onsubmit=async event=>{
+ event.preventDefault();el('signin').disabled=true;el('feedback').textContent='Signing in…';
+ try{
+  if(!sharedEndpoint)throw Error('The shared Development connection has not been installed yet.');
+  const result=await sharedTransport({action:'loginDraftWorkflow',instanceId:SHARED_CONFIG.instanceId,email:el('email').value,password:el('password').value});
+  if(!result?.ok||typeof result.session?.token!=='string'||result.session.token.length<32)throw Error(result?.message||'Sign-in could not be confirmed.');
+  sessionStorage.setItem(DRAFT_SESSION_KEY,result.session.token);el('feedback').textContent='';await client.refresh();
+ }catch(error){el('feedback').textContent=error.message;}finally{el('password').value='';el('signin').disabled=false;}
+};
+el('signout').onclick=async()=>{
+ if(ui?.pending){el('feedback').textContent='Recover the pending request before signing out.';return;}
+ el('signout').disabled=true;
+ try{
+  const result=await sharedTransport({action:'logoutDraftWorkflow',instanceId:SHARED_CONFIG.instanceId,token:sessionStorage.getItem(DRAFT_SESSION_KEY)});
+  if(!result?.ok||result.signedOut!==true)throw Error('Sign-out could not be confirmed. Try again.');
+  sessionStorage.removeItem(DRAFT_SESSION_KEY);edits=null;editVersion=null;confirmJob=null;client.signedOut();
+ }catch(error){el('feedback').textContent=error.message;}finally{el('signout').disabled=false;}
+};
+async function connectShared(){
+ try{
+  if(!SHARED_CONFIG.endpoint||!SHARED_CONFIG.instanceId)throw Error('The shared Development connection has not been installed yet. Your saved demo choices have not been submitted here.');
+  const endpoint=new URL(SHARED_CONFIG.endpoint);
+  if(endpoint.origin!=='https://script.google.com'||endpoint.search||endpoint.hash||!/^\/(?:a\/macros\/rockpad\.com\.au|macros)\/s\/[^/]+\/(?:exec|dev)$/.test(endpoint.pathname))throw Error('Invalid Development endpoint.');
+  sharedEndpoint=endpoint.toString();
+  teamTarget=new URL(location.href).searchParams.get('team')||undefined;
+  client=createSharedDraftClient({instanceId:SHARED_CONFIG.instanceId,managingTeam:teamTarget,storage:sessionStorage,token:()=>sessionStorage.getItem(DRAFT_SESSION_KEY),requestId:()=>crypto.randomUUID(),changed:renderShared,
+   send:sharedTransport
+  });
+  await client.refresh();
+  setInterval(()=>{const s=client.snapshot();if(!s.busy&&!s.refreshing&&!s.pending&&document.visibilityState==='visible')client.refresh(undefined,{background:true}).catch(()=>{});},5000);
+ }catch(error){el('connection').textContent=error.message;if(!client)el('refresh').disabled=true;}
+}
+connectShared();
+</script></body></html>
