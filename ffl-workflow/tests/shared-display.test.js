@@ -90,3 +90,11 @@ test('phase changes at the same revision still update the controls',()=>{
  const p=screen();p.run("snapshot.view.phase='review';renderShared(snapshot)");
  assert.equal(p.nodes.get('phase').textContent,'Committee review');assert.match(p.nodes.get('squad').innerHTML,/disabled/);
 });
+test('sign-out waits for revocation and preserves pending recovery on failure',async()=>{
+ const p=screen(),saved=new Map([['ffl_shared_draft_session_v1','token']]);let reloads=0,requests=0;
+ p.ctx.sessionStorage={getItem:k=>saved.get(k),removeItem:k=>saved.delete(k)};p.ctx.location={reload(){reloads++;}};
+ p.ctx.transport=async()=>{requests++;throw Error('Offline');};p.run('sharedTransport=transport');
+ p.ctx.snapshot.pending={command:{type:'pick'}};await p.nodes.get('signout').onclick();assert.equal(requests,0);assert.match(p.nodes.get('feedback').textContent,/pending/);
+ p.ctx.snapshot.pending=null;await p.nodes.get('signout').onclick();assert.equal(saved.size,1);assert.equal(reloads,0);
+ p.ctx.transport=async()=>({ok:true,signedOut:true});p.run('sharedTransport=transport');await p.nodes.get('signout').onclick();assert.equal(saved.size,0);assert.equal(reloads,1);
+});

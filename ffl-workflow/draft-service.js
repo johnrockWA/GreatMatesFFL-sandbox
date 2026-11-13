@@ -5,7 +5,11 @@ function createDraftService(host){
   let writing=false;
   try{
    host.assertEnvironment();
-   if(!payload||!['loginDraftWorkflow','readDraftWorkflow','writeDraftWorkflow'].includes(payload.action))throw Error('Unknown shared draft request.');
+   if(!payload||!['loginDraftWorkflow','logoutDraftWorkflow','readDraftWorkflow','writeDraftWorkflow'].includes(payload.action))throw Error('Unknown shared draft request.');
+   if(payload.action==='logoutDraftWorkflow'){
+    if(!host.instance()||payload.instanceId!==host.instance())throw Error('Wrong draft instance.');
+    return {ok:true,...host.logout(payload.token)};
+   }
    if(payload.action==='loginDraftWorkflow'){
     const instance=host.instance();
     if(typeof instance!=='string'||!instance||payload.instanceId!==instance)throw Error('This draft connection is not configured for the current instance.');

@@ -2,9 +2,9 @@ name: FFL source checks
 
 on:
   push:
-    branches: ['feature/katy-foundation']
+    branches: ['integration/**', 'feature/**', 'fix/**', 'test/**']
   pull_request:
-    branches: [develop, main]
+  workflow_dispatch:
 
 permissions:
   contents: read

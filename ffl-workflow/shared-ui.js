@@ -93,7 +93,15 @@ el('login').onsubmit=async event=>{
   sessionStorage.setItem(DRAFT_SESSION_KEY,result.session.token);el('feedback').textContent='';await client.refresh();
  }catch(error){el('feedback').textContent=error.message;}finally{el('password').value='';el('signin').disabled=false;}
 };
-el('signout').onclick=()=>{sessionStorage.removeItem(DRAFT_SESSION_KEY);location.reload();};
+el('signout').onclick=async()=>{
+ if(ui?.pending){el('feedback').textContent='Recover the pending request before signing out.';return;}
+ el('signout').disabled=true;
+ try{
+  const result=await sharedTransport({action:'logoutDraftWorkflow',instanceId:SHARED_CONFIG.instanceId,token:sessionStorage.getItem(DRAFT_SESSION_KEY)});
+  if(!result?.ok||result.signedOut!==true)throw Error('Sign-out could not be confirmed. Try again.');
+  sessionStorage.removeItem(DRAFT_SESSION_KEY);location.reload();
+ }catch(error){el('feedback').textContent=error.message;}finally{el('signout').disabled=false;}
+};
 async function connectShared(){
  try{
   if(!SHARED_CONFIG.endpoint||!SHARED_CONFIG.instanceId)throw Error('The shared Development connection has not been installed yet. Your saved demo choices have not been submitted here.');

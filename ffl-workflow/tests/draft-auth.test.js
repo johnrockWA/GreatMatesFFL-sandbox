@@ -29,3 +29,11 @@ test('draft sign-in dispatch requires the exact instance and does not call compe
  const result=service({action:'loginDraftWorkflow',instanceId:'reviewed-instance',email:'coach@example.invalid',password:'test-only'});
  assert.equal(result.ok,true);assert.ok(result.session.token);assert.equal(writes,0);
 });
+test('server logout revokes only the supplied session and is safe to repeat',()=>{
+ const h=lab(),a=h.auth.login({email:'coach@example.invalid',password:'test-only'}),b=h.auth.login({email:'coach@example.invalid',password:'test-only'});
+ assert.equal(h.auth.logout(a.token).signedOut,true);assert.equal(h.auth.validate(a.token).valid,false);assert.equal(h.auth.validate(b.token).valid,true);
+ assert.equal(h.auth.logout(a.token).signedOut,true);assert.equal(h.auth.logout(null).signedOut,true);
+ const service=createDraftService({assertEnvironment(){},instance:()=> 'test',logout:h.auth.logout});
+ assert.equal(service({action:'logoutDraftWorkflow',instanceId:'wrong',token:b.token}).ok,false);assert.equal(h.auth.validate(b.token).valid,true);
+ assert.equal(service({action:'logoutDraftWorkflow',instanceId:'test',token:b.token}).signedOut,true);assert.equal(h.auth.validate(b.token).valid,false);
+});

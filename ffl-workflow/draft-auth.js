@@ -27,6 +27,10 @@ function createDraftAuth(host){
   try{host.actor(auth);}catch{return {valid:false};}
   return {valid:true,email:auth.email,team:auth.team};
  }
- return {login,validate};
+ function logout(token){
+  if(typeof token==='string'&&token.length>=32&&token.length<=128)host.remove('draft-session:'+host.hash(token));
+  return {signedOut:true};
+ }
+ return {login,validate,logout};
 }
 if(typeof module!=='undefined')module.exports={createDraftAuth};

@@ -2,8 +2,9 @@
 Isolated 2027 development preview for Great Mates FFL.
 
 The workflow preview now has reproducible source and an initial **FFL HQ / Katy**
-foundation. It is still a browser-local simulation: no shared sign-in, official
-spreadsheet changes, emails or conversational AI.
+foundation. The local preview is a simulation. A separate owner-only Google
+Development installation now supports shared draft sign-in, durable writes and
+request recovery. Official competition publication and real coach email remain off.
 
 ## Run locally
 
@@ -30,8 +31,8 @@ connection defaults prevent requests until the reviewed Development installation
 it does not reuse demo state. See [shared coach connection](docs/katy/shared-coach-connection.md)
 for request recovery, access boundaries and remaining connected tests.
 
-The prepared API adapter is uninstalled, requires explicit verified identity
-mappings, and blocks shared finalisation. See [the implementation record](docs/katy/implementation-record.md)
+The API adapter is installed only in owner-only Development, requires explicit
+verified identity mappings, and blocks shared finalisation. See [the implementation record](docs/katy/implementation-record.md)
 and [acceptance gates](docs/katy/acceptance-and-release.md) before any Google work.
 
 Keep OAuth state, coach emails, passwords, tokens and private workbook snapshots out
@@ -45,3 +46,10 @@ and explicit dynasty/discard warnings. The original October fixture remains the
 historical seed. See [the refresh record](docs/katy/player-refresh-20261030.md) for
 provenance, archived evidence and coverage limits. Started local demos require an
 explicit reset to move to the updated snapshot.
+
+## Integration candidate
+
+`integration/2027-development` consolidates the tested recovery baseline. See
+[the integration record](docs/katy/integration-20261113.md) for scope and gates.
+`ffl-workflow/build-development.py` packages current source with an explicitly
+supplied private owner host. Its private output and hashes are not a deployment.
