@@ -103,6 +103,30 @@ opponent; official publication remains disabled.
 of unexpected player data. Remaining connected checks include different coach
 identities, lost-response recovery, clock boundaries and a complete small mock.
 
+### 13 November: prepared recovery improvements (not installed)
+
+The adapter now rejects an outdated pick with a refresh/current-turn explanation
+before checking turn-specific proxy authority. A current-revision attempt to pick
+for another team remains denied. Successful manual refresh clears old feedback
+only when the view is current and no request is pending; successful retry also
+clears old feedback. Unsaved selection edits remain intact.
+
+207 source tests pass and generated builds match. A new integration test uses the
+actual workflow adapter, durable store, service and client with in-memory I/O: the
+first coach's pick commits but its reply is lost, a second authenticated synthetic
+identity makes the next pick, and a recreated first client recovers the original
+receipt at the newer revision. Exactly two picks and two pick audit entries remain.
+It also checks opponent privacy, stale-turn wording and current-turn denial.
+This is not a connected Google failure-injection or multi-coach trial.
+
+The connected Development tab now requires fresh sandbox sign-in. These changes
+are prepared locally, not yet publicly published or installed. Approval package:
+publish the six changed source/build/test/report files as a draft PR and install
+the two code changes in owner-only Development; run a controlled connected
+lost-reply/retry rehearsal; then prepare and run two synthetic coach identities
+in an isolated rehearsal, checking turns and private queues. No production merge,
+official publication or real-coach invitations are included.
+
 ### Earlier source and installation baseline (8 November)
 
 196 source tests pass. Both generated HTML builds match their builders, and all

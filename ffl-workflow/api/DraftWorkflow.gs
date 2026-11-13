@@ -66,7 +66,7 @@ function getDraftWorkflow_(auth,managedTeam) {
 function postDraftWorkflow_(auth,action,managedTeam) {
   const actor=draftWorkflowActor_(auth,managedTeam);authorizeDraftAction(actor,action);
   draftWorkflowAssertWrites_();
-  const result=draftWorkflowStore_().dispatch(actor,action,Date.now(),function(state,command,who,now){try{authorizeDraftAction(who,command,state);return FFLDraft.apply(state,command,who,now);}catch(error){error.code='DRAFT_REJECTED';throw error;}});
+  const result=draftWorkflowStore_().dispatch(actor,action,Date.now(),function(state,command,who,now){try{if(command.revision!==state.revision)throw Error(command.type==='pick'?'The draft changed. Refresh and review the current turn before picking.':'The draft changed. Refresh and try again.');authorizeDraftAction(who,command,state);return FFLDraft.apply(state,command,who,now);}catch(error){error.code='DRAFT_REJECTED';throw error;}});
   const response=draftWorkflowResponse_(result.state,actor,Date.now());response.receipt=result.receipt;return response;
 }
 

@@ -13,6 +13,14 @@ function screen(state=fixture(),now=start){
  vm.runInContext('client=fakeClient;renderShared(snapshot)',ctx);
  return {nodes,events,windowEvents,sent,ctx,run:code=>vm.runInContext(code,ctx)};
 }
+test('successful refresh clears old feedback without discarding edits; failed or pending refresh does not',async()=>{
+ const p=screen();p.events.change({target:{dataset:{choice:'p0'},value:'normal'}});
+ p.run("el('feedback').textContent='Old rejection'");p.ctx.fakeClient.refresh=async()=>p.ctx.snapshot;
+ await p.nodes.get('refresh').onclick();assert.equal(p.nodes.get('feedback').textContent,'');assert.ok(p.run('edits'));
+ p.nodes.get('feedback').textContent='Unconfirmed request';p.ctx.snapshot.pending={command:{type:'save'}};
+ await p.nodes.get('refresh').onclick();assert.equal(p.nodes.get('feedback').textContent,'Unconfirmed request');
+ p.ctx.fakeClient.refresh=async()=>{throw Error('Still offline');};await p.nodes.get('refresh').onclick();assert.equal(p.nodes.get('feedback').textContent,'Still offline');
+});
 test('shared selections distinguish unsaved edits, submitted choices and another-session conflicts',()=>{
  let state=fixture();state=E.apply(state,{type:'submit',revision:0},coach,start);
  const p=screen(state);assert.equal(p.nodes.get('selectionstatus').textContent,'Submitted');
