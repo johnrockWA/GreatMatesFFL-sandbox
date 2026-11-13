@@ -64,8 +64,8 @@ function pickConfirmation(player){
   perform('pick',{player,expectedPick});
  });
 }
-el('refresh').onclick=async()=>{try{await client.refresh();}catch(error){el('feedback').textContent=error.message;}};
-el('retry').onclick=async()=>{try{const pendingType=client.snapshot().pending?.command.type;await client.retry();if(pendingType==='save'){edits=null;editVersion=null;renderShared(client.snapshot());}}catch(error){el('feedback').textContent=error.message;}};
+el('refresh').onclick=async()=>{try{const recovered=await client.refresh();if(!recovered.stale&&!recovered.pending)el('feedback').textContent='';}catch(error){el('feedback').textContent=error.message;}};
+el('retry').onclick=async()=>{try{const pendingType=client.snapshot().pending?.command.type;await client.retry();el('feedback').textContent='';if(pendingType==='save'){edits=null;editVersion=null;renderShared(client.snapshot());}}catch(error){el('feedback').textContent=error.message;}};
 el('discard').onclick=()=>promptConfirmation('Use the saved choices?','This discards only the unsaved changes on this screen.',()=>{edits=null;editVersion=null;renderShared(client.snapshot());});
 el('save').onclick=()=>perform('save',{value:edits});
 el('submit').onclick=()=>{if(edits&&!same(edits,ui.view.choices[ui.view.managingTeam].working))return;const revision=ui.view.revision;promptConfirmation('Submit your selections?',selectionText(ui.view,ui.view.choices[ui.view.managingTeam].working),()=>{if(controlsDisabled()||ui.view.revision!==revision){el('feedback').textContent='Your choices changed. Review them before submitting.';return;}perform('submit');});};
