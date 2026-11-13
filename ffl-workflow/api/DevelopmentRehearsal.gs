@@ -36,7 +36,7 @@ function fflIntegrationRequest(payload){
  try{
   if(payload?.instanceId!==fflIntegrationInstance_()||!payload.instanceId)throw Error('Wrong synthetic instance.');
   const auth=fflIntegrationAuth_();
-  if(payload.action==='loginDraftWorkflow')return {ok:true,session:auth.login(payload)};
+  if(payload.action==='loginDraftWorkflow'){const session=auth.login(payload);PropertiesService.getScriptProperties().setProperty('FFL_ACCEPTANCE_SESSION_'+String(payload.email).trim().toLowerCase(),fflIntegrationInstance_()+':draft-session:'+fflIntegrationHash_(session.token));return {ok:true,session};}
   if(payload.action==='logoutDraftWorkflow')return {ok:true,...auth.logout(payload.token)};
   const a=auth.validate(payload.token);if(!a.valid)return {ok:false,code:'AUTH_REQUIRED',message:'Sign in to the synthetic rehearsal.'};
   const actor=fflIntegrationActor_(a,payload.managingTeam),store=fflIntegrationStore_();
@@ -50,6 +50,7 @@ function fflIntegrationRequest(payload){
     authorizeDraftAction(a,c,s.draft);return FFLDevelopment.apply(s,{type:'draft',revision:c.revision,command:c},a,s.testNow,fflIntegrationHash_);
    }catch(e){e.code='DRAFT_REJECTED';throw e;}
   });
+  const flags=PropertiesService.getScriptProperties();if(command.type==='pick'&&!result.receipt.replayed&&flags.getProperty('FFL_ACCEPTANCE_LOST_REPLY')==='armed'){flags.setProperty('FFL_ACCEPTANCE_LOST_REPLY',JSON.stringify({requestId:command.requestId,revision:result.receipt.revision}));return {ok:false,code:'UNCONFIRMED',message:'Synthetic test: reply withheld after saved pick. Retry to recover.'};}
   const view=fflIntegrationProjection_(result.state,actor);view.receipt=result.receipt;return {ok:true,view};
  }catch(e){return {ok:false,code:!writing||e.code==='DRAFT_REJECTED'?'REJECTED':'UNCONFIRMED',message:e.message};}
 }
@@ -92,4 +93,31 @@ function fflRunIntegrationCompletion(){
  if(before!==fflOwnerSharedFingerprint_()||ownerHash!==draftWorkflowStore_().read().hash)throw Error('Protected or owner data changed');
  const report={status:'passed',startingBrowserPicks:startingPicks,totalPicks:s.draft.picks.length,squadSizes:Object.values(s.squads).map(x=>x.length),weeklySubmissions:Object.keys(s.round.nominations).length,ladderTeams:s.round.published.ladder.length,publicationReplay:true,notificationCaptureRows:captures-1,realEmailsSent:0,correctionAndRestore:true,revision:s.revision,protectedDataUnchanged:true,ownerRehearsalUnchanged:true};
  out.getRange('C1').setValue(JSON.stringify(report));Logger.log('FFL_INTEGRATION '+JSON.stringify(report));return report;
+}
+
+function fflStartMidseasonAcceptance(){
+ fflIntegrationAssert_();const p=PropertiesService.getScriptProperties();if(p.getProperty('FFL_ACCEPTANCE_ARCHIVE'))throw Error('Acceptance already initialized; preserve evidence.');
+ const previous=fflIntegrationStore_().read();if(!previous.data.state.squads||!previous.data.state.round.published)throw Error('Complete preseason integration first');
+ const prior=previous.data.state,now=Date.now(),archive={instance:p.getProperty('FFL_INTEGRATION_INSTANCE'),sheet:p.getProperty('FFL_INTEGRATION_SHEET'),hash:previous.hash,protectedHash:fflOwnerSharedFingerprint_(),ownerHash:draftWorkflowStore_().read().hash};
+ const draft=FFLDraft.create({kind:'midseason',season:2027,opensAt:new Date(now-60000).toISOString(),locksAt:new Date(now+86400000).toISOString(),draftAt:new Date(now+172800000).toISOString()},prior.draft.teams,prior.draft.players,prior.squads),state=FFLDevelopment.create(draft,new Date(now+180000000).toISOString());state.testNow=now;
+ const name='Integration_'+Utilities.getUuid().replace(/-/g,'').slice(0,12),sheet=sandboxOpenById_(DRAFT_WORKFLOW_SANDBOX_ID_).insertSheet(name);sheet.getRange('A1').setValue('FFL_SYNTHETIC_INTEGRATION_V1');SpreadsheetApp.flush();
+ p.setProperty('FFL_ACCEPTANCE_ARCHIVE',JSON.stringify(archive));p.setProperty('FFL_INTEGRATION_INSTANCE','midseason-'+Utilities.getUuid());p.setProperty('FFL_INTEGRATION_SHEET',name);fflIntegrationStore_().initialize(state);p.setProperty('FFL_INTEGRATION_BROWSER','true');
+ Logger.log(JSON.stringify({status:'midseason-ready',revision:0,previousEvidencePreserved:true,teams:draft.teams.map(t=>({team:t.id,players:state.draft.baselineSquads[t.id]}))}));
+}
+function fflArmAcceptanceLostReply(){fflIntegrationAssert_();PropertiesService.getScriptProperties().setProperty('FFL_ACCEPTANCE_LOST_REPLY','armed');Logger.log('One synthetic pick reply will be withheld after its save.');}
+function fflExpireAcceptanceAlpha(){
+ fflIntegrationAssert_();const key=PropertiesService.getScriptProperties().getProperty('FFL_ACCEPTANCE_SESSION_alpha@example.invalid');if(!key||!key.startsWith(fflIntegrationInstance_()+':'))throw Error('Sign in Alpha first');const cache=CacheService.getScriptCache(),raw=cache.get(key);if(!raw)throw Error('Session already absent');const auth=JSON.parse(raw);auth.expiresAt=0;cache.put(key,JSON.stringify(auth),600);Logger.log('Synthetic Alpha session expired; Beta untouched.');
+}
+function fflReportAcceptance(){
+ fflIntegrationAssert_();const p=PropertiesService.getScriptProperties(),s=fflIntegrationStore_().read().data.state,a=JSON.parse(p.getProperty('FFL_ACCEPTANCE_ARCHIVE')||'null');if(!a)throw Error('No acceptance archive');
+ const previous=sandboxOpenById_(DRAFT_WORKFLOW_SANDBOX_ID_).getSheetByName(a.sheet),head=JSON.parse(previous.getRange('B1').getValue());
+ const report={kind:s.draft.config.kind,phase:FFLDraft.phase(s.draft,s.testNow),revision:s.revision,picks:s.draft.picks,privateQueues:s.draft.queues,uniquePlayers:new Set(s.draft.picks.map(x=>x.player)).size,lostReply:JSON.parse(p.getProperty('FFL_ACCEPTANCE_LOST_REPLY')||'null'),protectedDataUnchanged:a.protectedHash===fflOwnerSharedFingerprint_(),ownerUnchanged:a.ownerHash===draftWorkflowStore_().read().hash,preseasonEvidenceUnchanged:a.hash===head.hash};
+ if(report.phase==='validation')report.squadSizes=Object.values(FFLDraft.finalSquads(s.draft)).map(x=>x.length);
+ Logger.log(JSON.stringify(report));return report;
+}
+function fflPrepareMidseasonAcceptance(){
+ fflIntegrationAssert_();const store=fflIntegrationStore_(),actor=fflIntegrationActor_({valid:true,email:'committee@example.invalid',team:'Synthetic Alpha'});let s=store.read().data.state;
+ if(s.draft.config.kind!=='midseason'||s.draft.prepared||s.draft.teams.some(t=>s.draft.choices[t.id].submitted===null))throw Error('Both synthetic midseason submissions required.');
+ fflAdvanceIntegrationClock();for(const type of ['prepare','arm']){s=store.read().data.state;store.dispatch(actor,{type,revision:s.revision,requestId:Utilities.getUuid()},Date.now(),(state,c,a)=>FFLDevelopment.apply(state,{type:'draft',revision:c.revision,command:c},a,state.testNow,fflIntegrationHash_));}
+ fflAdvanceIntegrationClock();fflArmAcceptanceLostReply();Logger.log('Midseason draft armed with one lost-reply test.');
 }

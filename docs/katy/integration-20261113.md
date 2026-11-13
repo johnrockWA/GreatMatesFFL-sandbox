@@ -96,3 +96,17 @@ in after the acknowledged sign-out.
 The corrected sign-out was retested in the actual Google iframe: the coach
 workspace disappeared and the sign-in form displayed without a blank reload.
 The synthetic browser entry switch was then disabled.
+
+## Acceptance follow-up — 13 November, 18:37 AWST
+
+The earlier mobile/recovery/midseason gaps above are superseded by the bounded
+connected evidence in [the readiness review](readiness-review-20261113.md).
+A genuine 390px coach viewport completed submission and drafting; body/scroll
+width was 375px. Two synthetic coach sessions completed all four midseason picks.
+A deliberately withheld post-save pick reply, another coach's intervening pick,
+forced expiry, page reload, sign-in and original-receipt recovery passed together.
+Final synthetic revision 13, four distinct players, final calculated squads [20,20].
+Protected records, owner state and archived preseason head were unchanged.
+217 source tests pass. Both deployed endpoints remain owner-only version 4;
+ordinary non-editor access and a physical-phone test are not certified.
+The synthetic entry switch was disabled and test sessions signed out afterward.
